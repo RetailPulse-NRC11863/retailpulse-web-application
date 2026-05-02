@@ -1,1 +1,51 @@
-<p>main-layout works!</p>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">RP</span>
+      <div>
+        <h2>RetailPulse</h2>
+        <p>Web Application</p>
+      </div>
+    </div>
+
+    @if (isAdminView()) {
+      <nav class="menu">
+        <p class="menu-label">Administrator</p>
+
+        <a routerLink="/app/admin/dashboard" routerLinkActive="active">
+          Dashboard
+        </a>
+
+        <a routerLink="/app/admin/store-configuration" routerLinkActive="active">
+          Store Configuration
+        </a>
+
+        <a routerLink="/app/admin/conversion" routerLinkActive="active">
+          Conversion
+        </a>
+
+        <a routerLink="/app/admin/subscription" routerLinkActive="active">
+          Subscription
+        </a>
+      </nav>
+    }
+
+    @if (isStaffView()) {
+      <nav class="menu">
+        <p class="menu-label">Store Staff</p>
+
+        <a routerLink="/app/staff/alerts" routerLinkActive="active">
+          Operational Alerts
+        </a>
+      </nav>
+    }
+
+    <div class="sidebar-footer">
+      <a routerLink="/">Switch View</a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

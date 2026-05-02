@@ -1,0 +1,95 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  background: #F7FAFC;
+}
+
+.sidebar {
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  background: #0A2540;
+  color: #ffffff;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+.brand-mark {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 14px;
+  background: #00D2FF;
+  color: #0A2540;
+  font-weight: 900;
+}
+
+.brand h2 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.brand p {
+  margin: 0.15rem 0 0;
+  color: #B8C7D9;
+  font-size: 0.875rem;
+}
+
+.menu {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.menu-label {
+  margin: 0 0 0.5rem;
+  color: #00D2FF;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.menu a,
+.sidebar-footer a {
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.menu a:hover,
+.menu a.active {
+  background: rgba(0, 210, 255, 0.16);
+}
+
+.sidebar-footer {
+  margin-top: auto;
+}
+
+.sidebar-footer a {
+  display: block;
+  color: #B8C7D9;
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow: auto;
+}
+
+@media (max-width: 800px) {
+  .layout {
+    display: block;
+  }
+
+  .sidebar {
+    width: auto;
+  }
+}

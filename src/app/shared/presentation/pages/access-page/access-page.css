@@ -1,0 +1,68 @@
+.access-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background:
+    radial-gradient(circle at top left, rgba(0, 210, 255, 0.18), transparent 35%),
+    #0A2540;
+}
+
+.access-card {
+  width: min(720px, 100%);
+  padding: 3rem;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+  text-align: center;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: #00A8CC;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  color: #0A2540;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.description {
+  margin: 1rem auto 2rem;
+  max-width: 560px;
+  color: #52616B;
+  line-height: 1.6;
+}
+
+.actions {
+  display: grid;
+  gap: 1rem;
+}
+
+.actions a {
+  display: block;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.primary-action {
+  color: #ffffff;
+  background: #0A2540;
+}
+
+.secondary-action {
+  color: #0A2540;
+  background: #E8F7FB;
+}
+
+.kiosk-action {
+  color: #0A2540;
+  border: 2px solid #00D2FF;
+  background: #ffffff;
+}
