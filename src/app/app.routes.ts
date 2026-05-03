@@ -12,7 +12,7 @@ import {
   ConversionReportPage
 } from './sales-conversion/presentation/pages/conversion-report-page/conversion-report-page';
 import {AlertsPage} from './alerts-recommendations/presentation/pages/alerts-page/alerts-page';
-import {KioskSearchPage} from './buyer-assistance/presentation/pages/kiosk-search-page/kiosk-search-page';
+import {KioskSearchPageComponent} from './buyer-assistance/presentation/pages/kiosk-search-page/kiosk-search-page';
 
 export const routes: Routes = [
   {
@@ -58,7 +58,7 @@ export const routes: Routes = [
   },
   {
     path: 'kiosk',
-    component: KioskSearchPage,
+    component: KioskSearchPageComponent,
     title: 'RetailPulse - Kiosk'
   },
   {

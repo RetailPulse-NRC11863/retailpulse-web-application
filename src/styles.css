@@ -1,1 +1,35 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --rp-color-primary: #0A2540;
+  --rp-color-accent: #00D2FF;
+  --rp-color-white: #FFFFFF;
+  --rp-color-bg: #F4F7F9;
+  --rp-color-text: #333333;
+  --rp-color-text-muted: #666666;
+  --rp-color-border: #E0E0E0;
+  --rp-color-success: #28A745;
+  --rp-color-danger: #DC3545;
+
+  --rp-radius: 8px;
+  --rp-font-family: 'Inter', sans-serif;
+  --rp-spacing-1: 8px;
+  --rp-spacing-2: 16px;
+  --rp-spacing-3: 24px;
+  --rp-spacing-4: 32px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--rp-font-family);
+  background-color: var(--rp-color-bg);
+  color: var(--rp-color-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--rp-color-primary);
+  margin-top: 0;
+}

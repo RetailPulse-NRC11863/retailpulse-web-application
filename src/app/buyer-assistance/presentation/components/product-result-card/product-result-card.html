@@ -1,0 +1,37 @@
+<div class="product-card">
+  <div class="product-header">
+    <div class="product-info">
+      <span class="category">{{ product.category }}</span>
+      <h3 class="product-name">{{ product.name }}</h3>
+    </div>
+    <div class="price">
+      S/ {{ product.price | number:'1.2-2' }}
+    </div>
+  </div>
+  
+  <div class="product-body">
+    <div class="location-info">
+      <div class="info-row">
+        <lucide-icon [img]="MapPin" [size]="18" class="icon-primary"></lucide-icon>
+        <span class="label">Zone:</span>
+        <span class="value">{{ product.zoneName }}</span>
+      </div>
+      <div class="info-row">
+        <lucide-icon [img]="Archive" [size]="18" class="icon-primary"></lucide-icon>
+        <span class="label">Shelf:</span>
+        <span class="value">{{ product.shelfReference }}</span>
+      </div>
+    </div>
+
+    <div class="status-info">
+      <div class="stock-status" [ngClass]="{'in-stock': product.stock > 0, 'out-of-stock': product.stock === 0}">
+        <lucide-icon *ngIf="product.stock > 0" [img]="CircleCheckBig" [size]="18"></lucide-icon>
+        <lucide-icon *ngIf="product.stock === 0" [img]="CircleAlert" [size]="18"></lucide-icon>
+        <span>
+          {{ product.stock > 0 ? product.stock + ' In Stock' : 'Out of Stock' }}
+        </span>
+      </div>
+      <app-promotion-card *ngIf="product.promotion" [promotion]="product.promotion"></app-promotion-card>
+    </div>
+  </div>
+</div>

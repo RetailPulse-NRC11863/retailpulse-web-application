@@ -1,11 +1,46 @@
-<section class="kiosk-page">
-  <div class="kiosk-card">
-    <p class="eyebrow">Web Kiosk</p>
-    <h1>Search for Products in Store</h1>
-    <p>
-      Here the shopper will be able to search for products, check stock, location, and promotions.
-    </p>
+<div class="kiosk-layout">
+  <header class="kiosk-header">
+    <div class="brand">
+      <lucide-icon [img]="ShoppingBag" [size]="32" class="brand-icon"></lucide-icon>
+      <h1>RetailPulse <span>Kiosk</span></h1>
+    </div>
+    <p class="subtitle">Find products, locations, and prices instantly</p>
+  </header>
 
-    <a href="/">Return to Selector</a>
-  </div>
-</section>
+  <main class="kiosk-main">
+    <div class="search-section">
+      <app-product-search-box 
+        (search)="onSearch($event)"
+        (clear)="onClear()">
+      </app-product-search-box>
+    </div>
+
+    <div class="results-section">
+      <!-- Loading State -->
+      <div *ngIf="store.loading()" class="state-container">
+        <div class="spinner"></div>
+        <p>Searching for products...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="store.error()" class="state-container error">
+        <p>{{ store.error() }}</p>
+      </div>
+
+      <!-- Empty State (Has searched, no results) -->
+      <div *ngIf="store.hasSearched() && !store.loading() && !store.error() && store.productResults().length === 0" class="state-container empty">
+        <lucide-icon [img]="PackageX" [size]="64" class="empty-icon"></lucide-icon>
+        <h2>No products found</h2>
+        <p>We couldn't find any products matching your search. Please try a different name or category.</p>
+      </div>
+
+      <!-- Results List -->
+      <div *ngIf="store.productResults().length > 0 && !store.loading()" class="results-grid">
+        <app-product-result-card 
+          *ngFor="let product of store.productResults()" 
+          [product]="product">
+        </app-product-result-card>
+      </div>
+    </div>
+  </main>
+</div>
