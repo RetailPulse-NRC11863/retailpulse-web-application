@@ -1,9 +1,21 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ConversionMetric } from '../../../domain/model/conversion-metric.entity';
+import { LucideAngularModule, Activity, ShoppingBag, TrendingUp, MapPin } from 'lucide-angular';
 
 @Component({
   selector: 'app-conversion-card',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './conversion-card.html',
-  styleUrl: './conversion-card.css',
+  styleUrls: ['./conversion-card.css']
 })
-export class ConversionCard {}
+export class ConversionCardComponent {
+  @Input({ required: true }) metric!: ConversionMetric;
+  @Input() zoneName: string = '';
+
+  readonly Activity = Activity;
+  readonly ShoppingBag = ShoppingBag;
+  readonly TrendingUp = TrendingUp;
+  readonly MapPin = MapPin;
+}

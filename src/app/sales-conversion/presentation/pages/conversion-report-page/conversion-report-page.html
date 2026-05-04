@@ -1,7 +1,88 @@
-<section class="page">
-  <p class="eyebrow">Administrator</p>
-  <h1>Conversion Reports</h1>
-  <p>
-    Here the relationship between interactions, consulted products, and simulated sales will be analyzed.
-  </p>
-</section>
+<div class="conversion-container">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">Sales & Conversion Analysis</h1>
+      <p class="page-subtitle">Understand performance bottlenecks and optimization opportunities</p>
+    </div>
+    <button class="btn-refresh" (click)="loadData()" [disabled]="isLoading">
+      <lucide-icon [img]="RefreshCw" size="16" [class.spinning]="isLoading"></lucide-icon>
+      Refresh
+    </button>
+  </div>
+
+  <div class="error-banner" *ngIf="hasError">
+    <lucide-icon [img]="AlertTriangle" size="20"></lucide-icon>
+    <span>Error loading data. Please try again.</span>
+  </div>
+
+  <div class="loading-state" *ngIf="isLoading && store.conversionMetrics().length === 0">
+    <div class="spinner"></div>
+    <p>Analyzing conversion data...</p>
+  </div>
+
+  <ng-container *ngIf="!isLoading || store.conversionMetrics().length > 0">
+    <div class="main-grid">
+      <!-- Left Column -->
+      <div class="column">
+        <section class="report-section">
+          <h2 class="section-title">Conversion by Zone</h2>
+          <div class="cards-list">
+            <app-conversion-card 
+              *ngFor="let metric of store.conversionMetrics()" 
+              [metric]="metric">
+            </app-conversion-card>
+            
+            <div class="empty-state" *ngIf="store.conversionMetrics().length === 0">
+              <p>No conversion data available.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="report-section">
+          <h2 class="section-title">AI Recommendations</h2>
+          <div class="cards-list">
+            <app-recommendation-card 
+              *ngFor="let rec of alertsStore.recommendations()" 
+              [recommendation]="rec">
+            </app-recommendation-card>
+
+            <div class="empty-state" *ngIf="alertsStore.recommendations().length === 0">
+              <p>No active recommendations.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right Column -->
+      <div class="column">
+        <section class="report-section">
+          <h2 class="section-title">Products Needing Attention</h2>
+          <div class="cards-list">
+            <app-product-performance-card 
+              *ngFor="let product of store.lowPerformingProducts()" 
+              [product]="product">
+            </app-product-performance-card>
+            
+            <div class="empty-state" *ngIf="store.lowPerformingProducts().length === 0">
+              <p>All monitored products are performing well.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="report-section">
+          <h2 class="section-title">Top Performers</h2>
+          <div class="cards-list">
+            <app-product-performance-card 
+              *ngFor="let product of store.topPerformingProducts()" 
+              [product]="product">
+            </app-product-performance-card>
+
+            <div class="empty-state" *ngIf="store.topPerformingProducts().length === 0">
+              <p>No top performers identified.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </ng-container>
+</div>

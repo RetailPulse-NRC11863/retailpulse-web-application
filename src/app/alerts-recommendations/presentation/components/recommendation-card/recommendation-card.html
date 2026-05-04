@@ -1,1 +1,20 @@
-<p>recommendation-card works!</p>
+<div class="recommendation-card" [ngClass]="recommendation.priority.toLowerCase()">
+  <div class="icon-column">
+    <div class="icon-circle">
+      <lucide-icon [img]="getIconForType(recommendation.type)" size="20"></lucide-icon>
+    </div>
+  </div>
+  <div class="content-column">
+    <div class="header-row">
+      <h4 class="title">{{ recommendation.title }}</h4>
+      <span class="badge priority" [ngClass]="recommendation.priority.toLowerCase()">
+        {{ recommendation.priority }}
+      </span>
+    </div>
+    <p class="description">{{ recommendation.description }}</p>
+    <div class="meta-row">
+      <span class="badge type">{{ recommendation.type }}</span>
+      <span class="date">{{ recommendation.createdAt | date:'mediumDate' }}</span>
+    </div>
+  </div>
+</div>

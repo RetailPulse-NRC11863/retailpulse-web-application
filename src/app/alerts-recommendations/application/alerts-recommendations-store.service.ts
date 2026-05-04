@@ -4,9 +4,12 @@ import { OperationalTask } from '../domain/model/operational-task.entity';
 import { AlertsRecommendationsApiService } from '../infrastructure/services/alerts-recommendations-api.service';
 import { forkJoin } from 'rxjs';
 
+import { Recommendation } from '../domain/model/recommendation.entity';
+
 export interface AlertsRecommendationsState {
   alerts: Alert[];
   operationalTasks: OperationalTask[];
+  recommendations: Recommendation[];
   loading: boolean;
   error: string | null;
   selectedPriority: string | null;
@@ -21,6 +24,7 @@ export class AlertsRecommendationsStore {
   private state = signal<AlertsRecommendationsState>({
     alerts: [],
     operationalTasks: [],
+    recommendations: [],
     loading: false,
     error: null,
     selectedPriority: null
@@ -29,6 +33,7 @@ export class AlertsRecommendationsStore {
   // State Signals
   alerts = computed(() => this.state().alerts);
   operationalTasks = computed(() => this.state().operationalTasks);
+  recommendations = computed(() => this.state().recommendations);
   loading = computed(() => this.state().loading);
   error = computed(() => this.state().error);
   selectedPriority = computed(() => this.state().selectedPriority);
@@ -105,6 +110,24 @@ export class AlertsRecommendationsStore {
           loading: false
         }));
         console.error('Failed to load operational tasks', err);
+      }
+    });
+  }
+
+  loadRecommendations() {
+    this.state.update(s => ({ ...s, loading: true, error: null }));
+    
+    this.apiService.getRecommendations().subscribe({
+      next: (recommendations) => {
+        this.state.update(s => ({ ...s, recommendations, loading: false }));
+      },
+      error: (err) => {
+        this.state.update(s => ({
+          ...s,
+          error: 'Error loading recommendations.',
+          loading: false
+        }));
+        console.error('Failed to load recommendations', err);
       }
     });
   }
