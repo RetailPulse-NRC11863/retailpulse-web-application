@@ -1,7 +1,78 @@
-<section class="page">
-  <p class="eyebrow">Administrator</p>
-  <h1>Administrator Dashboard</h1>
-  <p>
-    Here you will see metrics on traffic, retention, interaction, conversion, and heatmap.
-  </p>
-</section>
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <div>
+      <h1 class="dashboard-title">Store Overview</h1>
+      <p class="dashboard-subtitle">Real-time monitoring and analytics</p>
+    </div>
+    <button class="btn-refresh" (click)="loadData()" [disabled]="store.loading()">
+      <lucide-icon [img]="RefreshCw" size="16" [class.spinning]="store.loading()"></lucide-icon>
+      Refresh
+    </button>
+  </div>
+
+  <div class="error-banner" *ngIf="store.error()">
+    <lucide-icon [img]="AlertTriangle" size="20"></lucide-icon>
+    <span>{{ store.error() }}</span>
+    <button class="btn-close" (click)="store.clearError()">&times;</button>
+  </div>
+
+  <div class="loading-state" *ngIf="store.loading() && store.zoneMetrics().length === 0">
+    <div class="spinner"></div>
+    <p>Loading dashboard data...</p>
+  </div>
+
+  <ng-container *ngIf="!store.loading() || store.zoneMetrics().length > 0">
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <app-kpi-card 
+        title="Total Traffic" 
+        [value]="(store.totalTraffic() | number) || '0'" 
+        icon="Users"
+        [trend]="{ value: 5.2, isPositive: true }">
+      </app-kpi-card>
+      
+      <app-kpi-card 
+        title="Avg. Dwell Time" 
+        [value]="store.averageDwellTime() + 's'" 
+        icon="Clock"
+        [trend]="{ value: 2.1, isPositive: false }">
+      </app-kpi-card>
+      
+      <app-kpi-card 
+        title="Interactions" 
+        [value]="(store.totalInteractions() | number) || '0'" 
+        icon="Activity"
+        [trend]="{ value: 8.4, isPositive: true }">
+      </app-kpi-card>
+      
+      <app-kpi-card 
+        title="Conversion Rate" 
+        [value]="((store.overallConversionRate() * 100) | number:'1.1-1') + '%'" 
+        icon="ShoppingBag"
+        [trend]="{ value: 1.2, isPositive: true }">
+      </app-kpi-card>
+    </div>
+
+    <!-- Main Content -->
+    <div class="dashboard-main">
+      <div class="heatmap-section">
+        <app-heatmap-panel [heatmapZones]="store.heatmapZones()"></app-heatmap-panel>
+      </div>
+      
+      <div class="zones-section">
+        <h2 class="section-title">Zone Performance</h2>
+        <div class="zones-list">
+          <app-zone-metric-card 
+            *ngFor="let zone of store.zoneMetrics()" 
+            [zone]="zone"
+            [conversion]="getConversionForZone(zone.zoneId)">
+          </app-zone-metric-card>
+          
+          <div class="empty-state" *ngIf="store.zoneMetrics().length === 0">
+            <p>No zone data available.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>

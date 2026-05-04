@@ -1,0 +1,31 @@
+<div class="zone-card">
+  <div class="zone-header">
+    <div class="zone-title-wrapper">
+      <lucide-icon [img]="MapPin" size="20" class="zone-icon"></lucide-icon>
+      <h3 class="zone-name">{{ zone.zoneName }}</h3>
+    </div>
+  </div>
+
+  <div class="zone-metrics-grid">
+    <div class="metric-item">
+      <div class="metric-label">
+        <lucide-icon [img]="Users" size="14"></lucide-icon> Traffic
+      </div>
+      <div class="metric-value">{{ zone.trafficCount | number }}</div>
+    </div>
+    
+    <div class="metric-item">
+      <div class="metric-label">
+        <lucide-icon [img]="Clock" size="14"></lucide-icon> Dwell Time
+      </div>
+      <div class="metric-value">{{ formattedDwellTime }}</div>
+    </div>
+
+    <div class="metric-item" *ngIf="conversion">
+      <div class="metric-label">
+        <lucide-icon [img]="ShoppingCart" size="14"></lucide-icon> Conversion
+      </div>
+      <div class="metric-value">{{ (conversion.conversionRate * 100).toFixed(1) }}%</div>
+    </div>
+  </div>
+</div>

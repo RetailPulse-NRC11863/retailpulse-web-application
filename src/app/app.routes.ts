@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import {AccessPage} from './shared/presentation/pages/access-page/access-page';
 import {MainLayout} from './shared/presentation/layouts/main-layout/main-layout';
 import {PageNotFound} from './shared/presentation/pages/page-not-found/page-not-found';
-import {DashboardPage} from './monitoring/presentation/pages/dashboard-page/dashboard-page';
+import {DashboardPageComponent} from './monitoring/presentation/pages/dashboard-page/dashboard-page';
 import {
   StoreConfigurationPage
 } from './store-configuration/presentation/pages/store-configuration-page/store-configuration-page';
@@ -31,7 +31,7 @@ export const routes: Routes = [
       },
       {
         path: 'admin/dashboard',
-        component: DashboardPage,
+        component: DashboardPageComponent,
         title: 'RetailPulse - Admin Dashboard'
       },
       {
