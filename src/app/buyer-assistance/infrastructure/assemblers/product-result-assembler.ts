@@ -1,20 +1,56 @@
-import { ProductResult } from '../../domain/model/product-result';
+import {BaseAssembler} from '../../../shared/infrastructure/http/base-assembler';
+import {ProductResult} from '../../domain/model/product-result';
+import {ProductResultResource} from '../resources/product-result-resource';
+import {ProductResultResponse} from '../responses/product-result-response';
 
-export class ProductResultAssembler {
-  static fromDto(dto: any): ProductResult {
+/**
+ * Assembler that converts between ProductResult entities and API resources.
+ */
+export class ProductResultAssembler
+  implements BaseAssembler<ProductResult, ProductResultResource, ProductResultResponse> {
+
+  /**
+   * Converts a ProductResultResource to a ProductResult entity.
+   * @param resource - The resource to convert.
+   * @returns The converted ProductResult entity.
+   */
+  toEntityFromResource(resource: ProductResultResource): ProductResult {
+    return new ProductResult({
+      id: resource.id,
+      name: resource.name,
+      category: resource.category,
+      price: resource.price,
+      stock: resource.stock,
+      zoneName: resource.zoneName,
+      shelfReference: resource.shelfReference,
+      promotion: resource.promotion || null
+    });
+  }
+
+  /**
+   * Converts a ProductResult entity to a ProductResultResource.
+   * @param entity - The entity to convert.
+   * @returns The converted ProductResultResource.
+   */
+  toResourceFromEntity(entity: ProductResult): ProductResultResource {
     return {
-      id: dto.id,
-      name: dto.name,
-      category: dto.category,
-      price: dto.price,
-      stock: dto.stock,
-      zoneName: dto.zoneName,
-      shelfReference: dto.shelfReference,
-      promotion: dto.promotion || null
+      id: entity.id,
+      name: entity.name,
+      category: entity.category,
+      price: entity.price,
+      stock: entity.stock,
+      zoneName: entity.zoneName,
+      shelfReference: entity.shelfReference,
+      promotion: entity.promotion
     };
   }
 
-  static fromDtoList(dtos: any[]): ProductResult[] {
-    return dtos.map(dto => this.fromDto(dto));
+  /**
+   * Converts a ProductResultResponse envelope into a collection of ProductResult entities.
+   * @param response - Response payload returned by the API.
+   * @returns Array of mapped ProductResult entities.
+   */
+  toEntitiesFromResponse(response: ProductResultResponse): ProductResult[] {
+    return response.content.map(resource => this.toEntityFromResource(resource));
   }
 }
