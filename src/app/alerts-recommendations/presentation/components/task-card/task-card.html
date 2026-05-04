@@ -1,1 +1,33 @@
-<p>task-card works!</p>
+<div class="task-card">
+  <div class="task-header">
+    <div class="priority-badge" [ngClass]="'priority-' + task.priority.toLowerCase()">
+      <lucide-icon *ngIf="task.priority === 'HIGH'" [img]="AlertCircle" size="14"></lucide-icon>
+      <lucide-icon *ngIf="task.priority === 'MEDIUM'" [img]="AlertTriangle" size="14"></lucide-icon>
+      <lucide-icon *ngIf="task.priority === 'LOW'" [img]="Info" size="14"></lucide-icon>
+      {{ task.priority }}
+    </div>
+    <div class="status-badge" [ngClass]="'status-' + task.status.toLowerCase()">
+      <lucide-icon *ngIf="task.status === 'PENDING'" [img]="Clock" size="14"></lucide-icon>
+      <lucide-icon *ngIf="task.status === 'IN_PROGRESS'" [img]="Clock" size="14"></lucide-icon>
+      <lucide-icon *ngIf="task.status === 'RESOLVED'" [img]="CheckCircle2" size="14"></lucide-icon>
+      {{ task.status.replace('_', ' ') }}
+    </div>
+  </div>
+  
+  <div class="task-body">
+    <h3 class="task-title">{{ task.title }}</h3>
+    <p class="task-description">{{ task.description }}</p>
+    
+    <div class="zone-badge">
+      <lucide-icon [img]="MapPin" size="14"></lucide-icon>
+      {{ task.zoneName }}
+    </div>
+  </div>
+  
+  <div class="task-footer" *ngIf="task.status !== 'RESOLVED'">
+    <button class="btn-attend" (click)="onAttend()">
+      <lucide-icon [img]="CheckCircle2" size="18"></lucide-icon>
+      Mark as Attended
+    </button>
+  </div>
+</div>

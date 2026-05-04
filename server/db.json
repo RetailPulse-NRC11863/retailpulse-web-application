@@ -2,32 +2,32 @@
   "products": [
     {
       "id": "P001",
-      "name": "Arroz Costeño 5kg",
-      "category": "Abarrotes",
-      "price": 24.90,
+      "name": "Costeño Rice 5kg",
+      "category": "Groceries",
+      "price": 24.9,
       "stock": 18,
-      "zoneName": "Pasillo 2",
-      "shelfReference": "Estante B3",
-      "promotion": "10% de descuento"
+      "zoneName": "Aisle 2",
+      "shelfReference": "Shelf B3",
+      "promotion": "10% off"
     },
     {
       "id": "P002",
-      "name": "Aceite Primor 1L",
-      "category": "Abarrotes",
-      "price": 8.50,
+      "name": "Primor Oil 1L",
+      "category": "Groceries",
+      "price": 8.5,
       "stock": 0,
-      "zoneName": "Pasillo 2",
-      "shelfReference": "Estante B1",
+      "zoneName": "Aisle 2",
+      "shelfReference": "Shelf B1",
       "promotion": null
     },
     {
       "id": "P003",
-      "name": "Leche Gloria Evaporada",
-      "category": "Lácteos",
-      "price": 3.80,
+      "name": "Gloria Evaporated Milk",
+      "category": "Dairy",
+      "price": 3.8,
       "stock": 120,
-      "zoneName": "Pasillo 4",
-      "shelfReference": "Estante A1",
+      "zoneName": "Aisle 4",
+      "shelfReference": "Shelf A1",
       "promotion": "3x2"
     }
   ],
@@ -37,11 +37,11 @@
       "type": "OUT_OF_STOCK",
       "priority": "HIGH",
       "status": "PENDING",
-      "message": "Aceite Primor 1L agotado en Pasillo 2",
+      "message": "Primor Oil 1L out of stock in Aisle 2",
       "zoneId": "Z002",
-      "zoneName": "Pasillo 2",
+      "zoneName": "Aisle 2",
       "productId": "P002",
-      "productName": "Aceite Primor 1L",
+      "productName": "Primor Oil 1L",
       "createdAt": "2026-05-04T10:00:00Z"
     },
     {
@@ -49,34 +49,34 @@
       "type": "LOW_STOCK",
       "priority": "MEDIUM",
       "status": "IN_PROGRESS",
-      "message": "Arroz Costeño 5kg bajo stock (18 unidades)",
+      "message": "Costeño Rice 5kg low stock (18 units)",
       "zoneId": "Z002",
-      "zoneName": "Pasillo 2",
+      "zoneName": "Aisle 2",
       "productId": "P001",
-      "productName": "Arroz Costeño 5kg",
+      "productName": "Costeño Rice 5kg",
       "createdAt": "2026-05-04T11:30:00Z"
     }
   ],
   "operationalTasks": [
     {
       "id": "T001",
-      "title": "Reponer Aceite Primor",
-      "description": "Traer inventario del almacén principal para Aceite Primor 1L y abastecer Estante B1.",
+      "title": "Restock Primor Oil",
+      "description": "Bring inventory from main warehouse for Primor Oil 1L and stock Shelf B1.",
       "priority": "HIGH",
       "status": "PENDING",
       "zoneId": "Z002",
-      "zoneName": "Pasillo 2",
+      "zoneName": "Aisle 2",
       "alertId": "A001",
       "createdAt": "2026-05-04T10:05:00Z"
     },
     {
       "id": "T002",
-      "title": "Revisar stock de Arroz",
-      "description": "Verificar si hay más unidades de Arroz Costeño 5kg en trastienda.",
+      "title": "Check Rice stock",
+      "description": "Check if there are more units of Costeño Rice 5kg in backroom.",
       "priority": "MEDIUM",
       "status": "IN_PROGRESS",
       "zoneId": "Z002",
-      "zoneName": "Pasillo 2",
+      "zoneName": "Aisle 2",
       "alertId": "A002",
       "createdAt": "2026-05-04T11:35:00Z"
     }
