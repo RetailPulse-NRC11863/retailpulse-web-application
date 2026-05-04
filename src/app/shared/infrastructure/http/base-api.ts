@@ -1,6 +1,5 @@
-import { Injectable } from '@angular/core';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class BaseApi {}
+/**
+ * Defines the base type for API facades in a bounded context.
+ */
+export abstract class BaseApi {
+}
