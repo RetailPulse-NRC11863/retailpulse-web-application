@@ -168,5 +168,64 @@
       "type": "LAYOUT",
       "createdAt": "2026-05-04T11:00:00Z"
     }
-  ]
+  ],
+  "plans": [
+    {
+      "id": "PLAN_STARTER",
+      "name": "Starter",
+      "price": 99,
+      "currency": "USD",
+      "description": "Ideal for small stores looking to start digitalizing the shopping experience.",
+      "features": [
+        "1 store",
+        "Basic product catalog",
+        "Product search on kiosk",
+        "Stock and location queries",
+        "Simple promotions",
+        "Basic alerts"
+      ],
+      "recommended": false
+    },
+    {
+      "id": "PLAN_GROWTH",
+      "name": "Growth",
+      "price": 199,
+      "currency": "USD",
+      "description": "Designed for growing stores needing operational analytics and better floor control.",
+      "features": [
+        "Up to 3 stores",
+        "Everything in Starter",
+        "Metrics dashboard",
+        "Simple heatmap",
+        "Zone metrics",
+        "Operational alerts for staff",
+        "Basic conversion reports"
+      ],
+      "recommended": true
+    },
+    {
+      "id": "PLAN_PREMIUM",
+      "name": "Premium",
+      "price": 349,
+      "currency": "USD",
+      "description": "Designed for larger operations seeking advanced data-driven optimization.",
+      "features": [
+        "Unlimited stores",
+        "Everything in Growth",
+        "Automatic recommendations",
+        "High interaction / low conversion products",
+        "Advanced reports",
+        "Multiple user roles",
+        "Priority support"
+      ],
+      "recommended": false
+    }
+  ],
+  "activeSubscription": {
+    "id": "SUB001",
+    "storeName": "RetailPulse Demo Store",
+    "planId": "PLAN_GROWTH",
+    "status": "ACTIVE",
+    "renewalDate": "2026-06-30"
+  }
 }

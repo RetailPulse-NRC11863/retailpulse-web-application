@@ -61,3 +61,65 @@
     margin: 0 auto;
   }
 }
+
+.active-subscription-panel {
+  background-color: var(--rp-color-surface);
+  border: 1px solid var(--rp-color-border);
+  border-radius: var(--rp-border-radius-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 3rem;
+}
+
+.active-subscription-panel h2 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.25rem;
+  color: var(--rp-color-text);
+  border-bottom: 1px solid var(--rp-color-border);
+  padding-bottom: 0.75rem;
+}
+
+.active-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rp-color-text-secondary);
+}
+
+.detail .value {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--rp-color-text);
+}
+
+.status-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--rp-border-radius-full);
+  font-size: 0.875rem !important;
+  background-color: var(--rp-color-background);
+}
+
+.status-badge.active {
+  background-color: rgba(var(--rp-color-success-rgb), 0.1);
+  color: var(--rp-color-success) !important;
+}
+
+.plans-title {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+  color: var(--rp-color-text);
+  text-align: center;
+}

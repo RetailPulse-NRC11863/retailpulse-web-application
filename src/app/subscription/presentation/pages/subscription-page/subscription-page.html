@@ -9,10 +9,38 @@
     <p>Loading plans...</p>
   </div>
 
-  <div class="plans-grid" *ngIf="!store.loading()">
-    <app-subscription-card 
-      *ngFor="let plan of store.plans()" 
-      [plan]="plan">
-    </app-subscription-card>
-  </div>
+  <ng-container *ngIf="!store.loading() && store.activeSubscription()">
+    <div class="active-subscription-panel">
+      <h2>Active Subscription</h2>
+      <div class="active-details">
+        <div class="detail">
+          <span class="label">Store</span>
+          <span class="value">{{ store.activeSubscription()?.storeName }}</span>
+        </div>
+        <div class="detail">
+          <span class="label">Plan</span>
+          <span class="value">{{ getPlanName(store.activeSubscription()?.planId) }}</span>
+        </div>
+        <div class="detail">
+          <span class="label">Status</span>
+          <span class="value status-badge" [class.active]="store.activeSubscription()?.status === 'ACTIVE'">
+            {{ store.activeSubscription()?.status }}
+          </span>
+        </div>
+        <div class="detail">
+          <span class="label">Renewal Date</span>
+          <span class="value">{{ store.activeSubscription()?.renewalDate | date:'mediumDate' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="plans-title">Available Plans</h2>
+    <div class="plans-grid">
+      <app-subscription-card 
+        *ngFor="let plan of store.plans()" 
+        [plan]="plan"
+        [isActive]="store.activeSubscription()?.planId === plan.id">
+      </app-subscription-card>
+    </div>
+  </ng-container>
 </div>

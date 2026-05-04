@@ -12,6 +12,7 @@ import { LucideAngularModule, Check, Star } from 'lucide-angular';
 })
 export class SubscriptionCardComponent {
   @Input({ required: true }) plan!: SubscriptionPlan;
+  @Input() isActive: boolean = false;
   
   readonly Check = Check;
   readonly Star = Star;

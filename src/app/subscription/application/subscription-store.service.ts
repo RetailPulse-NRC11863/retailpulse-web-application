@@ -1,92 +1,73 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { forkJoin } from 'rxjs';
 
 export interface SubscriptionPlan {
   id: string;
   name: string;
   price: number;
   currency: string;
-  billingPeriod: string;
+  description: string;
   features: string[];
-  isCurrent: boolean;
   recommended: boolean;
+}
+
+export interface ActiveSubscription {
+  id: string;
+  storeName: string;
+  planId: string;
+  status: string;
+  renewalDate: string;
 }
 
 export interface SubscriptionState {
   plans: SubscriptionPlan[];
+  activeSubscription: ActiveSubscription | null;
   loading: boolean;
+  error: string | null;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubscriptionStore {
+  private http = inject(HttpClient);
+
   private state = signal<SubscriptionState>({
     plans: [],
-    loading: false
+    activeSubscription: null,
+    loading: false,
+    error: null
   });
 
   plans = computed(() => this.state().plans);
+  activeSubscription = computed(() => this.state().activeSubscription);
   loading = computed(() => this.state().loading);
-  currentPlan = computed(() => this.state().plans.find(p => p.isCurrent));
+  error = computed(() => this.state().error);
 
   loadPlans() {
-    this.state.update(s => ({ ...s, loading: true }));
+    this.state.update(s => ({ ...s, loading: true, error: null }));
     
-    // Mocking the plans directly since they are static SaaS plans
-    setTimeout(() => {
-      this.state.update(s => ({
-        ...s,
-        loading: false,
-        plans: [
-          {
-            id: 'plan_starter',
-            name: 'Starter',
-            price: 99,
-            currency: 'USD',
-            billingPeriod: 'month',
-            features: [
-              'Up to 1 store',
-              'Basic Heatmaps',
-              'Standard Support',
-              'Weekly Reports'
-            ],
-            isCurrent: false,
-            recommended: false
-          },
-          {
-            id: 'plan_growth',
-            name: 'Growth',
-            price: 299,
-            currency: 'USD',
-            billingPeriod: 'month',
-            features: [
-              'Up to 5 stores',
-              'Advanced Heatmaps & Dwell Time',
-              'Priority Support',
-              'Daily AI Recommendations',
-              'Real-time alerts'
-            ],
-            isCurrent: true,
-            recommended: true
-          },
-          {
-            id: 'plan_premium',
-            name: 'Premium',
-            price: 899,
-            currency: 'USD',
-            billingPeriod: 'month',
-            features: [
-              'Unlimited stores',
-              'Full Data Pipeline API',
-              '24/7 Dedicated Support',
-              'Custom AI Models',
-              'Predictive Analytics'
-            ],
-            isCurrent: false,
-            recommended: false
-          }
-        ]
-      }));
-    }, 500);
+    forkJoin({
+      plans: this.http.get<SubscriptionPlan[]>('http://localhost:3000/api/v1/plans'),
+      activeSubscription: this.http.get<ActiveSubscription>('http://localhost:3000/api/v1/activeSubscription')
+    }).subscribe({
+      next: (data) => {
+        this.state.update(s => ({
+          ...s,
+          plans: data.plans,
+          activeSubscription: data.activeSubscription,
+          loading: false
+        }));
+      },
+      error: (err) => {
+        console.error('Failed to load subscription data', err);
+        this.state.update(s => ({
+          ...s,
+          error: 'Connection error while loading subscription data.',
+          loading: false
+        }));
+      }
+    });
   }
 }

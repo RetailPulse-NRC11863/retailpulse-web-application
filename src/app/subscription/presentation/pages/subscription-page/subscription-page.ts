@@ -16,4 +16,10 @@ export class SubscriptionPageComponent implements OnInit {
   ngOnInit() {
     this.store.loadPlans();
   }
+
+  getPlanName(planId: string | undefined): string {
+    if (!planId) return 'Unknown';
+    const plan = this.store.plans().find(p => p.id === planId);
+    return plan ? plan.name : planId;
+  }
 }
