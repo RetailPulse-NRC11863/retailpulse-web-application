@@ -30,5 +30,55 @@
       "shelfReference": "Estante A1",
       "promotion": "3x2"
     }
+  ],
+  "alerts": [
+    {
+      "id": "A001",
+      "type": "OUT_OF_STOCK",
+      "priority": "HIGH",
+      "status": "PENDING",
+      "message": "Aceite Primor 1L agotado en Pasillo 2",
+      "zoneId": "Z002",
+      "zoneName": "Pasillo 2",
+      "productId": "P002",
+      "productName": "Aceite Primor 1L",
+      "createdAt": "2026-05-04T10:00:00Z"
+    },
+    {
+      "id": "A002",
+      "type": "LOW_STOCK",
+      "priority": "MEDIUM",
+      "status": "IN_PROGRESS",
+      "message": "Arroz Costeño 5kg bajo stock (18 unidades)",
+      "zoneId": "Z002",
+      "zoneName": "Pasillo 2",
+      "productId": "P001",
+      "productName": "Arroz Costeño 5kg",
+      "createdAt": "2026-05-04T11:30:00Z"
+    }
+  ],
+  "operationalTasks": [
+    {
+      "id": "T001",
+      "title": "Reponer Aceite Primor",
+      "description": "Traer inventario del almacén principal para Aceite Primor 1L y abastecer Estante B1.",
+      "priority": "HIGH",
+      "status": "PENDING",
+      "zoneId": "Z002",
+      "zoneName": "Pasillo 2",
+      "alertId": "A001",
+      "createdAt": "2026-05-04T10:05:00Z"
+    },
+    {
+      "id": "T002",
+      "title": "Revisar stock de Arroz",
+      "description": "Verificar si hay más unidades de Arroz Costeño 5kg en trastienda.",
+      "priority": "MEDIUM",
+      "status": "IN_PROGRESS",
+      "zoneId": "Z002",
+      "zoneName": "Pasillo 2",
+      "alertId": "A002",
+      "createdAt": "2026-05-04T11:35:00Z"
+    }
   ]
 }
