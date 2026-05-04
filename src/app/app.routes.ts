@@ -5,9 +5,9 @@ import {MainLayout} from './shared/presentation/layouts/main-layout/main-layout'
 import {PageNotFound} from './shared/presentation/pages/page-not-found/page-not-found';
 import {DashboardPageComponent} from './monitoring/presentation/pages/dashboard-page/dashboard-page';
 import {
-  StoreConfigurationPage
+  StoreConfigurationPageComponent
 } from './store-configuration/presentation/pages/store-configuration-page/store-configuration-page';
-import {SubscriptionPage} from './subscription/presentation/pages/subscription-page/subscription-page';
+import {SubscriptionPageComponent} from './subscription/presentation/pages/subscription-page/subscription-page';
 import {
   ConversionReportPage
 } from './sales-conversion/presentation/pages/conversion-report-page/conversion-report-page';
@@ -36,12 +36,12 @@ export const routes: Routes = [
       },
       {
         path: 'admin/store-configuration',
-        component: StoreConfigurationPage,
+        component: StoreConfigurationPageComponent,
         title: 'RetailPulse - Store Configuration'
       },
       {
         path: 'admin/subscription',
-        component: SubscriptionPage,
+        component: SubscriptionPageComponent,
         title: 'RetailPulse - Subscription'
       },
       {

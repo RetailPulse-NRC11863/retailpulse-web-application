@@ -1,1 +1,30 @@
-<p>subscription-card works!</p>
+<div class="subscription-card" [class.current]="plan.isCurrent" [class.recommended]="plan.recommended">
+  <div class="card-badge" *ngIf="plan.isCurrent">Current Plan</div>
+  <div class="card-badge recommended-badge" *ngIf="plan.recommended && !plan.isCurrent">
+    <lucide-icon [img]="Star" size="14"></lucide-icon> Recommended
+  </div>
+
+  <div class="card-header">
+    <h3 class="plan-name">{{ plan.name }}</h3>
+    <div class="plan-price">
+      <span class="currency">{{ plan.currency === 'USD' ? '$' : plan.currency }}</span>
+      <span class="amount">{{ plan.price }}</span>
+      <span class="period">/{{ plan.billingPeriod }}</span>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <ul class="features-list">
+      <li *ngFor="let feature of plan.features" class="feature-item">
+        <lucide-icon [img]="Check" size="16" class="check-icon"></lucide-icon>
+        <span>{{ feature }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card-footer">
+    <button class="btn-action" [disabled]="plan.isCurrent">
+      {{ plan.isCurrent ? 'Active' : 'Upgrade to ' + plan.name }}
+    </button>
+  </div>
+</div>

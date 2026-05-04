@@ -1,7 +1,18 @@
-<section class="page">
-  <p class="eyebrow">Administrator</p>
-  <h1>SaaS Plans</h1>
-  <p>
-    Here the store’s active plan will be displayed along with the Starter, Growth, and Premium plans.
-  </p>
-</section>
+<div class="subscription-container">
+  <div class="page-header">
+    <h1 class="page-title">Subscription Management</h1>
+    <p class="page-subtitle">Manage your SaaS plan and billing</p>
+  </div>
+
+  <div class="loading-state" *ngIf="store.loading()">
+    <div class="spinner"></div>
+    <p>Loading plans...</p>
+  </div>
+
+  <div class="plans-grid" *ngIf="!store.loading()">
+    <app-subscription-card 
+      *ngFor="let plan of store.plans()" 
+      [plan]="plan">
+    </app-subscription-card>
+  </div>
+</div>

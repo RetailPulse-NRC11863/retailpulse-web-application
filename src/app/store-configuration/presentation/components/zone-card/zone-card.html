@@ -1,0 +1,21 @@
+<div class="zone-card" [class.offline]="zone.status === 'OFFLINE'">
+  <div class="card-header">
+    <div class="title-wrapper">
+      <lucide-icon [img]="MapPin" size="18" class="icon"></lucide-icon>
+      <h3 class="title">{{ zone.name }}</h3>
+    </div>
+    <span class="id-badge">{{ zone.id }}</span>
+  </div>
+
+  <div class="card-body">
+    <div class="sensor-info">
+      <div class="sensor-status" [class.online]="zone.status === 'ONLINE'">
+        <lucide-icon [img]="zone.status === 'ONLINE' ? Wifi : WifiOff" size="16"></lucide-icon>
+        <span>{{ zone.status }}</span>
+      </div>
+      <div class="sensor-count">
+        <strong>{{ zone.sensorCount }}</strong> Active Sensors
+      </div>
+    </div>
+  </div>
+</div>

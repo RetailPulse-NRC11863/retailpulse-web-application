@@ -1,7 +1,62 @@
-<section class="page">
-  <p class="eyebrow">Administrator</p>
-  <h1>Store Configuration</h1>
-  <p>
-    Here you will manage zones, products, shelves, simulated sensors, and product locations.
-  </p>
-</section>
+<div class="config-container">
+  <div class="page-header">
+    <h1 class="page-title">Store Configuration</h1>
+    <p class="page-subtitle">Manage your retail environment, zones, and product placements</p>
+  </div>
+
+  <div class="loading-state" *ngIf="store.loading()">
+    <div class="spinner"></div>
+    <p>Loading store configuration...</p>
+  </div>
+
+  <ng-container *ngIf="!store.loading() && store.storeInfo()">
+    <!-- Current Store Overview -->
+    <section class="overview-section">
+      <div class="overview-card">
+        <div class="icon-block">
+          <lucide-icon [img]="StoreIcon" size="24"></lucide-icon>
+        </div>
+        <div class="details">
+          <h2>{{ store.storeInfo()?.name }}</h2>
+          <p>{{ store.storeInfo()?.location }}</p>
+          <div class="meta-tags">
+            <span class="tag">Manager: {{ store.storeInfo()?.manager }}</span>
+            <span class="tag status">{{ store.storeInfo()?.status }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="main-grid">
+      <!-- Zones Column -->
+      <section class="column">
+        <div class="section-header">
+          <lucide-icon [img]="MapIcon" size="20" class="section-icon"></lucide-icon>
+          <h2 class="section-title">Configured Zones</h2>
+        </div>
+        
+        <div class="zones-grid">
+          <app-zone-card 
+            *ngFor="let zone of store.zones()" 
+            [zone]="zone">
+          </app-zone-card>
+        </div>
+      </section>
+
+      <!-- Products Column -->
+      <section class="column">
+        <div class="section-header">
+          <lucide-icon [img]="PackageSearch" size="20" class="section-icon"></lucide-icon>
+          <h2 class="section-title">Registered Products & Locations</h2>
+        </div>
+        
+        <div class="products-list">
+          <app-product-card 
+            *ngFor="let product of store.products()" 
+            [product]="product">
+          </app-product-card>
+        </div>
+      </section>
+    </div>
+  </ng-container>
+</div>

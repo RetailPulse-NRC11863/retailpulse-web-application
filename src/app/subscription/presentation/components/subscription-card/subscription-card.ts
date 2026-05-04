@@ -1,9 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SubscriptionPlan } from '../../../application/subscription-store.service';
+import { LucideAngularModule, Check, Star } from 'lucide-angular';
 
 @Component({
   selector: 'app-subscription-card',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, LucideAngularModule],
   templateUrl: './subscription-card.html',
-  styleUrl: './subscription-card.css',
+  styleUrls: ['./subscription-card.css']
 })
-export class SubscriptionCard {}
+export class SubscriptionCardComponent {
+  @Input({ required: true }) plan!: SubscriptionPlan;
+  
+  readonly Check = Check;
+  readonly Star = Star;
+}

@@ -1,9 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { SubscriptionStore } from '../../../application/subscription-store.service';
+import { SubscriptionCardComponent } from '../../components/subscription-card/subscription-card';
 
 @Component({
   selector: 'app-subscription-page',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, SubscriptionCardComponent],
   templateUrl: './subscription-page.html',
-  styleUrl: './subscription-page.css',
+  styleUrls: ['./subscription-page.css']
 })
-export class SubscriptionPage {}
+export class SubscriptionPageComponent implements OnInit {
+  store = inject(SubscriptionStore);
+
+  ngOnInit() {
+    this.store.loadPlans();
+  }
+}
