@@ -80,5 +80,93 @@
       "alertId": "A002",
       "createdAt": "2026-05-04T11:35:00Z"
     }
+  ],
+  "zoneMetrics": [
+    {
+      "id": "ZM001",
+      "zoneId": "Z001",
+      "zoneName": "Aisle 1 - Beverages",
+      "trafficCount": 1500,
+      "averageDwellTimeSeconds": 120,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM002",
+      "zoneId": "Z002",
+      "zoneName": "Aisle 2 - Groceries",
+      "trafficCount": 2100,
+      "averageDwellTimeSeconds": 180,
+      "date": "2026-05-04"
+    }
+  ],
+  "heatmapZones": [
+    {
+      "id": "HZ001",
+      "zoneId": "Z001",
+      "intensity": 0.6,
+      "coordinates": { "x": 10, "y": 20 }
+    },
+    {
+      "id": "HZ002",
+      "zoneId": "Z002",
+      "intensity": 0.9,
+      "coordinates": { "x": 30, "y": 40 }
+    }
+  ],
+  "conversionMetrics": [
+    {
+      "id": "CM001",
+      "zoneId": "Z001",
+      "totalInteractions": 500,
+      "totalSales": 50,
+      "conversionRate": 0.10,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM002",
+      "zoneId": "Z002",
+      "totalInteractions": 800,
+      "totalSales": 160,
+      "conversionRate": 0.20,
+      "date": "2026-05-04"
+    }
+  ],
+  "productPerformance": [
+    {
+      "id": "PP001",
+      "productId": "P001",
+      "productName": "Costeño Rice 5kg",
+      "interactions": 300,
+      "sales": 150,
+      "performanceScore": 0.8,
+      "status": "GOOD"
+    },
+    {
+      "id": "PP002",
+      "productId": "P002",
+      "productName": "Primor Oil 1L",
+      "interactions": 400,
+      "sales": 20,
+      "performanceScore": 0.3,
+      "status": "NEEDS_ATTENTION"
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "R001",
+      "title": "Review Primor Oil Display",
+      "description": "High interaction but low sales for Primor Oil 1L. Consider reviewing the price or shelf placement.",
+      "priority": "HIGH",
+      "type": "MERCHANDISING",
+      "createdAt": "2026-05-04T10:00:00Z"
+    },
+    {
+      "id": "R002",
+      "title": "Optimize Aisle 1 layout",
+      "description": "Traffic is high but dwell time is low in Aisle 1. Consider placing promotional items at eye level.",
+      "priority": "MEDIUM",
+      "type": "LAYOUT",
+      "createdAt": "2026-05-04T11:00:00Z"
+    }
   ]
 }
