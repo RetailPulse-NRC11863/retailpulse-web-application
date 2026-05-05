@@ -178,3 +178,76 @@
   border: 1px dashed #e2e8f0;
   border-radius: 10px;
 }
+
+/* Zone Performance Cards */
+.zone-perf-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.zone-perf-card:hover {
+  border-color: #94a3b8;
+  box-shadow: 0 2px 8px rgba(10, 37, 64, 0.08);
+  transform: translateY(-1px);
+}
+
+.zone-perf-selected {
+  border-color: #0A2540 !important;
+  background: #f0f9ff !important;
+  box-shadow: 0 0 0 2px rgba(10, 37, 64, 0.12) !important;
+}
+
+.zone-perf-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.zone-perf-icon {
+  font-size: 1rem;
+}
+
+.zone-perf-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0A2540;
+  flex: 1;
+}
+
+.zone-intensity-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.zone-perf-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.zone-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.zone-stat-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.zone-stat-value {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #0A2540;
+}

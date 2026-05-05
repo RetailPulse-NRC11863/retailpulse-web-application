@@ -61,27 +61,27 @@ export class MonitoringStore {
   heatmapLoading = computed(() => this.state().heatmapLoading);
   error = computed(() => this.state().error);
 
-  // Computed KPIs
-  totalTraffic = computed(() => 
-    this.zoneMetrics().reduce((sum, metric) => sum + metric.trafficCount, 0)
+  // KPIs — all derived from heatmapMetrics so dashboard and heatmap are always in sync
+  totalTraffic = computed(() =>
+    this.heatmapMetrics().reduce((sum, m) => sum + m.traffic, 0)
   );
 
   averageDwellTime = computed(() => {
-    const metrics = this.zoneMetrics();
+    const metrics = this.heatmapMetrics();
     if (metrics.length === 0) return 0;
-    const totalDwell = metrics.reduce((sum, m) => sum + m.averageDwellTimeSeconds, 0);
-    return Math.round(totalDwell / metrics.length);
+    return Math.round(metrics.reduce((sum, m) => sum + m.averageDwellTimeSeconds, 0) / metrics.length);
   });
 
-  totalInteractions = computed(() => 
-    this.conversionMetrics().reduce((sum, metric) => sum + metric.totalInteractions, 0)
+  totalInteractions = computed(() =>
+    this.heatmapMetrics().reduce((sum, m) => sum + m.traffic, 0)
   );
 
   overallConversionRate = computed(() => {
-    const interactions = this.totalInteractions();
-    if (interactions === 0) return 0;
-    const sales = this.conversionMetrics().reduce((sum, metric) => sum + metric.totalSales, 0);
-    return sales / interactions;
+    const metrics = this.heatmapMetrics();
+    if (metrics.length === 0) return 0;
+    const weighted = metrics.reduce((sum, m) => sum + m.traffic * m.conversionRate, 0);
+    const totalTraffic = metrics.reduce((sum, m) => sum + m.traffic, 0);
+    return totalTraffic > 0 ? weighted / totalTraffic / 100 : 0;
   });
 
   // Heatmap computed signals

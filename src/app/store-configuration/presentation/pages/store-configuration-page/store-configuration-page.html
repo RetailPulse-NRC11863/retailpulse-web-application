@@ -1,7 +1,9 @@
 <div class="config-container">
   <div class="page-header">
-    <h1 class="page-title">Store Configuration</h1>
-    <p class="page-subtitle">Manage your retail environment, zones, and product placements</p>
+    <div>
+      <h1 class="page-title">Store Configuration</h1>
+      <p class="page-subtitle">Manage your retail environment, zones, and product placements</p>
+    </div>
   </div>
 
   <div class="loading-state" *ngIf="store.loading()">
@@ -10,7 +12,8 @@
   </div>
 
   <ng-container *ngIf="!store.loading() && store.storeInfo()">
-    <!-- Current Store Overview -->
+
+    <!-- Store Info Card -->
     <section class="overview-section">
       <div class="overview-card">
         <div class="icon-block">
@@ -28,35 +31,161 @@
     </section>
 
     <div class="main-grid">
+
       <!-- Zones Column -->
       <section class="column">
+
+        <!-- Section header with action buttons -->
         <div class="section-header">
-          <lucide-icon [img]="MapIcon" size="20" class="section-icon"></lucide-icon>
-          <h2 class="section-title">Configured Zones</h2>
+          <div class="section-title-group">
+            <lucide-icon [img]="MapIcon" size="20" class="section-icon"></lucide-icon>
+            <h2 class="section-title">Configured Zones</h2>
+            <span class="zone-count">{{ store.zones().length }}</span>
+          </div>
+          <div class="zone-actions">
+            <button class="btn-edit-layout"
+                    [class.active]="editMode()"
+                    (click)="editMode.set(!editMode())"
+                    [disabled]="store.zones().length === 0">
+              <lucide-icon [img]="EditIcon" size="14"></lucide-icon>
+              {{ editMode() ? 'Exit Edit Mode' : 'Edit Layout' }}
+            </button>
+            <button class="btn-add-zone" (click)="showAddForm.set(!showAddForm())">
+              <lucide-icon [img]="PlusIcon" size="14"></lucide-icon>
+              Add Zone
+            </button>
+          </div>
         </div>
-        
-        <div class="zones-grid">
-          <app-zone-card 
-            *ngFor="let zone of store.zones()" 
-            [zone]="zone">
-          </app-zone-card>
+
+        <!-- Add Zone Inline Form -->
+        <div class="add-zone-form" *ngIf="showAddForm()">
+          <div class="form-row">
+            <input class="form-input" type="text" placeholder="Zone name (e.g. Bakery Zone)" [(ngModel)]="newZoneName" />
+            <select class="form-select" [(ngModel)]="newZoneType">
+              <option *ngFor="let t of zoneTypes" [value]="t">{{ getZoneIcon(t) }} {{ getZoneTypeLabel(t) }}</option>
+            </select>
+          </div>
+          <div class="form-row simulated-data-row">
+            <label class="form-label">Simulated Data:</label>
+            <input class="form-input small-input" type="number" placeholder="Traffic" [(ngModel)]="newZoneTraffic" title="Traffic" />
+            <input class="form-input small-input" type="number" placeholder="Dwell (s)" [(ngModel)]="newZoneDwell" title="Dwell Time" />
+            <input class="form-input small-input" type="number" placeholder="Conv. (%)" [(ngModel)]="newZoneConversion" title="Conversion Rate" />
+            <input class="form-input small-input" type="number" placeholder="Intensity" [(ngModel)]="newZoneIntensity" title="Intensity" />
+          </div>
+          <div class="form-actions">
+            <button class="btn-submit-zone" (click)="submitAddZone()" [disabled]="!newZoneName.trim() || store.saving()">
+              {{ store.saving() ? 'Saving…' : 'Add Zone' }}
+            </button>
+            <button class="btn-form-cancel" (click)="showAddForm.set(false)">Cancel</button>
+          </div>
+        </div>
+
+        <!-- SVG Drag-and-Drop Layout Editor -->
+        <app-zone-layout-editor
+          *ngIf="editMode()"
+          [zones]="store.zones()"
+          (save)="onSaveLayout($event)"
+          (cancel)="onCancelEdit()">
+        </app-zone-layout-editor>
+
+        <!-- Zone Cards (view mode) -->
+        <div class="zones-grid" *ngIf="!editMode()">
+          <div class="zone-card" *ngFor="let zone of store.zones()">
+            <div class="zone-card-icon">{{ getZoneIcon(zone.type) }}</div>
+            <div class="zone-card-info">
+              <span class="zone-card-name">{{ zone.name }}</span>
+              <span class="zone-card-type">{{ getZoneTypeLabel(zone.type) }}</span>
+              <span class="zone-card-pos">Position: ({{ zone.x }}, {{ zone.y }}) · {{ zone.width }}×{{ zone.height }}</span>
+            </div>
+            <button class="btn-delete-zone" (click)="requestDelete(zone.id)" title="Delete zone">
+              <lucide-icon [img]="TrashIcon" size="14"></lucide-icon>
+            </button>
+          </div>
+
+          <div class="empty-state" *ngIf="store.zones().length === 0">
+            <p>No zones configured. Click <strong>Add Zone</strong> to get started.</p>
+          </div>
         </div>
       </section>
 
       <!-- Products Column -->
       <section class="column">
         <div class="section-header">
-          <lucide-icon [img]="PackageSearch" size="20" class="section-icon"></lucide-icon>
-          <h2 class="section-title">Registered Products & Locations</h2>
+          <div class="section-title-group">
+            <lucide-icon [img]="PackageIcon" size="20" class="section-icon"></lucide-icon>
+            <h2 class="section-title">Products &amp; Locations</h2>
+          </div>
+          <button class="btn-add-zone" (click)="showAddProductForm.set(!showAddProductForm())">
+            <lucide-icon [img]="PlusIcon" size="14"></lucide-icon>
+            Add Product
+          </button>
         </div>
-        
+
+        <!-- Add Product Form -->
+        <div class="add-zone-form" *ngIf="showAddProductForm()">
+          <div class="form-row">
+            <input class="form-input" type="text" placeholder="Product Name" [(ngModel)]="newProductName" />
+            <input class="form-input" type="text" placeholder="Category" [(ngModel)]="newProductCategory" />
+          </div>
+          <div class="form-row">
+            <input class="form-input" type="number" placeholder="Price" [(ngModel)]="newProductPrice" />
+            <input class="form-input" type="number" placeholder="Stock" [(ngModel)]="newProductStock" />
+          </div>
+          <div class="form-row">
+            <select class="form-select" [(ngModel)]="newProductZone">
+              <option value="">Select Zone</option>
+              <option *ngFor="let zone of store.zones()" [value]="zone.name">{{ zone.name }}</option>
+            </select>
+            <input class="form-input" type="text" placeholder="Shelf Ref (e.g. A1)" [(ngModel)]="newProductShelf" />
+          </div>
+          <div class="form-row">
+            <input class="form-input" type="text" placeholder="Promotion (optional)" [(ngModel)]="newProductPromotion" />
+          </div>
+          <div class="form-actions" style="margin-top: 10px;">
+            <button class="btn-submit-zone" (click)="submitAddProduct()" [disabled]="!newProductName.trim() || store.saving()">
+              {{ store.saving() ? 'Saving…' : 'Add Product' }}
+            </button>
+            <button class="btn-form-cancel" (click)="showAddProductForm.set(false)">Cancel</button>
+          </div>
+        </div>
+
         <div class="products-list">
-          <app-product-card 
-            *ngFor="let product of store.products()" 
-            [product]="product">
-          </app-product-card>
+          <div class="product-wrapper" *ngFor="let product of store.products()">
+            <app-product-card style="flex: 1" [product]="product"></app-product-card>
+            <button class="btn-delete-zone product-delete-btn" (click)="requestDeleteProduct(product.id)" title="Delete product">
+              <lucide-icon [img]="TrashIcon" size="14"></lucide-icon>
+            </button>
+          </div>
+          <div class="empty-state" *ngIf="store.products().length === 0">
+            <p>No products added.</p>
+          </div>
         </div>
       </section>
+
     </div>
   </ng-container>
+</div>
+
+<!-- Delete Zone Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="confirmDelete()">
+  <div class="modal-card">
+    <h3 class="modal-title">Delete Zone?</h3>
+    <p class="modal-body">This will permanently remove the zone and its heatmap metrics. This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" (click)="confirmDelete.set(null)">Cancel</button>
+      <button class="btn-modal-confirm" (click)="confirmDeleteZone()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Product Confirmation Modal -->
+<div class="modal-backdrop" *ngIf="confirmDeleteProduct()">
+  <div class="modal-card">
+    <h3 class="modal-title">Delete Product?</h3>
+    <p class="modal-body">This will permanently remove the product from the catalog. This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button class="btn-modal-cancel" (click)="confirmDeleteProduct.set(null)">Cancel</button>
+      <button class="btn-modal-confirm" (click)="confirmDeleteProductAction()">Delete</button>
+    </div>
+  </div>
 </div>

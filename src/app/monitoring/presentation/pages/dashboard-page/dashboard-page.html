@@ -4,8 +4,8 @@
       <h1 class="dashboard-title">Store Overview</h1>
       <p class="dashboard-subtitle">Real-time monitoring and analytics</p>
     </div>
-    <button class="btn-refresh" (click)="loadData()" [disabled]="store.loading()">
-      <lucide-icon [img]="RefreshCw" size="16" [class.spinning]="store.loading()"></lucide-icon>
+    <button class="btn-refresh" (click)="loadData()" [disabled]="store.heatmapLoading()">
+      <lucide-icon [img]="RefreshCw" size="16" [class.spinning]="store.heatmapLoading()"></lucide-icon>
       Refresh
     </button>
   </div>
@@ -16,12 +16,12 @@
     <button class="btn-close" (click)="store.clearError()">&times;</button>
   </div>
 
-  <div class="loading-state" *ngIf="store.loading() && store.zoneMetrics().length === 0">
+  <div class="loading-state" *ngIf="store.heatmapLoading() && store.zonesWithMetrics().length === 0">
     <div class="spinner"></div>
     <p>Loading dashboard data...</p>
   </div>
 
-  <ng-container *ngIf="!store.loading() || store.zoneMetrics().length > 0">
+  <ng-container *ngIf="!store.heatmapLoading() || store.zonesWithMetrics().length > 0">
     <!-- KPIs -->
     <div class="kpi-grid">
       <app-kpi-card
@@ -39,14 +39,14 @@
       </app-kpi-card>
 
       <app-kpi-card
-        title="Interactions"
+        title="Total Visitors"
         [value]="(store.totalInteractions() | number) || '0'"
         icon="Activity"
         [trend]="{ value: 8.4, isPositive: true }">
       </app-kpi-card>
 
       <app-kpi-card
-        title="Conversion Rate"
+        title="Avg. Conversion"
         [value]="((store.overallConversionRate() * 100) | number:'1.1-1') + '%'"
         icon="ShoppingBag"
         [trend]="{ value: 1.2, isPositive: true }">
@@ -71,17 +71,37 @@
         <app-heatmap-legend></app-heatmap-legend>
       </div>
 
-      <!-- Zone performance -->
+      <!-- Zone performance — same source as heatmap -->
       <div class="zones-section">
         <h2 class="section-title">Zone Performance</h2>
         <div class="zones-list">
-          <app-zone-metric-card
-            *ngFor="let zone of store.zoneMetrics()"
-            [zone]="zone"
-            [conversion]="getConversionForZone(zone.zoneId)">
-          </app-zone-metric-card>
+          <div class="zone-perf-card"
+               *ngFor="let item of store.zonesWithMetrics()"
+               [class.zone-perf-selected]="item.zone.id === store.selectedZoneId()"
+               (click)="onZoneSelected(item.zone.id)">
+            <div class="zone-perf-header">
+              <span class="zone-perf-icon">{{ getZoneIcon(item.zone.type) }}</span>
+              <span class="zone-perf-name">{{ item.zone.name }}</span>
+              <span class="zone-intensity-dot"
+                    [style.background]="getColorForIntensity(item.metric?.intensity || 0)"></span>
+            </div>
+            <div class="zone-perf-stats" *ngIf="item.metric">
+              <div class="zone-stat">
+                <span class="zone-stat-label">Traffic</span>
+                <span class="zone-stat-value">{{ item.metric.traffic }}</span>
+              </div>
+              <div class="zone-stat">
+                <span class="zone-stat-label">Dwell</span>
+                <span class="zone-stat-value">{{ item.metric.averageDwellTimeSeconds }}s</span>
+              </div>
+              <div class="zone-stat">
+                <span class="zone-stat-label">Conv.</span>
+                <span class="zone-stat-value">{{ item.metric.conversionRate }}%</span>
+              </div>
+            </div>
+          </div>
 
-          <div class="empty-state" *ngIf="store.zoneMetrics().length === 0">
+          <div class="empty-state" *ngIf="store.zonesWithMetrics().length === 0">
             <p>No zone data available.</p>
           </div>
         </div>

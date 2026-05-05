@@ -85,17 +85,73 @@
     {
       "id": "ZM001",
       "zoneId": "Z001",
-      "zoneName": "Aisle 1 - Beverages",
-      "trafficCount": 1500,
-      "averageDwellTimeSeconds": 120,
+      "zoneName": "Entrance",
+      "trafficCount": 340,
+      "averageDwellTimeSeconds": 18,
       "date": "2026-05-04"
     },
     {
       "id": "ZM002",
       "zoneId": "Z002",
-      "zoneName": "Aisle 2 - Groceries",
-      "trafficCount": 2100,
-      "averageDwellTimeSeconds": 180,
+      "zoneName": "Checkout",
+      "trafficCount": 180,
+      "averageDwellTimeSeconds": 30,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM003",
+      "zoneId": "Z003",
+      "zoneName": "Aisle 1",
+      "trafficCount": 290,
+      "averageDwellTimeSeconds": 41,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM004",
+      "zoneId": "Z004",
+      "zoneName": "Aisle 2",
+      "trafficCount": 150,
+      "averageDwellTimeSeconds": 35,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM005",
+      "zoneId": "Z005",
+      "zoneName": "Aisle 3",
+      "trafficCount": 90,
+      "averageDwellTimeSeconds": 22,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM006",
+      "zoneId": "Z006",
+      "zoneName": "Dairy Zone",
+      "trafficCount": 310,
+      "averageDwellTimeSeconds": 45,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM007",
+      "zoneId": "Z007",
+      "zoneName": "Grocery Zone",
+      "trafficCount": 170,
+      "averageDwellTimeSeconds": 30,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM008",
+      "zoneId": "Z008",
+      "zoneName": "Beverage Zone",
+      "trafficCount": 120,
+      "averageDwellTimeSeconds": 25,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "ZM009",
+      "zoneId": "Z009",
+      "zoneName": "Promo Zone",
+      "trafficCount": 410,
+      "averageDwellTimeSeconds": 52,
       "date": "2026-05-04"
     }
   ],
@@ -104,30 +160,92 @@
       "id": "HZ001",
       "zoneId": "Z001",
       "intensity": 0.6,
-      "coordinates": { "x": 10, "y": 20 }
+      "coordinates": {
+        "x": 10,
+        "y": 20
+      }
     },
     {
       "id": "HZ002",
       "zoneId": "Z002",
       "intensity": 0.9,
-      "coordinates": { "x": 30, "y": 40 }
+      "coordinates": {
+        "x": 30,
+        "y": 40
+      }
     }
   ],
   "conversionMetrics": [
     {
       "id": "CM001",
       "zoneId": "Z001",
-      "totalInteractions": 500,
-      "totalSales": 50,
-      "conversionRate": 0.10,
+      "totalInteractions": 340,
+      "totalSales": 41,
+      "conversionRate": 0.12,
       "date": "2026-05-04"
     },
     {
       "id": "CM002",
       "zoneId": "Z002",
-      "totalInteractions": 800,
-      "totalSales": 160,
-      "conversionRate": 0.20,
+      "totalInteractions": 180,
+      "totalSales": 180,
+      "conversionRate": 1,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM003",
+      "zoneId": "Z003",
+      "totalInteractions": 290,
+      "totalSales": 81,
+      "conversionRate": 0.28,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM004",
+      "zoneId": "Z004",
+      "totalInteractions": 150,
+      "totalSales": 33,
+      "conversionRate": 0.22,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM005",
+      "zoneId": "Z005",
+      "totalInteractions": 90,
+      "totalSales": 9,
+      "conversionRate": 0.1,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM006",
+      "zoneId": "Z006",
+      "totalInteractions": 310,
+      "totalSales": 99,
+      "conversionRate": 0.32,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM007",
+      "zoneId": "Z007",
+      "totalInteractions": 170,
+      "totalSales": 31,
+      "conversionRate": 0.18,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM008",
+      "zoneId": "Z008",
+      "totalInteractions": 120,
+      "totalSales": 17,
+      "conversionRate": 0.14,
+      "date": "2026-05-04"
+    },
+    {
+      "id": "CM009",
+      "zoneId": "Z009",
+      "totalInteractions": 410,
+      "totalSales": 144,
+      "conversionRate": 0.35,
       "date": "2026-05-04"
     }
   ],
@@ -304,7 +422,7 @@
     {
       "id": "Z009",
       "name": "Promo Zone",
-      "x": 220,
+      "x": 20,
       "y": 360,
       "width": 460,
       "height": 80,
@@ -392,6 +510,15 @@
       "conversionRate": 35,
       "intensity": 95,
       "attentionRequired": true
+    },
+    {
+      "id": "HM1777950524010",
+      "zoneId": "Z1777950523953",
+      "traffic": 0,
+      "averageDwellTimeSeconds": 0,
+      "conversionRate": 0,
+      "intensity": 0,
+      "attentionRequired": false
     }
   ]
 }
