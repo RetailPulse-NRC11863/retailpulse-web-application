@@ -2,7 +2,7 @@
   <aside class="sidebar">
     <div class="brand">
       <span class="brand-mark">RP</span>
-      <div>
+      <div class="brand-text">
         <h2>RetailPulse</h2>
         <p>Web Application</p>
       </div>
@@ -13,19 +13,28 @@
         <p class="menu-label">Administrator</p>
 
         <a routerLink="/app/admin/dashboard" routerLinkActive="active">
-          Dashboard
+          <span class="nav-icon">📊</span>
+          <span class="nav-text">Dashboard</span>
         </a>
 
         <a routerLink="/app/admin/store-configuration" routerLinkActive="active">
-          Store Configuration
+          <span class="nav-icon">⚙️</span>
+          <span class="nav-text">Store Configuration</span>
         </a>
 
         <a routerLink="/app/admin/conversion" routerLinkActive="active">
-          Conversion
+          <span class="nav-icon">📈</span>
+          <span class="nav-text">Conversion</span>
+        </a>
+
+        <a routerLink="/app/admin/store-heatmap" routerLinkActive="active">
+          <span class="nav-icon">🗺️</span>
+          <span class="nav-text">Store Heatmap</span>
         </a>
 
         <a routerLink="/app/admin/subscription" routerLinkActive="active">
-          Subscription
+          <span class="nav-icon">💳</span>
+          <span class="nav-text">Subscription</span>
         </a>
       </nav>
     }
@@ -35,13 +44,17 @@
         <p class="menu-label">Store Staff</p>
 
         <a routerLink="/app/staff/alerts" routerLinkActive="active">
-          Operational Alerts
+          <span class="nav-icon">🔔</span>
+          <span class="nav-text">Operational Alerts</span>
         </a>
       </nav>
     }
 
     <div class="sidebar-footer">
-      <a routerLink="/">Switch View</a>
+      <a routerLink="/">
+        <span class="nav-icon">🔄</span>
+        <span class="nav-text">Switch View</span>
+      </a>
     </div>
   </aside>
 

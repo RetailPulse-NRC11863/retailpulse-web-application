@@ -1,9 +1,9 @@
-import {Component, computed, inject} from '@angular/core';
-import {Router, RouterLink, RouterOutlet} from '@angular/router';
+import {Component, computed, inject, signal} from '@angular/core';
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet, RouterLink],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })

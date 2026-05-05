@@ -1,0 +1,135 @@
+<div class="store-heatmap-container" #heatmapContainer>
+  <svg
+    [attr.viewBox]="'0 0 ' + svgWidth + ' ' + svgHeight"
+    class="store-svg"
+    xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Store floor background -->
+    <rect x="0" y="0" [attr.width]="svgWidth" [attr.height]="svgHeight"
+          rx="12" fill="#dfe7ef" />
+
+    <!-- Grid lines for floor effect -->
+    <g opacity="0.12" stroke="#94a3b8">
+      <line *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]"
+            [attr.x1]="i * 50" y1="0" [attr.x2]="i * 50" [attr.y2]="svgHeight" />
+      <line *ngFor="let i of [0,1,2,3,4,5,6,7,8,9]"
+            x1="0" [attr.y1]="i * 50" [attr.x2]="svgWidth" [attr.y2]="i * 50" />
+    </g>
+
+    <!-- Shelf decorations between zones -->
+    <g class="shelves" stroke="#b0bec5" stroke-width="2" stroke-dasharray="6,3" opacity="0.35">
+      <line x1="20" y1="115" x2="900" y2="115" />
+      <line x1="20" y1="235" x2="900" y2="235" />
+      <line x1="20" y1="355" x2="900" y2="355" />
+    </g>
+
+    <!-- Zone rectangles -->
+    <g *ngFor="let item of zonesWithMetrics">
+      <rect
+        [attr.x]="item.zone.x"
+        [attr.y]="item.zone.y"
+        [attr.width]="item.zone.width"
+        [attr.height]="item.zone.height"
+        [attr.rx]="10"
+        [attr.fill]="getColorForIntensity(item.metric?.intensity || 0)"
+        [attr.opacity]="getZoneOpacity(item.metric?.intensity || 0)"
+        [class.zone-rect]="true"
+        [class.zone-selected]="item.zone.id === selectedZoneId"
+        [class.zone-hovered]="item.zone.id === hoveredZoneId"
+        [attr.stroke]="item.zone.id === selectedZoneId ? '#0A2540' : 'rgba(255,255,255,0.5)'"
+        [attr.stroke-width]="item.zone.id === selectedZoneId ? 3 : 1.5"
+        style="cursor: pointer; transition: all 0.25s ease;"
+        (click)="onZoneClick(item.zone.id)"
+        (mouseenter)="onZoneMouseEnter(item.zone.id, $event)"
+        (mouseleave)="onZoneMouseLeave()" />
+
+      <!-- Zone icon -->
+      <text
+        [attr.x]="item.zone.x + 16"
+        [attr.y]="item.zone.y + 28"
+        font-size="18"
+        fill="white"
+        opacity="0.9"
+        pointer-events="none">
+        {{ getZoneIcon(item.zone.type) }}
+      </text>
+
+      <!-- Zone name -->
+      <text
+        [attr.x]="item.zone.x + item.zone.width / 2"
+        [attr.y]="item.zone.y + item.zone.height / 2 - 2"
+        text-anchor="middle"
+        font-size="16"
+        font-weight="700"
+        fill="white"
+        pointer-events="none"
+        style="text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+        {{ item.zone.name }}
+      </text>
+
+      <!-- Traffic count badge -->
+      <text
+        *ngIf="item.metric"
+        [attr.x]="item.zone.x + item.zone.width / 2"
+        [attr.y]="item.zone.y + item.zone.height / 2 + 20"
+        text-anchor="middle"
+        font-size="13"
+        font-weight="600"
+        fill="white"
+        opacity="0.85"
+        pointer-events="none"
+        style="text-shadow: 0 1px 3px rgba(0,0,0,0.35);">
+        {{ item.metric.traffic }} visitors
+      </text>
+
+      <!-- Attention indicator -->
+      <circle
+        *ngIf="item.metric?.attentionRequired"
+        [attr.cx]="item.zone.x + item.zone.width - 16"
+        [attr.cy]="item.zone.y + 16"
+        r="6"
+        fill="#fbbf24"
+        stroke="white"
+        stroke-width="2"
+        class="attention-pulse" />
+    </g>
+
+    <!-- Store label -->
+    <text x="460" y="450" text-anchor="middle" font-size="12"
+          fill="#7B93AD" font-weight="600" letter-spacing="0.06em">
+      STORE FLOOR PLAN — Lima Central
+    </text>
+  </svg>
+
+  <!-- Hover tooltip -->
+  <div class="svg-tooltip"
+       *ngIf="getHoveredDetail() as detail"
+       [style.left.px]="tooltipX"
+       [style.top.px]="tooltipY">
+    <div class="tooltip-header">
+      <span class="tooltip-icon">{{ getZoneIcon(detail.zone.type) }}</span>
+      <span class="tooltip-name">{{ detail.zone.name }}</span>
+    </div>
+    <div class="tooltip-metrics" *ngIf="detail.metric">
+      <div class="tooltip-row">
+        <span class="tooltip-label">Traffic</span>
+        <span class="tooltip-value">{{ detail.metric.traffic }}</span>
+      </div>
+      <div class="tooltip-row">
+        <span class="tooltip-label">Dwell Time</span>
+        <span class="tooltip-value">{{ detail.metric.averageDwellTimeSeconds }}s</span>
+      </div>
+      <div class="tooltip-row">
+        <span class="tooltip-label">Conversion</span>
+        <span class="tooltip-value">{{ detail.metric.conversionRate }}%</span>
+      </div>
+      <div class="tooltip-row">
+        <span class="tooltip-label">Intensity</span>
+        <span class="tooltip-value intensity-badge"
+              [style.color]="getColorForIntensity(detail.metric.intensity)">
+          {{ getIntensityLabel(detail.metric.intensity) }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

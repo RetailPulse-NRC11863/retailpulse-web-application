@@ -1,29 +1,25 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { MonitoringStore } from '../../../application/monitoring-store.service';
-import { KpiCardComponent } from '../../components/kpi-card/kpi-card';
 import { StoreHeatmapComponent } from '../../components/store-heatmap/store-heatmap';
 import { HeatmapLegendComponent } from '../../components/heatmap-legend/heatmap-legend';
-import { ZoneMetricCardComponent } from '../../components/zone-metric-card/zone-metric-card';
+import { ZoneMetricTooltipComponent } from '../../components/zone-metric-tooltip/zone-metric-tooltip';
 import { LucideAngularModule, RefreshCw, AlertTriangle } from 'lucide-angular';
 
 @Component({
-  selector: 'app-dashboard-page',
+  selector: 'app-store-heatmap-page',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
-    KpiCardComponent,
     StoreHeatmapComponent,
     HeatmapLegendComponent,
-    ZoneMetricCardComponent,
+    ZoneMetricTooltipComponent,
     LucideAngularModule
   ],
-  templateUrl: './dashboard-page.html',
-  styleUrls: ['./dashboard-page.css']
+  templateUrl: './store-heatmap-page.html',
+  styleUrls: ['./store-heatmap-page.css']
 })
-export class DashboardPageComponent implements OnInit {
+export class StoreHeatmapPageComponent implements OnInit {
   store = inject(MonitoringStore);
 
   readonly RefreshCw = RefreshCw;
@@ -34,12 +30,7 @@ export class DashboardPageComponent implements OnInit {
   }
 
   loadData() {
-    this.store.loadDashboardData();
     this.store.loadHeatmapData();
-  }
-
-  getConversionForZone(zoneId: string) {
-    return this.store.conversionMetrics().find(c => c.zoneId === zoneId);
   }
 
   onZoneSelected(zoneId: string) {

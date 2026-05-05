@@ -10,6 +10,10 @@ import { HeatmapZone } from '../../domain/model/heatmap-zone.entity';
 import { HeatmapZoneResource } from '../resources/heatmap-zone-resource';
 import { HeatmapZoneResponse } from '../responses/heatmap-zone-response';
 import { HeatmapZoneAssembler } from '../assemblers/heatmap-zone-assembler';
+import { HeatmapMetric } from '../../domain/model/heatmap-metric.entity';
+import { HeatmapMetricResource } from '../resources/heatmap-metric-resource';
+import { HeatmapMetricResponse } from '../responses/heatmap-metric-response';
+import { HeatmapMetricAssembler } from '../assemblers/heatmap-metric-assembler';
 
 @Injectable({ providedIn: 'root' })
 export class ZoneMetricsApiService extends BaseApiEndpoint<ZoneMetric, ZoneMetricResource, ZoneMetricResponse, ZoneMetricAssembler> {
@@ -26,9 +30,17 @@ export class HeatmapZonesApiService extends BaseApiEndpoint<HeatmapZone, Heatmap
 }
 
 @Injectable({ providedIn: 'root' })
+export class HeatmapMetricsApiService extends BaseApiEndpoint<HeatmapMetric, HeatmapMetricResource, HeatmapMetricResponse, HeatmapMetricAssembler> {
+  constructor(http: HttpClient) {
+    super(http, 'http://localhost:3000/api/v1/heatmapMetrics', new HeatmapMetricAssembler());
+  }
+}
+
+@Injectable({ providedIn: 'root' })
 export class MonitoringApiService {
   private zoneMetricsService = inject(ZoneMetricsApiService);
   private heatmapZonesService = inject(HeatmapZonesApiService);
+  private heatmapMetricsService = inject(HeatmapMetricsApiService);
 
   getZoneMetrics(): Observable<ZoneMetric[]> {
     return this.zoneMetricsService.getAll();
@@ -36,5 +48,9 @@ export class MonitoringApiService {
 
   getHeatmapZones(): Observable<HeatmapZone[]> {
     return this.heatmapZonesService.getAll();
+  }
+
+  getHeatmapMetrics(): Observable<HeatmapMetric[]> {
+    return this.heatmapMetricsService.getAll();
   }
 }

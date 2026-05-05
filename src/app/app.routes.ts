@@ -13,6 +13,9 @@ import {
 } from './sales-conversion/presentation/pages/conversion-report-page/conversion-report-page';
 import {AlertsPage} from './alerts-recommendations/presentation/pages/alerts-page/alerts-page';
 import {KioskSearchPageComponent} from './buyer-assistance/presentation/pages/kiosk-search-page/kiosk-search-page';
+import {
+  StoreHeatmapPageComponent
+} from './monitoring/presentation/pages/store-heatmap-page/store-heatmap-page';
 
 export const routes: Routes = [
   {
@@ -43,6 +46,11 @@ export const routes: Routes = [
         path: 'admin/subscription',
         component: SubscriptionPageComponent,
         title: 'RetailPulse - Subscription'
+      },
+      {
+        path: 'admin/store-heatmap',
+        component: StoreHeatmapPageComponent,
+        title: 'RetailPulse - Store Heatmap'
       },
       {
         path: 'admin/conversion',

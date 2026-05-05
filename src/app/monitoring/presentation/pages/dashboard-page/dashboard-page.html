@@ -24,30 +24,30 @@
   <ng-container *ngIf="!store.loading() || store.zoneMetrics().length > 0">
     <!-- KPIs -->
     <div class="kpi-grid">
-      <app-kpi-card 
-        title="Total Traffic" 
-        [value]="(store.totalTraffic() | number) || '0'" 
+      <app-kpi-card
+        title="Total Traffic"
+        [value]="(store.totalTraffic() | number) || '0'"
         icon="Users"
         [trend]="{ value: 5.2, isPositive: true }">
       </app-kpi-card>
-      
-      <app-kpi-card 
-        title="Avg. Dwell Time" 
-        [value]="store.averageDwellTime() + 's'" 
+
+      <app-kpi-card
+        title="Avg. Dwell Time"
+        [value]="store.averageDwellTime() + 's'"
         icon="Clock"
         [trend]="{ value: 2.1, isPositive: false }">
       </app-kpi-card>
-      
-      <app-kpi-card 
-        title="Interactions" 
-        [value]="(store.totalInteractions() | number) || '0'" 
+
+      <app-kpi-card
+        title="Interactions"
+        [value]="(store.totalInteractions() | number) || '0'"
         icon="Activity"
         [trend]="{ value: 8.4, isPositive: true }">
       </app-kpi-card>
-      
-      <app-kpi-card 
-        title="Conversion Rate" 
-        [value]="((store.overallConversionRate() * 100) | number:'1.1-1') + '%'" 
+
+      <app-kpi-card
+        title="Conversion Rate"
+        [value]="((store.overallConversionRate() * 100) | number:'1.1-1') + '%'"
         icon="ShoppingBag"
         [trend]="{ value: 1.2, isPositive: true }">
       </app-kpi-card>
@@ -55,19 +55,32 @@
 
     <!-- Main Content -->
     <div class="dashboard-main">
+      <!-- Heatmap section -->
       <div class="heatmap-section">
-        <app-heatmap-panel [heatmapZones]="store.heatmapZones()"></app-heatmap-panel>
+        <div class="section-header">
+          <h2 class="section-title">Live Store Heatmap</h2>
+          <a routerLink="/app/admin/store-heatmap" class="section-link">
+            View full details →
+          </a>
+        </div>
+        <app-store-heatmap
+          [zonesWithMetrics]="store.zonesWithMetrics()"
+          [selectedZoneId]="store.selectedZoneId()"
+          (zoneSelected)="onZoneSelected($event)">
+        </app-store-heatmap>
+        <app-heatmap-legend></app-heatmap-legend>
       </div>
-      
+
+      <!-- Zone performance -->
       <div class="zones-section">
         <h2 class="section-title">Zone Performance</h2>
         <div class="zones-list">
-          <app-zone-metric-card 
-            *ngFor="let zone of store.zoneMetrics()" 
+          <app-zone-metric-card
+            *ngFor="let zone of store.zoneMetrics()"
             [zone]="zone"
             [conversion]="getConversionForZone(zone.zoneId)">
           </app-zone-metric-card>
-          
+
           <div class="empty-state" *ngIf="store.zoneMetrics().length === 0">
             <p>No zone data available.</p>
           </div>

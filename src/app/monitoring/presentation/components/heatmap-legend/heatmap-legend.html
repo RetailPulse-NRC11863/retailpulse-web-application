@@ -1,0 +1,19 @@
+<div class="legend-container">
+  <span class="legend-title">Traffic Intensity</span>
+
+  <div class="legend-gradient">
+    <div class="gradient-bar"></div>
+    <div class="gradient-labels">
+      <span>Low</span>
+      <span>Very High</span>
+    </div>
+  </div>
+
+  <div class="legend-items">
+    <div class="legend-item" *ngFor="let level of levels">
+      <span class="legend-dot" [style.backgroundColor]="level.color"></span>
+      <span class="legend-label">{{ level.label }}</span>
+      <span class="legend-range">{{ level.range }}</span>
+    </div>
+  </div>
+</div>
