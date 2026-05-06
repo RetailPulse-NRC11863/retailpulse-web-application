@@ -3,19 +3,17 @@ import { Routes } from '@angular/router';
 import {AccessPage} from './shared/presentation/pages/access-page/access-page';
 import {MainLayout} from './shared/presentation/layouts/main-layout/main-layout';
 import {PageNotFound} from './shared/presentation/pages/page-not-found/page-not-found';
-import {DashboardPageComponent} from './monitoring/presentation/pages/dashboard-page/dashboard-page';
-import {
-  StoreConfigurationPageComponent
-} from './store-configuration/presentation/pages/store-configuration-page/store-configuration-page';
-import {SubscriptionPageComponent} from './subscription/presentation/pages/subscription-page/subscription-page';
+import {DashboardPageComponent} from './traffic-analytics/presentation/pages/dashboard-page/dashboard-page';
+import {StoreConfigurationPageComponent} from './platform/store-setup/presentation/pages/store-configuration-page/store-configuration-page';
+import {SubscriptionPageComponent} from './platform/subscription/presentation/pages/subscription-page/subscription-page';
 import {
   ConversionReportPage
-} from './sales-conversion/presentation/pages/conversion-report-page/conversion-report-page';
-import {AlertsPage} from './alerts-recommendations/presentation/pages/alerts-page/alerts-page';
-import {KioskSearchPageComponent} from './buyer-assistance/presentation/pages/kiosk-search-page/kiosk-search-page';
+} from './promotion-optimization/presentation/pages/conversion-report-page/conversion-report-page';
+import {AlertsPage} from './store-operations/presentation/pages/alerts-page/alerts-page';
+import {KioskSearchPageComponent} from './assisted-shopping/presentation/pages/kiosk-search-page/kiosk-search-page';
 import {
   StoreHeatmapPageComponent
-} from './monitoring/presentation/pages/store-heatmap-page/store-heatmap-page';
+} from './traffic-analytics/presentation/pages/store-heatmap-page/store-heatmap-page';
 
 export const routes: Routes = [
   {

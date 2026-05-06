@@ -1,11 +1,7 @@
 <div class="layout">
   <aside class="sidebar">
     <div class="brand">
-      <span class="brand-mark">RP</span>
-      <div class="brand-text">
-        <h2>RetailPulse</h2>
-        <p>Web Application</p>
-      </div>
+      <img ngSrc='../public/logo-retailpulse.png' alt="Logo RetailPulse" width="300" height="30">
     </div>
 
     @if (isAdminView()) {
@@ -13,27 +9,27 @@
         <p class="menu-label">Administrator</p>
 
         <a routerLink="/app/admin/dashboard" routerLinkActive="active">
-          <span class="nav-icon">📊</span>
+          <span class="nav-icon"><lucide-icon [img]="ChartColumnBig" [size]="20"></lucide-icon></span>
           <span class="nav-text">Dashboard</span>
         </a>
 
         <a routerLink="/app/admin/store-configuration" routerLinkActive="active">
-          <span class="nav-icon">⚙️</span>
+          <span class="nav-icon"><lucide-icon [img]="Settings" [size]="20"></lucide-icon></span>
           <span class="nav-text">Store Configuration</span>
         </a>
 
         <a routerLink="/app/admin/conversion" routerLinkActive="active">
-          <span class="nav-icon">📈</span>
+          <span class="nav-icon"><lucide-icon [img]="ChartLine" [size]="20"></lucide-icon></span>
           <span class="nav-text">Conversion</span>
         </a>
 
         <a routerLink="/app/admin/store-heatmap" routerLinkActive="active">
-          <span class="nav-icon">🗺️</span>
+          <span class="nav-icon"><lucide-icon [img]="Flame" [size]="20"></lucide-icon></span>
           <span class="nav-text">Store Heatmap</span>
         </a>
 
         <a routerLink="/app/admin/subscription" routerLinkActive="active">
-          <span class="nav-icon">💳</span>
+          <span class="nav-icon"><lucide-icon [img]="CreditCard" [size]="20"></lucide-icon></span>
           <span class="nav-text">Subscription</span>
         </a>
       </nav>
@@ -44,7 +40,7 @@
         <p class="menu-label">Store Staff</p>
 
         <a routerLink="/app/staff/alerts" routerLinkActive="active">
-          <span class="nav-icon">🔔</span>
+          <span class="nav-icon"><lucide-icon [img]="Bell" [size]="20"></lucide-icon></span>
           <span class="nav-text">Operational Alerts</span>
         </a>
       </nav>
@@ -52,7 +48,7 @@
 
     <div class="sidebar-footer">
       <a routerLink="/">
-        <span class="nav-icon">🔄</span>
+        <span class="nav-icon"><lucide-icon [img]="RefreshCw" [size]="20"></lucide-icon></span>
         <span class="nav-text">Switch View</span>
       </a>
     </div>
