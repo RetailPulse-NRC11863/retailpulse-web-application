@@ -1,17 +1,17 @@
 <div class="subscription-container">
   <div class="page-header">
-    <h1 class="page-title">Subscription Management</h1>
-    <p class="page-subtitle">Manage your SaaS plan and billing</p>
+    <h1 class="page-title">{{ 'subscription.title' | translate }}</h1>
+    <p class="page-subtitle">{{ 'subscription.description' | translate }}</p>
   </div>
 
   <div class="loading-state" *ngIf="store.loading()">
     <div class="spinner"></div>
-    <p>Loading plans...</p>
+    <p>{{ 'common.loading' | translate }}</p>
   </div>
 
   <ng-container *ngIf="!store.loading() && store.activeSubscription()">
     <div class="active-subscription-panel">
-      <h2>Active Subscription</h2>
+      <h2>{{ 'subscription.currentPlan' | translate }}</h2>
       <div class="active-details">
         <div class="detail">
           <span class="label">Store</span>
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <h2 class="plans-title">Available Plans</h2>
+    <h2 class="plans-title">{{ 'subscription.availablePlans' | translate }}</h2>
     <div class="plans-grid">
       <app-subscription-card 
         *ngFor="let plan of store.plans()" 

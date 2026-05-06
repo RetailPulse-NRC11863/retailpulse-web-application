@@ -20,6 +20,7 @@ import {
   Star,
   MapPin
 } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 type ZoneType = 'ACCESS' | 'CHECKOUT' | 'AISLE' | 'SECTION' | 'PROMO';
 
@@ -39,7 +40,8 @@ const ZONE_DEFAULTS: Record<ZoneType, { width: number; height: number }> = {
     FormsModule,
     ProductCardComponent,
     ZoneLayoutEditorComponent,
-    LucideAngularModule
+    LucideAngularModule,
+    TranslateModule
   ],
   templateUrl: './store-configuration-page.html',
   styleUrls: ['./store-configuration-page.css']

@@ -4,11 +4,12 @@ import { StoreOperationsStore } from '../../../application/store-operations-stor
 import { AlertCardComponent } from '../../components/alert-card/alert-card';
 import { TaskCardComponent } from '../../components/task-card/task-card';
 import { LucideAngularModule, BellRing, ClipboardList, Activity } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alerts-page',
   standalone: true,
-  imports: [CommonModule, AlertCardComponent, TaskCardComponent, LucideAngularModule],
+  imports: [CommonModule, AlertCardComponent, TaskCardComponent, LucideAngularModule, TranslateModule],
   templateUrl: './alerts-page.html',
   styleUrls: ['./alerts-page.css']
 })

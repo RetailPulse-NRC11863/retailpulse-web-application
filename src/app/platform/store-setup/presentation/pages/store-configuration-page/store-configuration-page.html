@@ -1,14 +1,14 @@
 <div class="config-container">
   <div class="page-header">
     <div>
-      <h1 class="page-title">Store Configuration</h1>
+      <h1 class="page-title">{{ 'layout.storeConfiguration' | translate }}</h1>
       <p class="page-subtitle">Manage your retail environment, zones, and product placements</p>
     </div>
   </div>
 
   <div class="loading-state" *ngIf="store.loading()">
     <div class="spinner"></div>
-    <p>Loading store configuration...</p>
+    <p>{{ 'common.loading' | translate }}</p>
   </div>
 
   <ng-container *ngIf="!store.loading() && store.storeInfo()">
@@ -39,7 +39,7 @@
         <div class="section-header">
           <div class="section-title-group">
             <lucide-icon [img]="MapIcon" [size]="20" class="section-icon"></lucide-icon>
-            <h2 class="section-title">Configured Zones</h2>
+            <h2 class="section-title">{{ 'inventoryIntelligence.zones' | translate }}</h2>
             <span class="zone-count">{{ store.zones().length }}</span>
           </div>
           <div class="zone-actions">
@@ -52,7 +52,7 @@
             </button>
             <button class="btn-add-zone" (click)="showAddForm.set(!showAddForm())">
               <lucide-icon [img]="PlusIcon" [size]="14"></lucide-icon>
-              Add Zone
+              {{ 'inventoryIntelligence.addZone' | translate }}
             </button>
           </div>
         </div>
@@ -119,11 +119,11 @@
         <div class="section-header">
           <div class="section-title-group">
             <lucide-icon [img]="PackageIcon" [size]="20" class="section-icon"></lucide-icon>
-            <h2 class="section-title">Products &amp; Locations</h2>
+            <h2 class="section-title">{{ 'inventoryIntelligence.products' | translate }}</h2>
           </div>
           <button class="btn-add-zone" (click)="showAddProductForm.set(!showAddProductForm())">
             <lucide-icon [img]="PlusIcon" [size]="14"></lucide-icon>
-            Add Product
+            {{ 'inventoryIntelligence.addProduct' | translate }}
           </button>
         </div>
 

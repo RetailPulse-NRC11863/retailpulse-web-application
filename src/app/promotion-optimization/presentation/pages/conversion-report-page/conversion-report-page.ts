@@ -5,6 +5,7 @@ import { ConversionCardComponent } from '../../components/conversion-card/conver
 import { ProductPerformanceCardComponent } from '../../components/product-performance-card/product-performance-card';
 import { RecommendationCardComponent } from '../../components/recommendation-card/recommendation-card';
 import { LucideAngularModule, RefreshCw, AlertTriangle } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-conversion-report-page',
@@ -14,7 +15,8 @@ import { LucideAngularModule, RefreshCw, AlertTriangle } from 'lucide-angular';
     ConversionCardComponent,
     ProductPerformanceCardComponent,
     RecommendationCardComponent,
-    LucideAngularModule
+    LucideAngularModule,
+    TranslateModule
   ],
   templateUrl: './conversion-report-page.html',
   styleUrls: ['./conversion-report-page.css']

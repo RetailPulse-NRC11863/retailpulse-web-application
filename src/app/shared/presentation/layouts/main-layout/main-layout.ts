@@ -2,10 +2,12 @@ import {Component, computed, inject} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
 import {LucideAngularModule, ChartColumnBig, Settings, ChartLine, CreditCard, Flame, Bell, RefreshCw} from 'lucide-angular';
+import {LanguageSwitcher} from '../../components/language-switcher/language-switcher';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-main-layout',
-  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgOptimizedImage, LucideAngularModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, NgOptimizedImage, LucideAngularModule, LanguageSwitcher, TranslateModule],
   templateUrl: './main-layout.html',
   styleUrl: './main-layout.css',
 })

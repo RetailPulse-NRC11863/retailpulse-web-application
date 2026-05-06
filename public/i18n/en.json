@@ -1,0 +1,138 @@
+{
+  "common": {
+    "search": "Search",
+    "clear": "Clear",
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "noResults": "No results found",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "stock": "Stock",
+    "price": "Price",
+    "category": "Category",
+    "zone": "Zone",
+    "shelf": "Shelf",
+    "promotion": "Promotion",
+    "status": "Status",
+    "priority": "Priority",
+    "actions": "Actions"
+  },
+  "access": {
+    "eyebrow": "RetailPulse Web Application",
+    "title": "Select an experience",
+    "description": "Access one of the main system views according to the user profile.",
+    "adminTitle": "Business Administrator",
+    "adminDescription": "Analyze store performance, heatmaps, conversion and SaaS plans.",
+    "staffTitle": "Store Staff",
+    "staffDescription": "Review operational alerts, pending tasks and critical zones.",
+    "kioskTitle": "Kiosk Buyer",
+    "kioskDescription": "Search products, stock, location and promotions inside the store.",
+    "adminButton": "Enter as administrator",
+    "staffButton": "Enter as store staff",
+    "kioskButton": "Open kiosk"
+  },
+  "layout": {
+    "brand": "RetailPulse",
+    "webApplication": "Web Application",
+    "administrator": "Administrator",
+    "storeStaff": "Store Staff",
+    "dashboard": "Dashboard",
+    "storeConfiguration": "Store Configuration",
+    "conversion": "Conversion",
+    "subscription": "Subscription",
+    "operationalAlerts": "Operational Alerts",
+    "changeView": "Change view"
+  },
+  "kiosk": {
+    "eyebrow": "Kiosk Web",
+    "title": "Search products in store",
+    "description": "Find product availability, location and promotions without waiting for assistance.",
+    "searchPlaceholder": "Search product",
+    "searchButton": "Search",
+    "clearButton": "Clear",
+    "noResults": "No products found for this search.",
+    "outOfStock": "Out of stock",
+    "inStock": "In stock",
+    "aisle": "Aisle",
+    "shelf": "Shelf"
+  },
+  "staff": {
+    "title": "Operational Panel",
+    "description": "Review active alerts and pending tasks for store operations.",
+    "activeAlerts": "Active alerts",
+    "pendingTasks": "Pending tasks",
+    "noActiveAlerts": "No active alerts",
+    "noPendingTasks": "No pending tasks",
+    "markAsCompleted": "Mark as completed"
+  },
+  "admin": {
+    "dashboardTitle": "Administrator Dashboard",
+    "dashboardDescription": "Understand store behavior through traffic, interaction and conversion metrics.",
+    "totalTraffic": "Total traffic",
+    "averageDwellTime": "Average dwell time",
+    "interactions": "Interactions",
+    "conversionRate": "Conversion rate"
+  },
+  "trafficAnalytics": {
+    "heatmapTitle": "Store heatmap",
+    "heatmapDescription": "Visual representation of customer activity across store zones.",
+    "hotZones": "Hot zones",
+    "coldZones": "Cold zones",
+    "deadZones": "Dead zones",
+    "trafficLevel": "Traffic level",
+    "dwellTime": "Dwell time"
+  },
+  "inventoryIntelligence": {
+    "storeLayout": "Store layout",
+    "zones": "Zones",
+    "products": "Products",
+    "addZone": "Add zone",
+    "addProduct": "Add product",
+    "dragInstructions": "Drag zones to configure the store layout."
+  },
+  "promotionOptimization": {
+    "conversionInsights": "Conversion insights",
+    "productPerformance": "Product performance",
+    "recommendations": "Recommendations",
+    "highInteractionLowConversion": "High interaction and low conversion",
+    "applyRecommendation": "Apply recommendation"
+  },
+  "subscription": {
+    "title": "SaaS Plans",
+    "description": "Review the current subscription and compare available RetailPulse plans.",
+    "currentPlan": "Current plan",
+    "availablePlans": "Available plans",
+    "starter": "Starter",
+    "growth": "Growth",
+    "premium": "Premium",
+    "monthlyPrice": "Monthly price",
+    "recommended": "Recommended"
+  },
+  "pageNotFound": {
+    "title": "Page not found",
+    "content": "The requested route is not available.",
+    "goHome": "Go home"
+  },
+  "db": {
+    "Costeño Rice 5kg": "Costeño Rice 5kg",
+    "Primor Oil 1L": "Primor Oil 1L",
+    "Gloria Evaporated Milk": "Gloria Evaporated Milk",
+    "Groceries": "Groceries",
+    "Dairy": "Dairy",
+    "Entrance": "Entrance",
+    "Checkout": "Checkout",
+    "Aisle 1": "Aisle 1",
+    "Aisle 2": "Aisle 2",
+    "Aisle 3": "Aisle 3",
+    "Aisle 4": "Aisle 4",
+    "Dairy Zone": "Dairy Zone",
+    "Grocery Zone": "Grocery Zone",
+    "Beverage Zone": "Beverage Zone",
+    "Promo Zone": "Promo Zone",
+    "Shelf A1": "Shelf A1",
+    "Shelf B1": "Shelf B1",
+    "Shelf B3": "Shelf B3",
+    "10% off": "10% off",
+    "3x2": "3x2"
+  }
+}

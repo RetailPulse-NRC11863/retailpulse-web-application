@@ -1,8 +1,8 @@
 <div class="heatmap-page">
   <div class="page-header">
     <div>
-      <h1 class="page-title">Store Heatmap</h1>
-      <p class="page-subtitle">Traffic and behavior visualization per zone</p>
+      <h1 class="page-title">{{ 'trafficAnalytics.heatmapTitle' | translate }}</h1>
+      <p class="page-subtitle">{{ 'trafficAnalytics.heatmapDescription' | translate }}</p>
     </div>
     <button class="btn-refresh" (click)="loadData()" [disabled]="store.heatmapLoading()">
       <lucide-icon [img]="RefreshCw" size="16" [class.spinning]="store.heatmapLoading()"></lucide-icon>
@@ -18,7 +18,7 @@
 
   <div class="loading-state" *ngIf="store.heatmapLoading() && store.trafficZones().length === 0">
     <div class="spinner"></div>
-    <p>Loading store map...</p>
+    <p>{{ 'common.loading' | translate }}</p>
   </div>
 
   <ng-container *ngIf="!store.heatmapLoading() || store.trafficZones().length > 0">

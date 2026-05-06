@@ -1,7 +1,7 @@
 <div class="conversion-container">
   <div class="page-header">
     <div>
-      <h1 class="page-title">Sales & Conversion Analysis</h1>
+      <h1 class="page-title">{{ 'promotionOptimization.conversionInsights' | translate }}</h1>
       <p class="page-subtitle">Understand performance bottlenecks and optimization opportunities</p>
     </div>
     <button class="btn-refresh" (click)="loadData()" [disabled]="isLoading">
@@ -17,7 +17,7 @@
 
   <div class="loading-state" *ngIf="isLoading && store.conversionGaps().length === 0">
     <div class="spinner"></div>
-    <p>Analyzing conversion data...</p>
+    <p>{{ 'common.loading' | translate }}</p>
   </div>
 
   <ng-container *ngIf="!isLoading || store.conversionGaps().length > 0">
@@ -25,7 +25,7 @@
       <!-- Left Column -->
       <div class="column">
         <section class="report-section">
-          <h2 class="section-title">Conversion by Zone</h2>
+          <h2 class="section-title">{{ 'promotionOptimization.conversionInsights' | translate }}</h2>
           <div class="cards-list">
             <app-conversion-card 
               *ngFor="let metric of store.conversionGaps()" 
@@ -39,7 +39,7 @@
         </section>
 
         <section class="report-section">
-          <h2 class="section-title">AI Recommendations</h2>
+          <h2 class="section-title">{{ 'promotionOptimization.recommendations' | translate }}</h2>
           <div class="cards-list">
             <app-recommendation-card 
               *ngFor="let rec of store.recommendations()" 
@@ -57,7 +57,7 @@
       <!-- Right Column -->
       <div class="column">
         <section class="report-section">
-          <h2 class="section-title">Products Needing Attention</h2>
+          <h2 class="section-title">{{ 'promotionOptimization.highInteractionLowConversion' | translate }}</h2>
           <div class="cards-list">
             <app-product-performance-card 
               *ngFor="let product of store.lowPerformingProducts()" 
@@ -71,7 +71,7 @@
         </section>
 
         <section class="report-section">
-          <h2 class="section-title">Top Performers</h2>
+          <h2 class="section-title">{{ 'promotionOptimization.productPerformance' | translate }}</h2>
           <div class="cards-list">
             <app-product-performance-card 
               *ngFor="let product of store.topPerformingProducts()" 

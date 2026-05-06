@@ -16,6 +16,7 @@ import {
   Star,
   MapPin
 } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -26,7 +27,8 @@ import {
     KpiCardComponent,
     StoreHeatmapComponent,
     HeatmapLegendComponent,
-    LucideAngularModule
+    LucideAngularModule,
+    TranslateModule
   ],
   templateUrl: './dashboard-page.html',
   styleUrls: ['./dashboard-page.css']

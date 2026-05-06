@@ -1,9 +1,9 @@
 <section class="not-found">
   <div class="not-found-card">
     <p class="code">404</p>
-    <h1>Page Not Found</h1>
-    <p>The requested route is not available within RetailPulse.</p>
+    <h1>{{ 'pageNotFound.title' | translate }}</h1>
+    <p>{{ 'pageNotFound.content' | translate }}</p>
 
-    <a routerLink="/">Return to Home</a>
+    <a routerLink="/">{{ 'pageNotFound.goHome' | translate }}</a>
   </div>
 </section>

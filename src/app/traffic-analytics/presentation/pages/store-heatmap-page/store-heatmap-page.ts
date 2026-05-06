@@ -5,6 +5,7 @@ import { StoreHeatmapComponent } from '../../components/store-heatmap/store-heat
 import { HeatmapLegendComponent } from '../../components/heatmap-legend/heatmap-legend';
 import { ZoneMetricTooltipComponent } from '../../components/zone-metric-tooltip/zone-metric-tooltip';
 import { LucideAngularModule, RefreshCw, AlertTriangle } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-store-heatmap-page',
@@ -14,7 +15,8 @@ import { LucideAngularModule, RefreshCw, AlertTriangle } from 'lucide-angular';
     StoreHeatmapComponent,
     HeatmapLegendComponent,
     ZoneMetricTooltipComponent,
-    LucideAngularModule
+    LucideAngularModule,
+    TranslateModule
   ],
   templateUrl: './store-heatmap-page.html',
   styleUrls: ['./store-heatmap-page.css']
