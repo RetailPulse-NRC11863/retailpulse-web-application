@@ -1,0 +1,147 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #0b1f38;
+  font-family: 'Segoe UI', Roboto, Helvetica, sans-serif;
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.brand-title {
+  color: #0b1f38;
+  margin: 0 0 5px 0;
+  font-size: 2rem;
+}
+
+.subtitle {
+  color: #64748b;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  margin-bottom: 8px;
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.input-group input {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8;
+}
+
+/* Sección inferior y Quiosco */
+.login-footer {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.register-section {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin-bottom: 15px;
+}
+
+.register-link {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-link:hover {
+  text-decoration: underline;
+}
+
+.kiosk-divider {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  color: #94a3b8;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.kiosk-divider::before,
+.kiosk-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.kiosk-divider span {
+  padding: 0 10px;
+}
+
+.btn-kiosk-outline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  color: #0b1f38;
+  border: 2px solid #0b1f38;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.btn-kiosk-outline:hover {
+  background-color: #f1f5f9;
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+.btn-kiosk-outline .icon {
+  margin-right: 8px;
+}

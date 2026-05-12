@@ -1,0 +1,56 @@
+<div class="register-container">
+  <div class="register-card" [ngClass]="{'wide-card': step === 2}">
+    <div class="steps-indicator">Paso {{ step }} de 4</div>
+    <h1 class="brand-title">Únete a RetailPulse</h1>
+
+    <section *ngIf="step === 1" class="step-section">
+      <h2>Crea tus credenciales</h2>
+      <input type="email" placeholder="Correo corporativo" [(ngModel)]="userData.email" class="reg-input">
+      <input type="password" placeholder="Contraseña" [(ngModel)]="userData.password" class="reg-input">
+      <button (click)="nextStep()" class="btn-primary">Ver Planes</button>
+      <div class="back-link"><a routerLink="/login">← Volver al login</a></div>
+    </section>
+
+    <section *ngIf="step === 2" class="step-section">
+      <h2>Selecciona tu Plan</h2>
+      <div class="plans-grid">
+        <div class="plan-card" *ngFor="let plan of availablePlans" (click)="selectPlan(plan)">
+          <h3>{{ plan.name }}</h3>
+          <p class="plan-price">S/ {{ plan.price }}<span>/mes</span></p>
+          <ul class="plan-features">
+            <li *ngFor="let feature of plan.features">✔️ {{ feature }}</li>
+          </ul>
+          <button class="btn-primary outline">Elegir Plan</button>
+        </div>
+      </div>
+      <button (click)="prevStep()" class="btn-ghost" style="margin-top:15px;">← Atrás</button>
+    </section>
+
+    <section *ngIf="step === 3" class="step-section">
+      <h2>Checkout Seguro</h2>
+      <div class="stripe-mockup">
+        <div class="stripe-header">
+          <span>Plan {{ selectedPlan?.name }}:</span>
+          <strong>S/ {{ selectedPlan?.price }}.00</strong>
+        </div>
+        <input type="text" placeholder="Número de Tarjeta (ej. 4242 4242...)" class="reg-input">
+        <div class="row">
+          <input type="text" placeholder="MM/AA" class="reg-input half">
+          <input type="text" placeholder="CVC" class="reg-input half">
+        </div>
+      </div>
+      <button (click)="nextStep()" class="btn-primary">Pagar S/ {{ selectedPlan?.price }}.00</button>
+      <button (click)="prevStep()" class="btn-ghost" style="margin-top:10px;">← Cambiar Plan</button>
+    </section>
+
+    <section *ngIf="step === 4" class="step-section">
+      <h2>Configura tu Tienda</h2>
+      <input type="text" placeholder="Nombre de la Tienda" [(ngModel)]="storeData.name" class="reg-input">
+      <input type="text" placeholder="RUC (11 dígitos)" [(ngModel)]="storeData.ruc" class="reg-input">
+      <input type="text" placeholder="Rubro" [(ngModel)]="storeData.category" class="reg-input">
+      <input type="text" placeholder="Dirección" [(ngModel)]="storeData.address" class="reg-input">
+      <input type="text" placeholder="Horario" [(ngModel)]="storeData.hours" class="reg-input">
+      <button (click)="finishRegister()" class="btn-success">Finalizar</button>
+    </section>
+  </div>
+</div>

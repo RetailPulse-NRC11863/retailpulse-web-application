@@ -1,0 +1,40 @@
+<div class="register-container">
+    <div class="register-card">
+        <div class="steps-indicator">Paso {{ step }} de 3</div>
+        <h1 class="brand-title">Únete a RetailPulse</h1>
+
+        <section *ngIf="step === 1" class="step-section">
+            <h2>Datos de Cuenta</h2>
+            <input type="email" placeholder="Correo electrónico" [(ngModel)]="userData.email" class="reg-input">
+            <input type="password" placeholder="Contraseña" [(ngModel)]="userData.password" class="reg-input">
+            <button (click)="nextStep()" class="btn-primary">Continuar al Pago</button>
+        </section>
+
+        <section *ngIf="step === 2" class="step-section">
+            <h2>Suscripción Plan Pro</h2>
+            <div class="stripe-mockup">
+                <p>Introduce tu tarjeta para suscribirte (S/ 199.00/mes)</p>
+                <input type="text" placeholder="Número de Tarjeta (ej. 4242...)" class="reg-input">
+                <div class="row">
+                    <input type="text" placeholder="MM/AA" class="reg-input half">
+                    <input type="text" placeholder="CVC" class="reg-input half">
+                </div>
+            </div>
+            <button (click)="nextStep()" class="btn-primary">Pagar Suscripción</button>
+        </section>
+
+        <section *ngIf="step === 3" class="step-section">
+            <h2>Configura tu Tienda</h2>
+            <input type="text" placeholder="Nombre del Local" [(ngModel)]="storeData.name" class="reg-input">
+            <input type="text" placeholder="RUC (11 dígitos)" [(ngModel)]="storeData.ruc" class="reg-input">
+            <input type="text" placeholder="Rubro (ej. Tecnología)" [(ngModel)]="storeData.category" class="reg-input">
+            <input type="text" placeholder="Dirección Física" [(ngModel)]="storeData.address" class="reg-input">
+            <input type="text" placeholder="Horario (ej. 9am - 10pm)" [(ngModel)]="storeData.hours" class="reg-input">
+            <button (click)="finishRegister()" class="btn-success">Finalizar Registro</button>
+        </section>
+
+        <div class="back-link" *ngIf="step === 1">
+            <a routerLink="/login">← Volver al login</a>
+        </div>
+    </div>
+</div>

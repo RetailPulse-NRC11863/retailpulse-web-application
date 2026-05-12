@@ -1,0 +1,102 @@
+.product-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--rp-color-surface);
+  border: 1px solid var(--rp-color-border);
+  border-radius: var(--rp-border-radius-md);
+  padding: 1rem 1.25rem;
+  transition: background-color 0.2s ease;
+}
+
+.product-card:hover {
+  background-color: var(--rp-color-surface-hover);
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.icon-wrapper {
+  background-color: rgba(var(--rp-color-primary-rgb), 0.1);
+  color: var(--rp-color-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: var(--rp-border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rp-color-text);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.category {
+  color: var(--rp-color-text-secondary);
+  background-color: var(--rp-color-background);
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--rp-border-radius-full);
+}
+
+.id {
+  color: var(--rp-color-text-secondary);
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.detail-icon {
+  color: var(--rp-color-text-secondary);
+  margin-top: 0.125rem;
+}
+
+.detail-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rp-color-text-secondary);
+}
+
+.value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--rp-color-text);
+}
+
+.value.out-of-stock {
+  color: var(--rp-color-danger);
+  font-weight: 600;
+}

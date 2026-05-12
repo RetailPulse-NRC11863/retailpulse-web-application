@@ -1,0 +1,53 @@
+<div class="login-container">
+  <div class="login-card">
+    <div class="logo-container">
+      <h1 class="brand-title">RetailPulse</h1>
+      <p class="subtitle">Inteligencia operativa para tu tienda</p>
+    </div>
+
+    <form (submit)="handleLogin($event)" class="login-form">
+      <div class="input-group">
+        <label for="email">Correo Corporativo</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          [(ngModel)]="email"
+          placeholder="ejemplo@retailpulse.com"
+          required
+        >
+      </div>
+
+      <div class="input-group">
+        <label for="password">Contraseña</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          [(ngModel)]="password"
+          placeholder="••••••••"
+          required
+        >
+      </div>
+
+      <button type="submit" class="btn-primary">Iniciar Sesión</button>
+    </form>
+
+    <div class="login-footer">
+      <div class="register-section">
+        <p>¿No tienes una cuenta de tienda?</p>
+        <a routerLink="/register" class="register-link">Regístrate y adquiere un plan</a>
+      </div>
+
+      <div class="kiosk-divider">
+        <span>o también</span>
+      </div>
+
+      <div class="kiosk-section">
+        <a routerLink="/kiosk" class="btn-kiosk-outline">
+          <span class="icon">🖥️</span> Abrir modo quiosco
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

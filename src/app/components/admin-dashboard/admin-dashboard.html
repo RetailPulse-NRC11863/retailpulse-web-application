@@ -1,0 +1,50 @@
+<div class="dashboard-layout">
+    <aside class="sidebar">
+        <h2 class="brand">RetailPulse</h2>
+        <nav>
+            <ul>
+                <li class="active">📊 Dashboard</li>
+                <li>🔥 Mapas de Calor</li>
+                <li>⚙️ Configuración</li>
+            </ul>
+        </nav>
+        <a routerLink="/login" class="logout-btn">Cerrar Sesión</a>
+    </aside>
+
+    <main class="main-content">
+        <header class="top-header">
+            <h1>Bienvenido, {{ adminName }}</h1>
+
+            <div class="store-badge" *ngIf="storeConfig">
+                <p><strong>Tienda:</strong> {{ storeConfig.name }} | <strong>RUC:</strong> {{ storeConfig.ruc }}</p>
+                <p class="sub-badge">{{ storeConfig.address }} - {{ storeConfig.hours }}</p>
+            </div>
+        </header>
+
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <h3>Visitantes Hoy</h3>
+                <p class="kpi-value">1,240</p>
+                <p class="kpi-trend positive">↑ +12% vs ayer</p>
+            </div>
+            <div class="kpi-card">
+                <h3>Tasa de Conversión</h3>
+                <p class="kpi-value">22.5%</p>
+                <p class="kpi-trend positive">↑ +2.1%</p>
+            </div>
+            <div class="kpi-card">
+                <h3>Búsquedas en Quiosco</h3>
+                <p class="kpi-value">85</p>
+            </div>
+        </div>
+
+        <div class="heatmap-section">
+            <h3>Tráfico en Tiempo Real (Mapa de Calor)</h3>
+            <div class="heatmap-mockup">
+                [Simulación Visual del Plano de Tienda]
+                <div class="hotzone" style="top: 20%; left: 30%;">🔥 Zona Caliente</div>
+                <div class="coldzone" style="bottom: 10%; right: 20%;">❄️ Zona Fría</div>
+            </div>
+        </div>
+    </main>
+</div>

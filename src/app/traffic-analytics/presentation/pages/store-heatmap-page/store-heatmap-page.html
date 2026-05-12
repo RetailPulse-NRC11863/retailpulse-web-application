@@ -1,0 +1,71 @@
+<div class="heatmap-page">
+  <div class="page-header">
+    <div>
+      <h1 class="page-title">{{ 'trafficAnalytics.heatmapTitle' | translate }}</h1>
+      <p class="page-subtitle">{{ 'trafficAnalytics.heatmapDescription' | translate }}</p>
+    </div>
+    <button class="btn-refresh" (click)="loadData()" [disabled]="store.heatmapLoading()">
+      <lucide-icon [img]="RefreshCw" size="16" [class.spinning]="store.heatmapLoading()"></lucide-icon>
+      Update
+    </button>
+  </div>
+
+  <div class="error-banner" *ngIf="store.error()">
+    <lucide-icon [img]="AlertTriangle" size="20"></lucide-icon>
+    <span>{{ store.error() }}</span>
+    <button class="btn-close" (click)="store.clearError()">&times;</button>
+  </div>
+
+  <div class="loading-state" *ngIf="store.heatmapLoading() && store.trafficZones().length === 0">
+    <div class="spinner"></div>
+    <p>{{ 'common.loading' | translate }}</p>
+  </div>
+
+  <ng-container *ngIf="!store.heatmapLoading() || store.trafficZones().length > 0">
+    <div class="heatmap-layout">
+      <div class="heatmap-main">
+        <app-store-heatmap
+          [zonesWithMetrics]="store.zonesWithMetrics()"
+          [selectedZoneId]="store.selectedZoneId()"
+          (zoneSelected)="onZoneSelected($event)">
+        </app-store-heatmap>
+
+        <app-heatmap-legend></app-heatmap-legend>
+      </div>
+
+      <aside class="heatmap-sidebar">
+        <app-zone-metric-tooltip
+          [zoneDetail]="store.selectedZoneDetail()">
+        </app-zone-metric-tooltip>
+
+        <!-- Quick stats table -->
+        <div class="stats-table-card" *ngIf="store.zonesWithMetrics().length > 0">
+          <h3 class="stats-title">Zone Summary</h3>
+          <div class="stats-table-wrapper">
+            <table class="stats-table">
+              <thead>
+                <tr>
+                  <th>Zone</th>
+                  <th>Traffic</th>
+                  <th>Dwell</th>
+                  <th>Conv.</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of store.zonesWithMetrics()"
+                    [class.row-selected]="item.zone.id === store.selectedZoneId()"
+                    (click)="onZoneSelected(item.zone.id)"
+                    class="stats-row">
+                  <td class="zone-name-cell">{{ item.zone.name }}</td>
+                  <td>{{ item.metric?.traffic || '—' }}</td>
+                  <td>{{ item.metric ? item.metric.averageDwellTimeSeconds + 's' : '—' }}</td>
+                  <td>{{ item.metric ? item.metric.conversionRate + '%' : '—' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </ng-container>
+</div>

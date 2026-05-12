@@ -1,0 +1,21 @@
+<div class="kpi-card">
+  <div class="kpi-header">
+    <h3 class="kpi-title">{{ title }}</h3>
+    <div class="kpi-icon-wrapper">
+      <lucide-icon *ngIf="icon === 'Users'" [img]="Users" size="20"></lucide-icon>
+      <lucide-icon *ngIf="icon === 'Clock'" [img]="Clock" size="20"></lucide-icon>
+      <lucide-icon *ngIf="icon === 'Activity'" [img]="Activity" size="20"></lucide-icon>
+      <lucide-icon *ngIf="icon === 'ShoppingBag'" [img]="ShoppingBag" size="20"></lucide-icon>
+    </div>
+  </div>
+  
+  <div class="kpi-body">
+    <div class="kpi-value">{{ value }}</div>
+    
+    <div class="kpi-trend" *ngIf="trend" [class.positive]="trend.isPositive" [class.negative]="!trend.isPositive">
+      <lucide-icon *ngIf="trend.isPositive" [img]="ArrowUpRight" size="16"></lucide-icon>
+      <lucide-icon *ngIf="!trend.isPositive" [img]="ArrowDownRight" size="16"></lucide-icon>
+      <span>{{ trend.value }}%</span>
+    </div>
+  </div>
+</div>

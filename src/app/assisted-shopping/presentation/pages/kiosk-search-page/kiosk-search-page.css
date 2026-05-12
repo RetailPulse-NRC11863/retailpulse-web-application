@@ -1,0 +1,136 @@
+/* --- Estilos base existentes --- */
+.kiosk-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.kiosk-header {
+  background-color: var(--rp-color-primary);
+  color: var(--rp-color-white);
+  padding: var(--rp-spacing-4) var(--rp-spacing-3);
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- ESTILO AÑADIDO PARA EL BOTÓN VOLVER --- */
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--rp-color-white);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--rp-radius);
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(-4px);
+}
+/* ------------------------------------------- */
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.brand-icon {
+  color: var(--rp-color-accent);
+}
+
+.brand h1 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--rp-color-white);
+}
+
+.brand h1 span {
+  font-weight: 300;
+  color: var(--rp-color-accent);
+}
+
+.subtitle {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.kiosk-main {
+  flex: 1;
+  padding: var(--rp-spacing-4) var(--rp-spacing-3);
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.search-section {
+  margin-bottom: var(--rp-spacing-4);
+}
+
+.results-section {
+  position: relative;
+  min-height: 300px;
+}
+
+.results-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-spacing-2);
+}
+
+.state-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px;
+  text-align: center;
+  background: var(--rp-color-white);
+  border-radius: var(--rp-radius);
+  box-shadow: 0 2px 8px rgba(10, 37, 64, 0.05);
+}
+
+.empty-icon {
+  color: var(--rp-color-text-muted);
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.empty h2 {
+  margin-bottom: 8px;
+}
+
+.empty p {
+  color: var(--rp-color-text-muted);
+  max-width: 400px;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 210, 255, 0.1);
+  border-left-color: var(--rp-color-accent);
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+.error {
+  color: var(--rp-color-danger);
+  background: rgba(220, 53, 69, 0.05);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

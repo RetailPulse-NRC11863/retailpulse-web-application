@@ -1,0 +1,159 @@
+/* Contenedor principal para centrar todo */
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f8fafc; /* Fondo gris muy suave */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Tarjeta blanca del formulario */
+.register-card {
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 480px;
+  border: 1px solid #e2e8f0;
+}
+
+.steps-indicator {
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.brand-title {
+  color: #0f172a;
+  font-size: 1.8rem;
+  margin: 0 0 24px 0;
+}
+
+/* Secciones de cada paso */
+.step-section {
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-section h2 {
+  font-size: 1.3rem;
+  color: #1e293b;
+  margin: 0 0 5px 0;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  color: #64748b;
+  margin: 0 0 20px 0;
+}
+
+/* Inputs y Formularios */
+.reg-input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #334155;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.reg-input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Botones */
+.btn-primary, .btn-success {
+  width: 100%;
+  padding: 14px;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.btn-primary { background-color: #0b1f38; }
+.btn-primary:hover { background-color: #1e3a5f; }
+
+.btn-success { background-color: #16a34a; }
+.btn-success:hover { background-color: #15803d; }
+
+/* Simulación de Stripe (Checkout) */
+.stripe-mockup {
+  background: #f1f5f9;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px dashed #94a3b8;
+  margin-bottom: 20px;
+}
+
+.stripe-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+.stripe-header strong {
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.half {
+  flex: 1;
+}
+
+/* Enlace para volver */
+.back-link {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.back-link a {
+  color: #64748b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.back-link a:hover {
+  color: #0f172a;
+}
+.wide-card { max-width: 800px; }
+.plans-grid { display: flex; gap: 15px; margin-top: 20px; }
+.plan-card { flex: 1; border: 2px solid #e2e8f0; border-radius: 10px; padding: 20px; cursor: pointer; transition: 0.3s; }
+.plan-card:hover { border-color: #2563eb; transform: translateY(-5px); }
+.plan-price { font-size: 1.8rem; font-weight: bold; color: #0f172a; margin: 10px 0; }
+.plan-price span { font-size: 1rem; color: #64748b; font-weight: normal; }
+.plan-features { list-style: none; padding: 0; margin-bottom: 20px; font-size: 0.9rem; color: #475569;}
+.plan-features li { margin-bottom: 8px; }
+.btn-ghost { background: transparent; border: none; color: #64748b; cursor: pointer; width: 100%; font-weight: bold;}

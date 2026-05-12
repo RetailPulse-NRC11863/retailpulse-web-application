@@ -1,0 +1,116 @@
+.recommendation-card {
+  display: flex;
+  gap: 1.25rem;
+  background-color: var(--rp-color-surface);
+  border: 1px solid var(--rp-color-border);
+  border-radius: var(--rp-border-radius-md);
+  padding: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.recommendation-card.high {
+  border-left: 4px solid var(--rp-color-danger);
+}
+
+.recommendation-card.medium {
+  border-left: 4px solid var(--rp-color-warning);
+}
+
+.icon-column {
+  flex-shrink: 0;
+}
+
+.icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(var(--rp-color-primary-rgb), 0.1);
+  color: var(--rp-color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recommendation-card.high .icon-circle {
+  background-color: rgba(var(--rp-color-danger-rgb), 0.1);
+  color: var(--rp-color-danger);
+}
+
+.recommendation-card.medium .icon-circle {
+  background-color: rgba(var(--rp-color-warning-rgb), 0.1);
+  color: var(--rp-color-warning);
+}
+
+.content-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rp-color-text);
+}
+
+.badge {
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--rp-border-radius-full);
+  font-size: 0.625rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge.priority.high {
+  background-color: rgba(var(--rp-color-danger-rgb), 0.1);
+  color: var(--rp-color-danger);
+}
+
+.badge.priority.medium {
+  background-color: rgba(var(--rp-color-warning-rgb), 0.1);
+  color: var(--rp-color-warning);
+}
+
+.badge.priority.low {
+  background-color: rgba(var(--rp-color-success-rgb), 0.1);
+  color: var(--rp-color-success);
+}
+
+.badge.type {
+  background-color: var(--rp-color-background);
+  color: var(--rp-color-text-secondary);
+  border: 1px solid var(--rp-color-border);
+}
+
+.description {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--rp-color-text-secondary);
+  line-height: 1.5;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.date {
+  font-size: 0.75rem;
+  color: var(--rp-color-text-secondary);
+}

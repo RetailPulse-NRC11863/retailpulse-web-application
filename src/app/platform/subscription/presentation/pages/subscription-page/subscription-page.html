@@ -1,0 +1,66 @@
+<div class="subscription-container">
+  <div class="page-header">
+    <h1 class="page-title">Planes y Suscripción</h1>
+    <p class="page-subtitle">Gestiona tu plan SaaS de RetailPulse y potencia tu tienda física.</p>
+  </div>
+
+  <div class="upgrade-banner" *ngIf="upgradeFeature">
+    ⚠️ Tu plan actual no incluye <strong>"{{ upgradeFeature }}"</strong>. Mejora tu plan para desbloquear esta función.
+  </div>
+
+  <div class="active-subscription-panel" *ngIf="!store.loading()">
+    <div class="panel-header">
+      <h2>Suscripción Actual</h2>
+      <span class="status-badge active">ACTIVA</span>
+    </div>
+    <div class="active-details">
+      <div class="detail">
+        <span class="label">Tienda</span>
+        <span class="value">{{ store.activeSubscription()?.storeName }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Nivel de Plan</span>
+        <span class="value current-plan-name">{{ getPlanName(store.activeSubscription()?.planId) }}</span>
+      </div>
+      <div class="detail">
+        <span class="label">Próxima Renovación</span>
+        <span class="value">{{ formatRenewalDate(store.activeSubscription()?.renewalDate) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="plans-title">Mejora tu experiencia</h2>
+
+  <div class="plans-grid">
+    <app-subscription-card
+      *ngFor="let plan of store.plans()"
+      [plan]="plan"
+      [isActive]="store.activeSubscription()?.planId === plan.id"
+      [actionLabel]="store.activeSubscription()?.planId === plan.id ? 'Plan Actual' : 'Cambiar a ' + plan.name"
+      (selected)="openCheckout($event)">
+
+      <ul class="custom-features">
+        <li *ngIf="plan.id === 'starter'">✔️ Dashboard de Tráfico Básico</li>
+        <li *ngIf="plan.id === 'starter'">✔️ Alertas de Personal (Staff)</li>
+
+        <li *ngIf="plan.id === 'growth'">✔️ Todo lo de Starter</li>
+        <li *ngIf="plan.id === 'growth'">✔️ Reportes de Conversión</li>
+        <li *ngIf="plan.id === 'growth'">✔️ Exportación de Datos PDF/Excel</li>
+
+        <li *ngIf="plan.id === 'premium'">✔️ Todo lo de Growth</li>
+        <li *ngIf="plan.id === 'premium'">✔️ Mapas de Calor de Tienda</li>
+        <li *ngIf="plan.id === 'premium'">✔️ Analítica Predictiva con IA</li>
+      </ul>
+    </app-subscription-card>
+  </div>
+
+  <app-stripe-checkout-modal
+    *ngIf="selectedPlan"
+    [open]="checkoutOpen"
+    [plan]="selectedPlan"
+    [currentPlan]="activePlan"
+    mode="change"
+    (closed)="closeCheckout()"
+    (confirmed)="confirmCheckout()">
+  </app-stripe-checkout-modal>
+</div>

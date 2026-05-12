@@ -1,0 +1,87 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "users": [
+    {
+      "id": "1",
+      "email": "admin@retailpulse.com",
+      "password": "admin",
+      "role": "ADMIN",
+      "name": "Jesús Admin"
+    },
+    {
+      "id": "2",
+      "email": "staff@retailpulse.com",
+      "password": "staff",
+      "role": "STAFF",
+      "name": "Personal Coolbox"
+    },
+    {
+      "email": "admin@retailpulse.com",
+      "password": "admin",
+      "role": "ADMIN",
+      "name": "Administrador",
+      "id": "2IvTbd_"
+    },
+    {
+      "email": "admin@retailpulse.com",
+      "password": "admin",
+      "role": "ADMIN",
+      "name": "Administrador",
+      "planId": "growth",
+      "id": "goJtX-s"
+    },
+    {
+      "email": "staff@retailpulse.com",
+      "password": "staff",
+      "role": "ADMIN",
+      "name": "Administrador",
+      "planId": "premium",
+      "id": "wzaMYlU"
+    }
+  ],
+  "stores": [
+    {
+      "name": "Coolbox",
+      "ruc": "2060334501",
+      "category": "Tecnologia",
+      "address": "Lima Peru",
+      "hours": "10am - 10pm",
+      "ownerEmail": "admin@retailpulse.com",
+      "id": 1
+    },
+    {
+      "name": "",
+      "ruc": "",
+      "category": "",
+      "address": "",
+      "hours": "",
+      "ownerEmail": "admin@retailpulse.com",
+      "id": 2
+    },
+    {
+      "name": "",
+      "ruc": "",
+      "category": "",
+      "address": "",
+      "hours": "",
+      "ownerEmail": "staff@retailpulse.com",
+      "id": 3
+    }
+  ]
+}

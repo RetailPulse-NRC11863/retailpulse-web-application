@@ -1,0 +1,34 @@
+<div class="product-card">
+  <div class="card-left">
+    <div class="icon-wrapper">
+      <lucide-icon [img]="Package" size="20"></lucide-icon>
+    </div>
+    <div class="info">
+      <h4 class="name">{{ product.name }}</h4>
+      <div class="meta">
+        <span class="category">{{ product.category }}</span>
+        <span class="id">{{ product.id }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-right">
+    <div class="detail-item">
+      <lucide-icon [img]="Layers" size="14" class="detail-icon"></lucide-icon>
+      <div class="detail-text">
+        <span class="label">Location</span>
+        <span class="value">{{ product.zoneName }} / {{ product.shelfReference }}</span>
+      </div>
+    </div>
+
+    <div class="detail-item">
+      <lucide-icon [img]="Tag" size="14" class="detail-icon"></lucide-icon>
+      <div class="detail-text">
+        <span class="label">Inventory</span>
+        <span class="value" [class.out-of-stock]="product.stock === 0">
+          {{ product.stock > 0 ? product.stock + ' units' : 'Out of Stock' }}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

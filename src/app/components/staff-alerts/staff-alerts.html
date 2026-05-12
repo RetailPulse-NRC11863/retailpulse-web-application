@@ -1,0 +1,22 @@
+<div class="mobile-wrapper">
+    <header class="staff-header">
+        <h2>Operaciones RetailPulse</h2>
+        <a routerLink="/login" class="logout">Salir</a>
+    </header>
+
+    <main class="alerts-container">
+        <h3>Alertas Activas</h3>
+
+        <div *ngFor="let alert of alerts" class="alert-card" [ngClass]="{'resolved': alert.resolved}">
+            <div class="alert-header">
+                <span class="badge" [ngClass]="alert.type.toLowerCase()">{{ alert.type }}</span>
+                <span class="location">📍 {{ alert.location }}</span>
+            </div>
+            <p class="message">{{ alert.message }}</p>
+            <button *ngIf="!alert.resolved" class="btn-resolve" (click)="resolveAlert(alert.id)">
+                Marcar como Atendido
+            </button>
+            <p *ngIf="alert.resolved" class="status-ok">✔️ Atendido</p>
+        </div>
+    </main>
+</div>

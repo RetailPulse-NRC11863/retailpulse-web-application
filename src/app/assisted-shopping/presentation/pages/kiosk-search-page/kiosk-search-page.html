@@ -1,0 +1,53 @@
+<div class="kiosk-layout">
+  <header class="kiosk-header" style="position: relative;">
+
+    <div style="position: absolute; top: 1.5rem; left: 1.5rem;">
+      <a routerLink="/login" class="back-link">
+        <lucide-icon [img]="ArrowLeft" [size]="20"></lucide-icon>
+        <span>{{ 'common.back' | translate }}</span>
+      </a>
+    </div>
+
+    <div style="position: absolute; top: 1.5rem; right: 1.5rem;">
+      <app-language-switcher></app-language-switcher>
+    </div>
+
+    <div>
+      <div class="brand">
+        <lucide-icon [img]="ShoppingBag" [size]="32" class="brand-icon"></lucide-icon>
+        <h1>RetailPulse <span>{{ 'kiosk.eyebrow' | translate }}</span></h1>
+      </div>
+      <p class="subtitle">{{ 'kiosk.description' | translate }}</p>
+    </div>
+  </header>
+
+  <main class="kiosk-main">
+    <div class="search-section">
+      <app-product-search-box (search)="onSearch($event)" (clear)="onClear()">
+      </app-product-search-box>
+    </div>
+
+    <div class="results-section">
+      <div *ngIf="store.loading()" class="state-container">
+        <div class="spinner"></div>
+        <p>{{ 'common.loading' | translate }}</p>
+      </div>
+
+      <div *ngIf="store.error()" class="state-container error">
+        <p>{{ store.error() }}</p>
+      </div>
+
+      <div *ngIf="store.hasSearched() && !store.loading() && !store.error() && store.productResults().length === 0"
+           class="state-container empty">
+        <lucide-icon [img]="PackageX" [size]="64" class="empty-icon"></lucide-icon>
+        <h2>{{ 'kiosk.noResults' | translate }}</h2>
+        <p>{{ 'kiosk.noResultsDetail' | translate }}</p>
+      </div>
+
+      <div *ngIf="store.productResults().length > 0 && !store.loading()" class="results-grid">
+        <app-product-result-card *ngFor="let product of store.productResults()" [product]="product">
+        </app-product-result-card>
+      </div>
+    </div>
+  </main>
+</div>

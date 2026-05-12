@@ -1,0 +1,31 @@
+<div class="conversion-card">
+  <div class="card-header">
+    <div class="zone-info">
+      <lucide-icon [img]="MapPin" size="18" class="zone-icon"></lucide-icon>
+      <h3 class="zone-name">{{ zoneName || metric.zoneId }}</h3>
+    </div>
+    <div class="conversion-badge" [class.high]="metric.conversionRate >= 0.15" [class.low]="metric.conversionRate < 0.15">
+      {{ (metric.conversionRate * 100).toFixed(1) }}%
+    </div>
+  </div>
+
+  <div class="funnel-container">
+    <div class="funnel-step interactions">
+      <div class="step-label">
+        <lucide-icon [img]="Activity" size="14"></lucide-icon> Interactions
+      </div>
+      <div class="step-value">{{ metric.totalInteractions | number }}</div>
+    </div>
+    
+    <div class="funnel-arrow">
+      <lucide-icon [img]="TrendingUp" size="16"></lucide-icon>
+    </div>
+
+    <div class="funnel-step sales">
+      <div class="step-label">
+        <lucide-icon [img]="ShoppingBag" size="14"></lucide-icon> Sales
+      </div>
+      <div class="step-value">{{ metric.totalSales | number }}</div>
+    </div>
+  </div>
+</div>

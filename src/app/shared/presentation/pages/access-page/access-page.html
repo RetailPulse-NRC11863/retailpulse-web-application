@@ -1,0 +1,32 @@
+<section class="access-page">
+  <div style="position: absolute; top: 2rem; right: 2rem;">
+    <app-language-switcher></app-language-switcher>
+  </div>
+  <div class="access-card">
+    <p class="eyebrow">{{ 'access.eyebrow' | translate }}</p>
+
+    <h1>{{ 'access.title' | translate }}</h1>
+
+    <p class="description">
+      {{ 'access.description' | translate }}
+    </p>
+
+    <div class="actions">
+      <a routerLink="/register" class="primary-action">
+        {{ 'access.registerButton' | translate }}
+      </a>
+
+      <a routerLink="/app/admin/dashboard" class="primary-action">
+        {{ 'access.adminButton' | translate }}
+      </a>
+
+      <a routerLink="/app/staff/alerts" class="secondary-action">
+        {{ 'access.staffButton' | translate }}
+      </a>
+
+      <a routerLink="/kiosk" class="kiosk-action">
+        {{ 'access.kioskButton' | translate }}
+      </a>
+    </div>
+  </div>
+</section>

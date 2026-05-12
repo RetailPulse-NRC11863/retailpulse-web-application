@@ -1,0 +1,19 @@
+<div class="alert-card" [ngClass]="'priority-' + alert.priority.toLowerCase()">
+  <div class="alert-header">
+    <div class="priority-badge">
+      <lucide-icon *ngIf="alert.priority === 'HIGH'" [img]="AlertCircle" size="16"></lucide-icon>
+      <lucide-icon *ngIf="alert.priority === 'MEDIUM'" [img]="AlertTriangle" size="16"></lucide-icon>
+      <lucide-icon *ngIf="alert.priority === 'LOW'" [img]="Info" size="16"></lucide-icon>
+      {{ alert.priority }}
+    </div>
+    <span class="zone-badge">
+      <lucide-icon [img]="MapPin" size="14"></lucide-icon>
+      {{ alert.zoneName }}
+    </span>
+  </div>
+  
+  <div class="alert-body">
+    <h3 class="alert-title">{{ alert.type.replace('_', ' ') }}</h3>
+    <p class="alert-message">{{ alert.message }}</p>
+  </div>
+</div>

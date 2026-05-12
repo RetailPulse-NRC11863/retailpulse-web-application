@@ -1,0 +1,14 @@
+.register-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f4f7f6; font-family: sans-serif; padding: 20px;}
+.register-card { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 450px; text-align: center; }
+.steps-indicator { color: #2563eb; font-weight: bold; font-size: 0.9rem; margin-bottom: 10px; }
+.brand-title { color: #0b1f38; margin-bottom: 25px; }
+.step-section { display: flex; flex-direction: column; gap: 15px; text-align: left; }
+.step-section h2 { font-size: 1.2rem; color: #334155; margin-bottom: 10px; }
+.reg-input { padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 1rem; width: 100%; box-sizing: border-box;}
+.row { display: flex; gap: 10px; }
+.half { width: 50%; }
+.stripe-mockup { background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px dashed #94a3b8; }
+.btn-primary { padding: 12px; background-color: #0b1f38; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px;}
+.btn-success { padding: 12px; background-color: #16a34a; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 10px;}
+.back-link { margin-top: 20px; font-size: 0.9rem; }
+.back-link a { color: #64748b; text-decoration: none; }

@@ -1,0 +1,67 @@
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <img ngSrc='../public/logo-retailpulse.png' alt="Logo RetailPulse" width="300" height="30">
+    </div>
+
+    @if (isAdminView()) {
+      <nav class="menu">
+        <p class="menu-label">{{ 'layout.administrator' | translate }}</p>
+
+        <a routerLink="/app/admin/dashboard" routerLinkActive="active">
+          <span class="nav-icon"><lucide-icon [img]="ChartColumnBig" [size]="20"></lucide-icon></span>
+          <span class="nav-text">{{ 'layout.dashboard' | translate }}</span>
+        </a>
+
+        <a routerLink="/app/admin/store-configuration" routerLinkActive="active">
+          <span class="nav-icon"><lucide-icon [img]="Settings" [size]="20"></lucide-icon></span>
+          <span class="nav-text">{{ 'layout.storeConfiguration' | translate }}</span>
+        </a>
+
+        @if (saasPolicy.hasCapability('conversion')) {
+          <a routerLink="/app/admin/conversion" routerLinkActive="active">
+            <span class="nav-icon"><lucide-icon [img]="ChartLine" [size]="20"></lucide-icon></span>
+            <span class="nav-text">{{ 'layout.conversion' | translate }}</span>
+          </a>
+        }
+
+        @if (saasPolicy.hasCapability('heatmap')) {
+          <a routerLink="/app/admin/store-heatmap" routerLinkActive="active">
+            <span class="nav-icon"><lucide-icon [img]="Flame" [size]="20"></lucide-icon></span>
+            <span class="nav-text">{{ 'trafficAnalytics.heatmapTitle' | translate }}</span>
+          </a>
+        }
+
+        <a routerLink="/app/admin/subscription" routerLinkActive="active">
+          <span class="nav-icon"><lucide-icon [img]="CreditCard" [size]="20"></lucide-icon></span>
+          <span class="nav-text">{{ 'layout.subscription' | translate }}</span>
+        </a>
+      </nav>
+    }
+
+    @if (isStaffView()) {
+      <nav class="menu">
+        <p class="menu-label">{{ 'layout.storeStaff' | translate }}</p>
+
+        <a routerLink="/app/staff/alerts" routerLinkActive="active">
+          <span class="nav-icon"><lucide-icon [img]="Bell" [size]="20"></lucide-icon></span>
+          <span class="nav-text">{{ 'layout.operationalAlerts' | translate }}</span>
+        </a>
+      </nav>
+    }
+
+    <div class="sidebar-footer">
+      <div style="margin-bottom: 12px; display: flex; justify-content: center;">
+        <app-language-switcher></app-language-switcher>
+      </div>
+      <a routerLink="/">
+        <span class="nav-icon"><lucide-icon [img]="RefreshCw" [size]="20"></lucide-icon></span>
+        <span class="nav-text">{{ 'layout.changeView' | translate }}</span>
+      </a>
+    </div>
+  </aside>
+
+  <main class="content">
+    <router-outlet />
+  </main>
+</div>

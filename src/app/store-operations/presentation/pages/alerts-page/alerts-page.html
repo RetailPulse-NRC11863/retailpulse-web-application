@@ -1,0 +1,83 @@
+<div class="staff-layout">
+  <div class="staff-header">
+    <div class="brand">
+      <lucide-icon [img]="Activity" class="brand-icon" size="32"></lucide-icon>
+      <h1>{{ 'staff.title' | translate }}</h1>
+    </div>
+    <p class="subtitle">{{ 'staff.description' | translate }}</p>
+  </div>
+
+  <main class="staff-main">
+    <div *ngIf="store.loading()" class="state-container">
+      <div class="spinner"></div>
+      <p>{{ 'common.loading' | translate }}</p>
+    </div>
+
+    <div *ngIf="store.error()" class="state-container error">
+      <h2>{{ 'common.error' | translate }}</h2>
+      <p>{{ store.error() }}</p>
+      <button class="btn-retry" (click)="store.loadOperationsData()">Retry</button>
+    </div>
+
+    <div *ngIf="!store.loading() && !store.error()" class="dashboard-grid">
+
+      <section class="summary-section">
+        <div class="summary-card alerts-summary">
+          <lucide-icon [img]="BellRing" size="24"></lucide-icon>
+          <div class="summary-info">
+            <span class="summary-value">{{ store.activeAlerts().length }}</span>
+            <span class="summary-label">{{ 'staff.activeAlerts' | translate }}</span>
+          </div>
+        </div>
+        <div class="summary-card tasks-summary">
+          <lucide-icon [img]="ClipboardList" size="24"></lucide-icon>
+          <div class="summary-info">
+            <span class="summary-value">{{ store.pendingTasks().length }}</span>
+            <span class="summary-label">{{ 'staff.pendingTasks' | translate }}</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="panels-container">
+        <section class="panel">
+          <div class="panel-header">
+            <h2>{{ 'staff.activeAlerts' | translate }}</h2>
+          </div>
+          <div class="panel-content">
+            <ng-container *ngIf="store.activeAlerts().length > 0; else noAlerts">
+              <div class="cards-list">
+                <app-alert-card *ngFor="let alert of store.activeAlerts()" [alert]="alert">
+                </app-alert-card>
+              </div>
+            </ng-container>
+            <ng-template #noAlerts>
+              <div class="empty-state">
+                <p>{{ 'staff.noActiveAlerts' | translate }}</p>
+              </div>
+            </ng-template>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <h2>{{ 'staff.pendingTasks' | translate }}</h2>
+          </div>
+          <div class="panel-content">
+            <ng-container *ngIf="store.pendingTasks().length > 0; else noTasks">
+              <div class="cards-list">
+                <app-task-card *ngFor="let task of store.pendingTasks()" [task]="task" (attend)="onAttendTask($event)">
+                </app-task-card>
+              </div>
+            </ng-container>
+            <ng-template #noTasks>
+              <div class="empty-state">
+                <p>{{ 'staff.noPendingTasks' | translate }}</p>
+              </div>
+            </ng-template>
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</div>

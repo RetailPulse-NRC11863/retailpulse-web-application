@@ -1,0 +1,29 @@
+<div class="product-card" [ngClass]="product.status.toLowerCase()">
+  <div class="card-left">
+    <div class="product-icon-wrapper">
+      <lucide-icon [img]="Package" size="20"></lucide-icon>
+    </div>
+    <div class="product-info">
+      <h4 class="product-name">{{ product.productName }}</h4>
+      <span class="product-id">{{ product.productId }}</span>
+    </div>
+  </div>
+
+  <div class="card-right">
+    <div class="metrics-row">
+      <div class="metric">
+        <span class="label">Interactions</span>
+        <span class="value">{{ product.interactions | number }}</span>
+      </div>
+      <div class="metric">
+        <span class="label">Sales</span>
+        <span class="value">{{ product.sales | number }}</span>
+      </div>
+    </div>
+    
+    <div class="status-indicator">
+      <lucide-icon *ngIf="product.status === 'GOOD'" [img]="ArrowUpRight" size="18" class="icon-good"></lucide-icon>
+      <lucide-icon *ngIf="product.status === 'NEEDS_ATTENTION'" [img]="AlertCircle" size="18" class="icon-attention"></lucide-icon>
+    </div>
+  </div>
+</div>

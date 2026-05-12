@@ -1,0 +1,99 @@
+.product-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--rp-color-surface);
+  border: 1px solid var(--rp-color-border);
+  border-radius: var(--rp-border-radius-md);
+  padding: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.product-card:hover {
+  background-color: var(--rp-color-surface-hover);
+}
+
+.product-card.needs_attention {
+  border-left: 4px solid var(--rp-color-danger);
+}
+
+.product-card.good {
+  border-left: 4px solid var(--rp-color-success);
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.product-icon-wrapper {
+  background-color: var(--rp-color-background);
+  padding: 0.75rem;
+  border-radius: var(--rp-border-radius-sm);
+  color: var(--rp-color-text-secondary);
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.product-name {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--rp-color-text);
+}
+
+.product-id {
+  font-size: 0.75rem;
+  color: var(--rp-color-text-secondary);
+}
+
+.card-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.metrics-row {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.125rem;
+}
+
+.metric .label {
+  font-size: 0.625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rp-color-text-secondary);
+}
+
+.metric .value {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--rp-color-text);
+}
+
+.status-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+}
+
+.icon-good {
+  color: var(--rp-color-success);
+}
+
+.icon-attention {
+  color: var(--rp-color-danger);
+}

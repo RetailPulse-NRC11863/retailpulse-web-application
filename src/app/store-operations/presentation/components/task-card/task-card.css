@@ -1,0 +1,107 @@
+.task-card {
+  background: var(--rp-color-white);
+  border-radius: var(--rp-radius);
+  padding: var(--rp-spacing-3);
+  box-shadow: 0 2px 8px rgba(10,37,64,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: var(--rp-spacing-3);
+  border: 1px solid var(--rp-color-border);
+}
+
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.priority-badge, .status-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.priority-high { color: var(--rp-color-danger); }
+.priority-medium { color: #D39300; }
+.priority-low { color: var(--rp-color-success); }
+
+.status-pending {
+  background: rgba(102, 102, 102, 0.1);
+  color: var(--rp-color-text-muted);
+}
+.status-in_progress {
+  background: rgba(0, 210, 255, 0.1);
+  color: var(--rp-color-primary);
+}
+.status-resolved {
+  background: rgba(40, 167, 69, 0.1);
+  color: var(--rp-color-success);
+}
+
+.task-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-title {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--rp-color-primary);
+}
+
+.task-description {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--rp-color-text);
+  line-height: 1.5;
+}
+
+.zone-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: var(--rp-color-text-muted);
+  margin-top: 4px;
+}
+
+.task-footer {
+  margin-top: auto;
+  padding-top: var(--rp-spacing-2);
+  border-top: 1px solid var(--rp-color-border);
+}
+
+.btn-attend {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--rp-color-primary);
+  color: var(--rp-color-white);
+  border: none;
+  padding: 12px;
+  border-radius: var(--rp-radius);
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-attend:hover {
+  background: #061A2D;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(10,37,64,0.15);
+}
+
+.btn-attend:active {
+  transform: translateY(0);
+}
