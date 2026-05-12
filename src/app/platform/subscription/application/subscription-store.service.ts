@@ -9,6 +9,7 @@ export interface SubscriptionState {
   activeSubscription: SaaSAccount | null;
   loading: boolean;
   error: string | null;
+  loaded: boolean;
 }
 
 @Injectable({
@@ -21,15 +22,18 @@ export class SubscriptionStore {
     plans: [],
     activeSubscription: null,
     loading: false,
-    error: null
+    error: null,
+    loaded: false
   });
 
   plans = computed(() => this.state().plans);
   activeSubscription = computed(() => this.state().activeSubscription);
   loading = computed(() => this.state().loading);
   error = computed(() => this.state().error);
+  loaded = computed(() => this.state().loaded);
 
   loadPlans() {
+    if (this.state().loaded || this.state().loading) return;
     this.state.update(s => ({ ...s, loading: true, error: null }));
     
     forkJoin({
@@ -41,22 +45,27 @@ export class SubscriptionStore {
           ...s,
           plans: data.plans,
           activeSubscription: data.activeSubscription,
-          loading: false
+          loading: false,
+          loaded: true
         }));
       },
       error: (err) => {
         this.state.update(s => ({
           ...s,
           error: 'Connection error while loading subscription data.',
-          loading: false
+          loading: false,
+          loaded: false
         }));
       }
     });
   }
 
-  changePlan(planId: string) {
+  changePlan(
+    planId: string,
+    patch?: Partial<{ storeName: string; renewalDate: string | Date; status: string }>
+  ) {
     this.state.update(s => ({ ...s, loading: true, error: null }));
-    this.api.changePlan(planId).subscribe({
+    this.api.patchActiveAccount({ planId, ...(patch ?? {}) }).subscribe({
       next: (updatedAccount) => {
         this.state.update(s => ({
           ...s,

@@ -6,6 +6,7 @@ import {PageNotFound} from './shared/presentation/pages/page-not-found/page-not-
 import {DashboardPageComponent} from './traffic-analytics/presentation/pages/dashboard-page/dashboard-page';
 import {StoreConfigurationPageComponent} from './platform/store-setup/presentation/pages/store-configuration-page/store-configuration-page';
 import {SubscriptionPageComponent} from './platform/subscription/presentation/pages/subscription-page/subscription-page';
+import { RegisterPageComponent } from './platform/subscription/presentation/pages/register-page/register-page';
 import {
   ConversionReportPage
 } from './promotion-optimization/presentation/pages/conversion-report-page/conversion-report-page';
@@ -14,12 +15,18 @@ import {KioskSearchPageComponent} from './assisted-shopping/presentation/pages/k
 import {
   StoreHeatmapPageComponent
 } from './traffic-analytics/presentation/pages/store-heatmap-page/store-heatmap-page';
+import { planCapabilityGuard } from './platform/subscription/presentation/guards/plan-capability.guard';
 
 export const routes: Routes = [
   {
     path: '',
     component: AccessPage,
     title: 'RetailPulse - Access'
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent,
+    title: 'RetailPulse - Register'
   },
   {
     path: 'app',
@@ -48,12 +55,14 @@ export const routes: Routes = [
       {
         path: 'admin/store-heatmap',
         component: StoreHeatmapPageComponent,
-        title: 'RetailPulse - Store Heatmap'
+        title: 'RetailPulse - Store Heatmap',
+        canActivate: [planCapabilityGuard('heatmap')]
       },
       {
         path: 'admin/conversion',
         component: ConversionReportPage,
-        title: 'RetailPulse - Conversion Reports'
+        title: 'RetailPulse - Conversion Reports',
+        canActivate: [planCapabilityGuard('conversion')]
       },
       {
         path: 'staff/alerts',

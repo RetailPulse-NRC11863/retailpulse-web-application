@@ -10,26 +10,32 @@
   </div>
 
   <ng-container *ngIf="!store.loading() && store.activeSubscription()">
+    @if (upgradeFeature) {
+      <div class="upgrade-banner">
+        {{ 'subscription.upgradeNotice' | translate:{ feature: upgradeFeature } }}
+      </div>
+    }
+
     <div class="active-subscription-panel">
       <h2>{{ 'subscription.currentPlan' | translate }}</h2>
       <div class="active-details">
         <div class="detail">
-          <span class="label">Store</span>
+          <span class="label">{{ 'subscription.store' | translate }}</span>
           <span class="value">{{ store.activeSubscription()?.storeName }}</span>
         </div>
         <div class="detail">
-          <span class="label">Plan</span>
+          <span class="label">{{ 'subscription.plan' | translate }}</span>
           <span class="value">{{ getPlanName(store.activeSubscription()?.planId) }}</span>
         </div>
         <div class="detail">
-          <span class="label">Status</span>
+          <span class="label">{{ 'subscription.status' | translate }}</span>
           <span class="value status-badge" [class.active]="store.activeSubscription()?.status === 'ACTIVE'">
-            {{ store.activeSubscription()?.status }}
+            {{ getStatusLabel(store.activeSubscription()?.status) }}
           </span>
         </div>
         <div class="detail">
-          <span class="label">Renewal Date</span>
-          <span class="value">{{ store.activeSubscription()?.renewalDate | date:'mediumDate' }}</span>
+          <span class="label">{{ 'subscription.renewalDate' | translate }}</span>
+          <span class="value">{{ formatRenewalDate(store.activeSubscription()?.renewalDate) }}</span>
         </div>
       </div>
     </div>
@@ -39,8 +45,21 @@
       <app-subscription-card 
         *ngFor="let plan of store.plans()" 
         [plan]="plan"
-        [isActive]="store.activeSubscription()?.planId === plan.id">
+        [isActive]="store.activeSubscription()?.planId === plan.id"
+        [actionLabel]="'subscription.changeTo' | translate:{ plan: plan.name }"
+        (selected)="openCheckout($event)">
       </app-subscription-card>
     </div>
+
+    @if (selectedPlan) {
+      <app-stripe-checkout-modal
+        [open]="checkoutOpen"
+        [plan]="selectedPlan"
+        [currentPlan]="activePlan"
+        mode="change"
+        (closed)="closeCheckout()"
+        (confirmed)="confirmCheckout()"
+      />
+    }
   </ng-container>
 </div>

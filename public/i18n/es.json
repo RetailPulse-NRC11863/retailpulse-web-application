@@ -29,7 +29,8 @@
     "kioskDescription": "Busca productos, stock, ubicación y promociones dentro de la tienda.",
     "adminButton": "Ingresar como administrador",
     "staffButton": "Ingresar como personal",
-    "kioskButton": "Abrir quiosco"
+    "kioskButton": "Abrir quiosco",
+    "registerButton": "Registrarme y elegir plan"
   },
   "layout": {
     "brand": "RetailPulse",
@@ -102,11 +103,63 @@
     "description": "Revisa la suscripción actual y compara los planes disponibles de RetailPulse.",
     "currentPlan": "Plan actual",
     "availablePlans": "Planes disponibles",
+    "store": "Tienda",
+    "plan": "Plan",
+    "status": "Estado",
+    "renewalDate": "Renovación",
+    "changeTo": "Cambiar a {{plan}}",
+    "upgradeNotice": "Tu plan actual no incluye {{feature}}. Elige un plan para desbloquearlo.",
+    "statusValues": {
+      "ACTIVE": "Activo",
+      "TRIAL": "Prueba",
+      "CANCELED": "Cancelado"
+    },
+    "card": {
+      "currentPlan": "Plan actual",
+      "recommended": "Recomendado",
+      "active": "Activo"
+    },
     "starter": "Starter",
     "growth": "Growth",
     "premium": "Premium",
     "monthlyPrice": "Precio mensual",
     "recommended": "Recomendado"
+  },
+  "register": {
+    "back": "← Volver",
+    "title": "Crea tu cuenta",
+    "subtitle": "Elige un plan y completa un checkout simulado (tipo Stripe) para activar tu suscripción.",
+    "accountTitle": "Datos de la cuenta",
+    "storeName": "Nombre de tienda",
+    "email": "Correo",
+    "password": "Contraseña",
+    "hint": "Este registro es una demo. Las credenciales no se guardan.",
+    "choosePlan": "Elige un plan SaaS",
+    "choosePlanHint": "Luego puedes cambiar tu plan desde la vista de administrador.",
+    "continueCheckout": "Continuar al checkout"
+  },
+  "checkout": {
+    "secure": "Checkout seguro",
+    "payTitle": "Paga {{amount}} / mes",
+    "planLine": "Plan {{plan}}",
+    "changingFrom": "cambiando desde {{plan}}",
+    "close": "Cerrar",
+    "email": "Correo",
+    "emailError": "Ingresa un correo válido",
+    "cardInfo": "Información de tarjeta",
+    "cardError": "Revisa los datos de la tarjeta",
+    "nameOnCard": "Nombre en la tarjeta",
+    "country": "País",
+    "postalCode": "ZIP / Código postal",
+    "subtotal": "Subtotal",
+    "tax": "Impuestos",
+    "taxHint": "Calculado en el checkout",
+    "totalToday": "Total a pagar hoy",
+    "payCta": "Pagar y suscribirme",
+    "processing": "Procesando…",
+    "success": "Pago exitoso",
+    "disclaimer": "Este checkout es una simulación para demo. No se procesa ningún pago.",
+    "included": "Incluye"
   },
   "pageNotFound": {
     "title": "Página no encontrada",

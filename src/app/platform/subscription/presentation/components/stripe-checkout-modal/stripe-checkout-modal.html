@@ -1,0 +1,116 @@
+@if (open) {
+  <div class="backdrop" (click)="close()"></div>
+
+  <section class="modal" role="dialog" aria-modal="true" aria-label="Checkout">
+    <header class="modal-header">
+      <div>
+        <p class="eyebrow">{{ 'checkout.secure' | translate }}</p>
+        <h2 class="title">
+          {{ 'checkout.payTitle' | translate:{ amount: (plan.currency === 'USD' ? '$' : plan.currency) + plan.price } }}
+        </h2>
+        <p class="subtitle">
+          {{ 'checkout.planLine' | translate:{ plan: plan.name } }}
+          @if (mode === 'change' && currentPlan) {
+            <span class="muted"> • {{ 'checkout.changingFrom' | translate:{ plan: currentPlan.name } }}</span>
+          }
+        </p>
+      </div>
+
+      <button type="button" class="close" (click)="close()" [attr.aria-label]="'checkout.close' | translate">×</button>
+    </header>
+
+    <div class="modal-body">
+      <div class="stripe-shell">
+        <div class="brand-row">
+          <div class="stripe-mark">stripe</div>
+          <div class="locks">🔒</div>
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="submit()" class="form">
+          <label class="field">
+            <span>{{ 'checkout.email' | translate }}</span>
+            <input type="email" formControlName="email" placeholder="you@company.com" autocomplete="email" />
+            @if (form.controls.email.touched && form.controls.email.invalid) {
+              <small class="error">{{ 'checkout.emailError' | translate }}</small>
+            }
+          </label>
+
+          <label class="field">
+            <span>{{ 'checkout.cardInfo' | translate }}</span>
+            <input
+              type="text"
+              formControlName="cardNumber"
+              placeholder="4242 4242 4242 4242"
+              inputmode="numeric"
+              autocomplete="cc-number"
+            />
+
+            <div class="row">
+              <input type="text" formControlName="exp" placeholder="MM/YY" inputmode="numeric" autocomplete="cc-exp" />
+              <input type="text" formControlName="cvc" placeholder="CVC" inputmode="numeric" autocomplete="cc-csc" />
+            </div>
+
+            @if ((form.controls.cardNumber.touched && form.controls.cardNumber.invalid) || (form.controls.exp.touched && form.controls.exp.invalid) || (form.controls.cvc.touched && form.controls.cvc.invalid)) {
+              <small class="error">{{ 'checkout.cardError' | translate }}</small>
+            }
+          </label>
+
+          <label class="field">
+            <span>{{ 'checkout.nameOnCard' | translate }}</span>
+            <input type="text" formControlName="name" placeholder="Jane Doe" autocomplete="cc-name" />
+          </label>
+
+          <div class="row two">
+            <label class="field">
+              <span>{{ 'checkout.country' | translate }}</span>
+              <select formControlName="country">
+                <option value="US">United States</option>
+                <option value="PE">Peru</option>
+                <option value="MX">Mexico</option>
+                <option value="CL">Chile</option>
+                <option value="AR">Argentina</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>{{ 'checkout.postalCode' | translate }}</span>
+              <input type="text" formControlName="postalCode" placeholder="94107" autocomplete="postal-code" />
+            </label>
+          </div>
+
+          <div class="summary">
+            <div class="line">
+              <span>{{ 'checkout.subtotal' | translate }}</span>
+              <span>{{ plan.currency === 'USD' ? '$' : plan.currency }}{{ plan.price }}.00</span>
+            </div>
+            <div class="line muted">
+              <span>{{ 'checkout.tax' | translate }}</span>
+              <span>{{ 'checkout.taxHint' | translate }}</span>
+            </div>
+            <div class="line total">
+              <span>{{ 'checkout.totalToday' | translate }}</span>
+              <span>{{ plan.currency === 'USD' ? '$' : plan.currency }}{{ plan.price }}.00</span>
+            </div>
+          </div>
+
+          <button class="pay" type="submit" [disabled]="isProcessing">
+            @if (!isProcessing && !isSuccess) { {{ 'checkout.payCta' | translate }} }
+            @if (isProcessing) { {{ 'checkout.processing' | translate }} }
+            @if (!isProcessing && isSuccess) { {{ 'checkout.success' | translate }} }
+          </button>
+
+          <p class="fineprint">
+            {{ 'checkout.disclaimer' | translate }}
+          </p>
+        </form>
+      </div>
+
+      <aside class="plan-preview">
+        <h3>{{ 'checkout.included' | translate }}</h3>
+        <ul>
+          <li *ngFor="let feature of plan.getFeatures(lang)">{{ feature }}</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+}

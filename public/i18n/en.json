@@ -29,7 +29,8 @@
     "kioskDescription": "Search products, stock, location and promotions inside the store.",
     "adminButton": "Enter as administrator",
     "staffButton": "Enter as store staff",
-    "kioskButton": "Open kiosk"
+    "kioskButton": "Open kiosk",
+    "registerButton": "Register & choose plan"
   },
   "layout": {
     "brand": "RetailPulse",
@@ -102,11 +103,63 @@
     "description": "Review the current subscription and compare available RetailPulse plans.",
     "currentPlan": "Current plan",
     "availablePlans": "Available plans",
+    "store": "Store",
+    "plan": "Plan",
+    "status": "Status",
+    "renewalDate": "Renewal date",
+    "changeTo": "Change to {{plan}}",
+    "upgradeNotice": "Your current plan does not include {{feature}}. Choose a plan to unlock it.",
+    "statusValues": {
+      "ACTIVE": "Active",
+      "TRIAL": "Trial",
+      "CANCELED": "Canceled"
+    },
+    "card": {
+      "currentPlan": "Current plan",
+      "recommended": "Recommended",
+      "active": "Active"
+    },
     "starter": "Starter",
     "growth": "Growth",
     "premium": "Premium",
     "monthlyPrice": "Monthly price",
     "recommended": "Recommended"
+  },
+  "register": {
+    "back": "← Back",
+    "title": "Create your account",
+    "subtitle": "Pick a plan and complete a simulated checkout (Stripe-like) to activate your subscription.",
+    "accountTitle": "Account details",
+    "storeName": "Store name",
+    "email": "Email",
+    "password": "Password",
+    "hint": "This is a demo registration. Credentials are not persisted.",
+    "choosePlan": "Choose a SaaS plan",
+    "choosePlanHint": "You can change your plan later from the administrator view.",
+    "continueCheckout": "Continue to checkout"
+  },
+  "checkout": {
+    "secure": "Secure checkout",
+    "payTitle": "Pay {{amount}} / mo",
+    "planLine": "{{plan}} plan",
+    "changingFrom": "changing from {{plan}}",
+    "close": "Close",
+    "email": "Email",
+    "emailError": "Enter a valid email",
+    "cardInfo": "Card information",
+    "cardError": "Check your card details",
+    "nameOnCard": "Name on card",
+    "country": "Country",
+    "postalCode": "ZIP / Postal code",
+    "subtotal": "Subtotal",
+    "tax": "Tax",
+    "taxHint": "Calculated at checkout",
+    "totalToday": "Total due today",
+    "payCta": "Pay & subscribe",
+    "processing": "Processing…",
+    "success": "Payment successful",
+    "disclaimer": "This is a simulated checkout for demo purposes. No payment is processed.",
+    "included": "Included"
   },
   "pageNotFound": {
     "title": "Page not found",

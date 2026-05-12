@@ -24,8 +24,13 @@ export class SubscriptionApiService {
   }
 
   changePlan(planId: string): Observable<SaaSAccount> {
-    // Mock update
     return this.http.patch<any>('http://localhost:3000/api/v1/activeSubscription', { planId }).pipe(
+      map(item => new SaaSAccount(item))
+    );
+  }
+
+  patchActiveAccount(patch: Partial<{ planId: string; storeName: string; renewalDate: string | Date; status: string }>): Observable<SaaSAccount> {
+    return this.http.patch<any>('http://localhost:3000/api/v1/activeSubscription', patch).pipe(
       map(item => new SaaSAccount(item))
     );
   }

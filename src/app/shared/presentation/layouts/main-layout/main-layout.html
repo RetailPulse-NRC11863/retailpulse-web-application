@@ -18,15 +18,19 @@
           <span class="nav-text">{{ 'layout.storeConfiguration' | translate }}</span>
         </a>
 
-        <a routerLink="/app/admin/conversion" routerLinkActive="active">
-          <span class="nav-icon"><lucide-icon [img]="ChartLine" [size]="20"></lucide-icon></span>
-          <span class="nav-text">{{ 'layout.conversion' | translate }}</span>
-        </a>
+        @if (saasPolicy.hasCapability('conversion')) {
+          <a routerLink="/app/admin/conversion" routerLinkActive="active">
+            <span class="nav-icon"><lucide-icon [img]="ChartLine" [size]="20"></lucide-icon></span>
+            <span class="nav-text">{{ 'layout.conversion' | translate }}</span>
+          </a>
+        }
 
-        <a routerLink="/app/admin/store-heatmap" routerLinkActive="active">
-          <span class="nav-icon"><lucide-icon [img]="Flame" [size]="20"></lucide-icon></span>
-          <span class="nav-text">{{ 'trafficAnalytics.heatmapTitle' | translate }}</span>
-        </a>
+        @if (saasPolicy.hasCapability('heatmap')) {
+          <a routerLink="/app/admin/store-heatmap" routerLinkActive="active">
+            <span class="nav-icon"><lucide-icon [img]="Flame" [size]="20"></lucide-icon></span>
+            <span class="nav-text">{{ 'trafficAnalytics.heatmapTitle' | translate }}</span>
+          </a>
+        }
 
         <a routerLink="/app/admin/subscription" routerLinkActive="active">
           <span class="nav-icon"><lucide-icon [img]="CreditCard" [size]="20"></lucide-icon></span>

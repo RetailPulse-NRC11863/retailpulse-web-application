@@ -7,6 +7,9 @@ export class SubscriptionPlan implements BaseEntity {
   currency: string;
   description: string;
   features: string[];
+  descriptionI18n?: Record<string, string>;
+  featuresI18n?: Record<string, string[]>;
+  capabilities: Record<string, boolean>;
   recommended: boolean;
 
   constructor(data: {
@@ -16,6 +19,9 @@ export class SubscriptionPlan implements BaseEntity {
     currency: string;
     description: string;
     features: string[];
+    descriptionI18n?: Record<string, string>;
+    featuresI18n?: Record<string, string[]>;
+    capabilities?: Record<string, boolean>;
     recommended: boolean;
   }) {
     this.id = data.id;
@@ -24,6 +30,9 @@ export class SubscriptionPlan implements BaseEntity {
     this.currency = data.currency;
     this.description = data.description;
     this.features = data.features;
+    this.descriptionI18n = data.descriptionI18n;
+    this.featuresI18n = data.featuresI18n;
+    this.capabilities = data.capabilities ?? {};
     this.recommended = data.recommended;
   }
 
@@ -33,5 +42,13 @@ export class SubscriptionPlan implements BaseEntity {
 
   hasFeature(feature: string): boolean {
     return this.features.includes(feature);
+  }
+
+  getDescription(lang: string): string {
+    return this.descriptionI18n?.[lang] ?? this.description;
+  }
+
+  getFeatures(lang: string): string[] {
+    return this.featuresI18n?.[lang] ?? this.features;
   }
 }

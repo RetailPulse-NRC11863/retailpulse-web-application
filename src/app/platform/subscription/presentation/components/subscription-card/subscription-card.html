@@ -1,12 +1,12 @@
 <div class="subscription-card" [class.current]="isActive" [class.recommended]="plan.recommended">
-  <div class="card-badge" *ngIf="isActive">Current Plan</div>
+  <div class="card-badge" *ngIf="isActive">{{ 'subscription.card.currentPlan' | translate }}</div>
   <div class="card-badge recommended-badge" *ngIf="plan.recommended && !isActive">
-    <lucide-icon [img]="Star" size="14"></lucide-icon> Recommended
+    <lucide-icon [img]="Star" size="14"></lucide-icon> {{ 'subscription.card.recommended' | translate }}
   </div>
 
   <div class="card-header">
     <h3 class="plan-name">{{ plan.name }}</h3>
-    <p class="plan-description">{{ plan.description }}</p>
+    <p class="plan-description">{{ plan.getDescription(lang) }}</p>
     <div class="plan-price">
       <span class="currency">{{ plan.currency === 'USD' ? '$' : plan.currency }}</span>
       <span class="amount">{{ plan.price }}</span>
@@ -16,7 +16,7 @@
 
   <div class="card-body">
     <ul class="features-list">
-      <li *ngFor="let feature of plan.features" class="feature-item">
+      <li *ngFor="let feature of plan.getFeatures(lang)" class="feature-item">
         <lucide-icon [img]="Check" size="16" class="check-icon"></lucide-icon>
         <span>{{ feature }}</span>
       </li>
@@ -24,8 +24,8 @@
   </div>
 
   <div class="card-footer">
-    <button class="btn-action" [disabled]="isActive">
-      {{ isActive ? 'Active' : 'Upgrade to ' + plan.name }}
+    <button class="btn-action" [disabled]="isActive" (click)="select()">
+      {{ isActive ? ('subscription.card.active' | translate) : (actionLabel ?? ('subscription.changeTo' | translate:{ plan: plan.name })) }}
     </button>
   </div>
 </div>
