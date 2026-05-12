@@ -32,7 +32,7 @@
 
     <div class="main-grid">
 
-      <!-- Zones Column -->
+      <!-- ===== ZONES COLUMN ===== -->
       <section class="column">
 
         <!-- Section header with action buttons -->
@@ -50,30 +50,54 @@
               <lucide-icon [img]="EditIcon" [size]="14"></lucide-icon>
               {{ editMode() ? 'Exit Edit Mode' : 'Edit Layout' }}
             </button>
-            <button class="btn-add-zone" (click)="showAddForm.set(!showAddForm())">
+            <button class="btn-add-zone" (click)="showAddForm.set(!showAddForm()); editingZoneId.set(null)">
               <lucide-icon [img]="PlusIcon" [size]="14"></lucide-icon>
               {{ 'inventoryIntelligence.addZone' | translate }}
             </button>
           </div>
         </div>
 
-        <!-- Add Zone Inline Form -->
+        <!-- ── Add Zone Form ── -->
         <div class="add-zone-form" *ngIf="showAddForm()">
-          <div class="form-row">
-            <input class="form-input" type="text" placeholder="Zone name (e.g. Bakery Zone)" [(ngModel)]="newZoneName" />
-            <select class="form-select" [(ngModel)]="newZoneType">
-              <option *ngFor="let t of zoneTypes" [value]="t">
-                {{ getZoneTypeLabel(t) }}
-              </option>
-            </select>
+          <h4 class="form-section-title">New Zone</h4>
+          <div class="form-grid form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Zone Name</label>
+              <input class="form-input" type="text" placeholder="e.g. Bakery Zone" [(ngModel)]="newZoneName" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Zone Type</label>
+              <select class="form-select" [(ngModel)]="newZoneType">
+                <option *ngFor="let t of zoneTypes" [value]="t">
+                  {{ getZoneTypeLabel(t) }}
+                </option>
+              </select>
+            </div>
           </div>
-          <div class="form-row simulated-data-row">
-            <label class="form-label">Simulated Data:</label>
-            <input class="form-input small-input" type="number" placeholder="Traffic" [(ngModel)]="newZoneTraffic" title="Traffic" />
-            <input class="form-input small-input" type="number" placeholder="Dwell (s)" [(ngModel)]="newZoneDwell" title="Dwell Time" />
-            <input class="form-input small-input" type="number" placeholder="Conv. (%)" [(ngModel)]="newZoneConversion" title="Conversion Rate" />
-            <input class="form-input small-input" type="number" placeholder="Intensity" [(ngModel)]="newZoneIntensity" title="Intensity" />
+
+          <div class="form-divider">
+            <span class="divider-label">Simulated Analytics Data</span>
           </div>
+
+          <div class="form-grid form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Traffic (visitors)</label>
+              <input class="form-input" type="number" placeholder="0" [(ngModel)]="newZoneTraffic" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Dwell Time (seconds)</label>
+              <input class="form-input" type="number" placeholder="0" [(ngModel)]="newZoneDwell" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Conversion Rate (%)</label>
+              <input class="form-input" type="number" placeholder="0" [(ngModel)]="newZoneConversion" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Intensity (0–100)</label>
+              <input class="form-input" type="number" placeholder="0" [(ngModel)]="newZoneIntensity" />
+            </div>
+          </div>
+
           <div class="form-actions">
             <button class="btn-submit-zone" (click)="submitAddZone()" [disabled]="!newZoneName.trim() || store.saving()">
               {{ store.saving() ? 'Saving…' : 'Add Zone' }}
@@ -92,20 +116,78 @@
 
         <!-- Zone Cards (view mode) -->
         <div class="zones-grid" *ngIf="!editMode()">
-          <div class="zone-card" *ngFor="let zone of store.zones()">
-            <div class="zone-card-icon">
-              <lucide-icon [img]="getZoneIcon(zone.type)" [size]="20"></lucide-icon>
+          <div *ngFor="let zone of store.zones()">
+
+            <!-- ── Edit Zone Inline Form ── -->
+            <div class="add-zone-form" *ngIf="editingZoneId() === zone.id">
+              <h4 class="form-section-title">Edit Zone</h4>
+              <div class="form-grid form-grid-2">
+                <div class="field-group">
+                  <label class="field-label">Zone Name</label>
+                  <input class="form-input" type="text" placeholder="Zone name" [(ngModel)]="editZoneName" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Zone Type</label>
+                  <select class="form-select" [(ngModel)]="editZoneType">
+                    <option *ngFor="let t of zoneTypes" [value]="t">
+                      {{ getZoneTypeLabel(t) }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-divider">
+                <span class="divider-label">Simulated Analytics Data</span>
+              </div>
+
+              <div class="form-grid form-grid-2">
+                <div class="field-group">
+                  <label class="field-label">Traffic (visitors)</label>
+                  <input class="form-input" type="number" placeholder="0" [(ngModel)]="editZoneTraffic" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Dwell Time (seconds)</label>
+                  <input class="form-input" type="number" placeholder="0" [(ngModel)]="editZoneDwell" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Conversion Rate (%)</label>
+                  <input class="form-input" type="number" placeholder="0" [(ngModel)]="editZoneConversion" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Intensity (0–100)</label>
+                  <input class="form-input" type="number" placeholder="0" [(ngModel)]="editZoneIntensity" />
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button class="btn-submit-zone btn-update" (click)="submitEditZone()" [disabled]="!editZoneName.trim() || store.saving()">
+                  {{ store.saving() ? 'Saving…' : 'Update Zone' }}
+                </button>
+                <button class="btn-form-cancel" (click)="cancelEditZone()">Cancel</button>
+              </div>
             </div>
 
-            <div class="zone-card-info">
-              <span class="zone-card-name">{{ zone.name }}</span>
-              <span class="zone-card-type">{{ getZoneTypeLabel(zone.type) }}</span>
-              <span class="zone-card-pos">Position: ({{ zone.x }}, {{ zone.y }}) · {{ zone.width }}×{{ zone.height }}</span>
-            </div>
+            <!-- Zone Card (view) -->
+            <div class="zone-card" *ngIf="editingZoneId() !== zone.id">
+              <div class="zone-card-icon">
+                <lucide-icon [img]="getZoneIcon(zone.type)" [size]="20"></lucide-icon>
+              </div>
 
-            <button class="btn-delete-zone" (click)="requestDelete(zone.id)" title="Delete zone">
-              <lucide-icon [img]="TrashIcon" [size]="14"></lucide-icon>
-            </button>
+              <div class="zone-card-info">
+                <span class="zone-card-name">{{ zone.name }}</span>
+                <span class="zone-card-type">{{ getZoneTypeLabel(zone.type) }}</span>
+                <span class="zone-card-pos">Position: ({{ zone.x }}, {{ zone.y }}) · {{ zone.width }}×{{ zone.height }}</span>
+              </div>
+
+              <div class="zone-card-actions">
+                <button class="btn-edit-item" (click)="startEditZone(zone)" title="Edit zone">
+                  <lucide-icon [img]="PencilIcon" [size]="14"></lucide-icon>
+                </button>
+                <button class="btn-delete-zone" (click)="requestDelete(zone.id)" title="Delete zone">
+                  <lucide-icon [img]="TrashIcon" [size]="14"></lucide-icon>
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -114,40 +196,62 @@
         </div>
       </section>
 
-      <!-- Products Column -->
+      <!-- ===== PRODUCTS COLUMN ===== -->
       <section class="column">
         <div class="section-header">
           <div class="section-title-group">
             <lucide-icon [img]="PackageIcon" [size]="20" class="section-icon"></lucide-icon>
             <h2 class="section-title">{{ 'inventoryIntelligence.products' | translate }}</h2>
           </div>
-          <button class="btn-add-zone" (click)="showAddProductForm.set(!showAddProductForm())">
+          <button class="btn-add-zone" (click)="showAddProductForm.set(!showAddProductForm()); editingProductId.set(null)">
             <lucide-icon [img]="PlusIcon" [size]="14"></lucide-icon>
             {{ 'inventoryIntelligence.addProduct' | translate }}
           </button>
         </div>
 
-        <!-- Add Product Form -->
+        <!-- ── Add Product Form ── -->
         <div class="add-zone-form" *ngIf="showAddProductForm()">
-          <div class="form-row">
-            <input class="form-input" type="text" placeholder="Product Name" [(ngModel)]="newProductName" />
-            <input class="form-input" type="text" placeholder="Category" [(ngModel)]="newProductCategory" />
+          <h4 class="form-section-title">New Product</h4>
+          <div class="form-grid form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Product Name</label>
+              <input class="form-input" type="text" placeholder="e.g. Laptop Lenovo" [(ngModel)]="newProductName" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Category</label>
+              <input class="form-input" type="text" placeholder="e.g. Groceries" [(ngModel)]="newProductCategory" />
+            </div>
           </div>
-          <div class="form-row">
-            <input class="form-input" type="number" placeholder="Price" [(ngModel)]="newProductPrice" />
-            <input class="form-input" type="number" placeholder="Stock" [(ngModel)]="newProductStock" />
+          <div class="form-grid form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Price (S/.)</label>
+              <input class="form-input" type="number" placeholder="0" [(ngModel)]="newProductPrice" />
+            </div>
+            <div class="field-group">
+              <label class="field-label">Stock (units)</label>
+              <input class="form-input" type="number" placeholder="0" [(ngModel)]="newProductStock" />
+            </div>
           </div>
-          <div class="form-row">
-            <select class="form-select" [(ngModel)]="newProductZone">
-              <option value="">Select Zone</option>
-              <option *ngFor="let zone of store.zones()" [value]="zone.name">{{ zone.name }}</option>
-            </select>
-            <input class="form-input" type="text" placeholder="Shelf Ref (e.g. A1)" [(ngModel)]="newProductShelf" />
+          <div class="form-grid form-grid-2">
+            <div class="field-group">
+              <label class="field-label">Zone</label>
+              <select class="form-select" [(ngModel)]="newProductZone">
+                <option value="">Select Zone</option>
+                <option *ngFor="let zone of store.zones()" [value]="zone.name">{{ zone.name }}</option>
+              </select>
+            </div>
+            <div class="field-group">
+              <label class="field-label">Shelf Reference</label>
+              <input class="form-input" type="text" placeholder="e.g. A1" [(ngModel)]="newProductShelf" />
+            </div>
           </div>
-          <div class="form-row">
-            <input class="form-input" type="text" placeholder="Promotion (optional)" [(ngModel)]="newProductPromotion" />
+          <div class="form-grid form-grid-1">
+            <div class="field-group">
+              <label class="field-label">Promotion <span class="optional-tag">(optional)</span></label>
+              <input class="form-input" type="text" placeholder="e.g. 2x1, 20% OFF" [(ngModel)]="newProductPromotion" />
+            </div>
           </div>
-          <div class="form-actions" style="margin-top: 10px;">
+          <div class="form-actions">
             <button class="btn-submit-zone" (click)="submitAddProduct()" [disabled]="!newProductName.trim() || store.saving()">
               {{ store.saving() ? 'Saving…' : 'Add Product' }}
             </button>
@@ -155,12 +259,72 @@
           </div>
         </div>
 
+        <!-- Product List -->
         <div class="products-list">
-          <div class="product-wrapper" *ngFor="let product of store.products()">
-            <app-product-card style="flex: 1" [product]="product"></app-product-card>
-            <button class="btn-delete-zone product-delete-btn" (click)="requestDeleteProduct(product.id)" title="Delete product">
-              <lucide-icon [img]="TrashIcon" [size]="14"></lucide-icon>
-            </button>
+          <div *ngFor="let product of store.products()">
+
+            <!-- ── Edit Product Inline Form ── -->
+            <div class="add-zone-form" *ngIf="editingProductId() === product.id">
+              <h4 class="form-section-title">Edit Product</h4>
+              <div class="form-grid form-grid-2">
+                <div class="field-group">
+                  <label class="field-label">Product Name</label>
+                  <input class="form-input" type="text" placeholder="Product name" [(ngModel)]="editProductName" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Category</label>
+                  <input class="form-input" type="text" placeholder="Category" [(ngModel)]="editProductCategory" />
+                </div>
+              </div>
+              <div class="form-grid form-grid-2">
+                <div class="field-group">
+                  <label class="field-label">Price (S/.)</label>
+                  <input class="form-input" type="number" placeholder="0" [(ngModel)]="editProductPrice" />
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Stock (units)</label>
+                  <input class="form-input" type="number" placeholder="0" [(ngModel)]="editProductStock" />
+                </div>
+              </div>
+              <div class="form-grid form-grid-2">
+                <div class="field-group">
+                  <label class="field-label">Zone</label>
+                  <select class="form-select" [(ngModel)]="editProductZone">
+                    <option value="">Select Zone</option>
+                    <option *ngFor="let zone of store.zones()" [value]="zone.name">{{ zone.name }}</option>
+                  </select>
+                </div>
+                <div class="field-group">
+                  <label class="field-label">Shelf Reference</label>
+                  <input class="form-input" type="text" placeholder="e.g. A1" [(ngModel)]="editProductShelf" />
+                </div>
+              </div>
+              <div class="form-grid form-grid-1">
+                <div class="field-group">
+                  <label class="field-label">Promotion <span class="optional-tag">(optional)</span></label>
+                  <input class="form-input" type="text" placeholder="e.g. 2x1, 20% OFF" [(ngModel)]="editProductPromotion" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button class="btn-submit-zone btn-update" (click)="submitEditProduct()" [disabled]="!editProductName.trim() || store.saving()">
+                  {{ store.saving() ? 'Saving…' : 'Update Product' }}
+                </button>
+                <button class="btn-form-cancel" (click)="cancelEditProduct()">Cancel</button>
+              </div>
+            </div>
+
+            <!-- Product Card (view) -->
+            <div class="product-wrapper" *ngIf="editingProductId() !== product.id">
+              <app-product-card style="flex: 1" [product]="product"></app-product-card>
+              <div class="product-card-actions">
+                <button class="btn-edit-item" (click)="startEditProduct(product)" title="Edit product">
+                  <lucide-icon [img]="PencilIcon" [size]="14"></lucide-icon>
+                </button>
+                <button class="btn-delete-zone product-delete-btn" (click)="requestDeleteProduct(product.id)" title="Delete product">
+                  <lucide-icon [img]="TrashIcon" [size]="14"></lucide-icon>
+                </button>
+              </div>
+            </div>
           </div>
           <div class="empty-state" *ngIf="store.products().length === 0">
             <p>No products added.</p>

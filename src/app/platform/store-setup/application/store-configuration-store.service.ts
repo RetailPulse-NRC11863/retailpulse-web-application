@@ -183,6 +183,71 @@ export class StoreConfigurationStore {
     });
   }
 
+  updateZone(
+    zoneId: string,
+    zoneUpdates: Partial<TrafficZone>,
+    metricsData?: { traffic: number; averageDwellTimeSeconds: number; conversionRate: number; intensity: number }
+  ) {
+    this.state.update(s => ({ ...s, saving: true }));
+    this.http.patch<any>(`${API}/storeLayoutZones/${zoneId}`, zoneUpdates).pipe(
+      switchMap(updated => {
+        if (metricsData) {
+          return this.http.get<any[]>(`${API}/heatmapMetrics?zoneId=${zoneId}`).pipe(
+            switchMap(metrics => {
+              if (metrics.length > 0) {
+                return this.http.patch(`${API}/heatmapMetrics/${metrics[0].id}`, metricsData).pipe(
+                  catchError(() => of(null)),
+                  switchMap(() => of(updated))
+                );
+              }
+              return of(updated);
+            }),
+            catchError(() => of(updated))
+          );
+        }
+        return of(updated);
+      })
+    ).subscribe({
+      next: (updated) => {
+        this.state.update(s => ({
+          ...s,
+          zones: s.zones.map(z => z.id === zoneId ? new TrafficZone({ ...z, ...updated }) : z),
+          saving: false
+        }));
+      },
+      error: () => {
+        this.state.update(s => ({
+          ...s,
+          error: 'Failed to update zone.',
+          saving: false
+        }));
+      }
+    });
+  }
+
+  updateProduct(productId: string, productData: Partial<InventoryItem>) {
+    this.state.update(s => ({ ...s, saving: true }));
+    const existing = this.state().products.find(p => p.id === productId);
+    const merged = { ...existing, ...productData, id: productId };
+
+    this.http.put<any>(`${API}/products/${productId}`, merged).subscribe({
+      next: (updated) => {
+        this.state.update(s => ({
+          ...s,
+          products: s.products.map(p => p.id === productId ? new InventoryItem(updated) : p),
+          saving: false
+        }));
+      },
+      error: () => {
+        this.state.update(s => ({
+          ...s,
+          error: 'Failed to update product.',
+          saving: false
+        }));
+      }
+    });
+  }
+
   deleteZone(zoneId: string) {
     this.state.update(s => ({ ...s, saving: true }));
     this.http.delete(`${API}/storeLayoutZones/${zoneId}`).pipe(
