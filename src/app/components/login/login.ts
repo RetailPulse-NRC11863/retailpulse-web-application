@@ -27,7 +27,7 @@ export class LoginComponent {
   handleLogin(event: Event) {
     event.preventDefault();
 
-    const url = `http://localhost:3000/users?email=${this.email}&password=${this.password}`;
+    const url = `${environment.apiUrl}/users?email=${this.email}&password=${this.password}`;
 
     this.http.get<any[]>(url).subscribe({
       next: (users) => {

@@ -27,11 +27,11 @@ export class RegisterComponent {
 
   finishRegister() {
     // 1. Guardar usuario
-    this.http.post('http://localhost:3000/users', this.userData).subscribe({
+    this.http.post(`${environment.apiUrl}/users`, this.userData).subscribe({
       next: () => {
         // 2. Guardar tienda vinculada al correo del administrador
         const newStore = { ...this.storeData, ownerEmail: this.userData.email };
-        this.http.post('http://localhost:3000/stores', newStore).subscribe(() => {
+        this.http.post(`${environment.apiUrl}/stores`, newStore).subscribe(() => {
           alert('¡Suscripción y tienda configuradas con éxito!');
           this.router.navigate(['/login']);
         });
