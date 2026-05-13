@@ -302,6 +302,10 @@
         "Simple promotions",
         "Basic alerts"
       ],
+      "capabilities": {
+        "heatmap": false,
+        "conversion": false
+      },
       "recommended": false
     },
     {
@@ -319,6 +323,10 @@
         "Operational alerts for staff",
         "Basic conversion reports"
       ],
+      "capabilities": {
+        "heatmap": true,
+        "conversion": true
+      },
       "recommended": true
     },
     {
@@ -336,6 +344,10 @@
         "Multiple user roles",
         "Priority support"
       ],
+      "capabilities": {
+        "heatmap": true,
+        "conversion": true
+      },
       "recommended": false
     }
   ],
