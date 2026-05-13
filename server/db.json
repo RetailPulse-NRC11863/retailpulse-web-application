@@ -293,38 +293,15 @@
       "name": "Starter",
       "price": 99,
       "currency": "USD",
-      "description": "For single-store teams starting with digital operations and a basic in-store kiosk.",
-      "descriptionI18n": {
-        "en": "For single-store teams starting with digital operations and a basic in-store kiosk.",
-        "es": "Para equipos de una sola tienda que inician con operaciones digitales y un quiosco básico en tienda."
-      },
+      "description": "Ideal for small stores looking to start digitalizing the shopping experience.",
       "features": [
-        "1 store / 3 zones monitored",
-        "In‑store Kiosk (search, stock, location, promotions)",
-        "Inventory essentials (catalog, stock alerts)",
-        "Operational alerts for staff",
-        "Email support (48h)"
+        "1 store",
+        "Basic product catalog",
+        "Product search on kiosk",
+        "Stock and location queries",
+        "Simple promotions",
+        "Basic alerts"
       ],
-      "featuresI18n": {
-        "en": [
-          "1 store / 3 zones monitored",
-          "In‑store Kiosk (search, stock, location, promotions)",
-          "Inventory essentials (catalog, stock alerts)",
-          "Operational alerts for staff",
-          "Email support (48h)"
-        ],
-        "es": [
-          "1 tienda / 3 zonas monitoreadas",
-          "Quiosco en tienda (búsqueda, stock, ubicación, promociones)",
-          "Inventario esencial (catálogo, alertas de stock)",
-          "Alertas operativas para el personal",
-          "Soporte por email (48h)"
-        ]
-      },
-      "capabilities": {
-        "heatmap": false,
-        "conversion": false
-      },
       "recommended": false
     },
     {
@@ -332,44 +309,16 @@
       "name": "Growth",
       "price": 199,
       "currency": "USD",
-      "description": "For growing stores that need analytics: heatmaps, conversion insights, and zone KPIs.",
-      "descriptionI18n": {
-        "en": "For growing stores that need analytics: heatmaps, conversion insights, and zone KPIs.",
-        "es": "Para tiendas en crecimiento que necesitan analítica: mapas de calor, insights de conversión y KPIs por zona."
-      },
+      "description": "Designed for growing stores needing operational analytics and better floor control.",
       "features": [
-        "Up to 3 stores / 10 zones monitored",
+        "Up to 3 stores",
         "Everything in Starter",
-        "Traffic analytics dashboard",
-        "Heatmaps (zones + dwell time)",
-        "Conversion reports by zone",
-        "Operational tasks & alerts automation",
-        "Priority email support (24h)"
+        "Metrics dashboard",
+        "Simple heatmap",
+        "Zone metrics",
+        "Operational alerts for staff",
+        "Basic conversion reports"
       ],
-      "featuresI18n": {
-        "en": [
-          "Up to 3 stores / 10 zones monitored",
-          "Everything in Starter",
-          "Traffic analytics dashboard",
-          "Heatmaps (zones + dwell time)",
-          "Conversion reports by zone",
-          "Operational tasks & alerts automation",
-          "Priority email support (24h)"
-        ],
-        "es": [
-          "Hasta 3 tiendas / 10 zonas monitoreadas",
-          "Todo lo de Starter",
-          "Dashboard de analítica de tráfico",
-          "Mapas de calor (zonas + tiempo de permanencia)",
-          "Reportes de conversión por zona",
-          "Automatización de tareas y alertas operativas",
-          "Soporte prioritario por email (24h)"
-        ]
-      },
-      "capabilities": {
-        "heatmap": true,
-        "conversion": true
-      },
       "recommended": true
     },
     {
@@ -377,44 +326,16 @@
       "name": "Premium",
       "price": 349,
       "currency": "USD",
-      "description": "For advanced teams that want full analytics plus optimization suggestions and deeper insights.",
-      "descriptionI18n": {
-        "en": "For advanced teams that want full analytics plus optimization suggestions and deeper insights.",
-        "es": "Para equipos avanzados que quieren analítica completa más sugerencias de optimización e insights más profundos."
-      },
+      "description": "Designed for larger operations seeking advanced data-driven optimization.",
       "features": [
-        "Unlimited stores / unlimited zones",
+        "Unlimited stores",
         "Everything in Growth",
-        "Optimization recommendations (layout + promos)",
-        "High‑interaction / low‑conversion detection",
-        "Advanced reporting exports",
-        "Multiple user roles & permissions",
-        "Priority support + onboarding"
+        "Automatic recommendations",
+        "High interaction / low conversion products",
+        "Advanced reports",
+        "Multiple user roles",
+        "Priority support"
       ],
-      "featuresI18n": {
-        "en": [
-          "Unlimited stores / unlimited zones",
-          "Everything in Growth",
-          "Optimization recommendations (layout + promos)",
-          "High‑interaction / low‑conversion detection",
-          "Advanced reporting exports",
-          "Multiple user roles & permissions",
-          "Priority support + onboarding"
-        ],
-        "es": [
-          "Tiendas ilimitadas / zonas ilimitadas",
-          "Todo lo de Growth",
-          "Recomendaciones de optimización (layout + promos)",
-          "Detección de alta interacción / baja conversión",
-          "Exportación de reportes avanzados",
-          "Múltiples roles de usuario y permisos",
-          "Soporte prioritario + onboarding"
-        ]
-      },
-      "capabilities": {
-        "heatmap": true,
-        "conversion": true
-      },
       "recommended": false
     }
   ],
@@ -598,6 +519,31 @@
       "conversionRate": 0,
       "intensity": 0,
       "attentionRequired": false
+    }
+  ],
+  "users": [
+    {
+      "email": "admin@retailpulse.com",
+      "password": "admin",
+      "role": "ADMIN",
+      "name": "Jesús Andrés",
+      "planId": "PLAN_PREMIUM"
+    },
+    {
+      "email": "staff@retailpulse.com",
+      "password": "staff",
+      "role": "STAFF",
+      "name": "Personal de Tienda"
+    }
+  ],
+  "stores": [
+    {
+      "name": "RetailPulse Demo Store",
+      "ruc": "20123456789",
+      "category": "Tecnología",
+      "address": "Av. Monterrico 123, Lima",
+      "hours": "9:00 AM - 10:00 PM",
+      "ownerEmail": "admin@retailpulse.com"
     }
   ]
 }
