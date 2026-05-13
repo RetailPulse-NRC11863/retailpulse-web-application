@@ -4,6 +4,7 @@ import { forkJoin, of } from 'rxjs';
 import { catchError, switchMap } from 'rxjs/operators';
 import { TrafficZone } from '../../../traffic-analytics/domain/model/traffic-zone.entity';
 import { InventoryItem } from '../../../inventory-intelligence/domain/model/inventory-item.entity';
+import { environment } from '../../../../environments/environment';
 
 export interface StoreInfo {
   id: string;
@@ -22,7 +23,7 @@ export interface StoreConfigurationState {
   error: string | null;
 }
 
-const API = 'http://localhost:3000/api/v1';
+const API = `${environment.apiUrl}`;
 
 @Injectable({ providedIn: 'root' })
 export class StoreConfigurationStore {

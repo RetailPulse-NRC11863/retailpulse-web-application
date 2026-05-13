@@ -6,6 +6,7 @@ import {AssistedProduct} from '../../domain/model/assisted-product';
 import {ProductSearchResultResource} from '../resources/product-search-result-resource';
 import {ProductSearchResultResponse} from '../responses/product-search-result-response';
 import {ProductSearchResultAssembler} from '../assemblers/product-search-result-assembler';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AssistedShoppingApiService extends BaseApiEndpoint<
   ProductSearchResultAssembler
 > {
   constructor(http: HttpClient) {
-    super(http, 'http://localhost:3000/api/v1/products', new ProductSearchResultAssembler());
+    super(http, `${environment.apiUrl}/products`, new ProductSearchResultAssembler());
   }
 
   searchProducts(query: string): Observable<AssistedProduct[]> {

@@ -6,11 +6,12 @@ import { StoreZoneLayout } from '../../domain/model/zone.entity';
 import { StoreZoneLayoutResource } from '../resources/store-zone-layout-resource';
 import { StoreZoneLayoutResponse } from '../responses/store-zone-layout-response';
 import { ZoneAssembler } from '../assemblers/zone-assembler';
+import { environment } from '../../../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class StoreZoneLayoutApiService extends BaseApiEndpoint<StoreZoneLayout, StoreZoneLayoutResource, StoreZoneLayoutResponse, ZoneAssembler> {
   constructor(http: HttpClient) {
-    super(http, 'http://localhost:3000/api/v1/storeLayoutZones', new ZoneAssembler());
+    super(http, `${environment.apiUrl}/storeLayoutZones`, new ZoneAssembler());
   }
 }
 

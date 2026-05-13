@@ -5,6 +5,7 @@ import { OperationalAlert } from '../../domain/model/operational-alert.entity';
 import { OperationalAlertResource } from '../resources/operational-alert-resource';
 import { OperationalAlertResponse } from '../responses/operational-alert-response';
 import { OperationalAlertAssembler } from '../assemblers/operational-alert-assembler';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,6 @@ export class OperationalAlertsApiService extends BaseApiEndpoint<
   OperationalAlertAssembler
 > {
   constructor(http: HttpClient) {
-    super(http, 'http://localhost:3000/api/v1/alerts', new OperationalAlertAssembler());
+    super(http, `${environment.apiUrl}/alerts`, new OperationalAlertAssembler());
   }
 }

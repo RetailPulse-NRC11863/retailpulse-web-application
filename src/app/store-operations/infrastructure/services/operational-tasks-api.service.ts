@@ -6,6 +6,7 @@ import { OperationalTaskResource } from '../resources/operational-task-resource'
 import { OperationalTaskResponse } from '../responses/operational-task-response';
 import { OperationalTaskAssembler } from '../assemblers/operational-task-assembler';
 import { Observable, map, catchError } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class OperationalTasksApiService extends BaseApiEndpoint<
   OperationalTaskAssembler
 > {
   constructor(http: HttpClient) {
-    super(http, 'http://localhost:3000/api/v1/operationalTasks', new OperationalTaskAssembler());
+    super(http, `${environment.apiUrl}/operationalTasks`, new OperationalTaskAssembler());
   }
 
   /**
