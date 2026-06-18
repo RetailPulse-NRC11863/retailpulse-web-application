@@ -10,16 +10,18 @@ export class SaaSAccount implements BaseEntity {
 
   constructor(data: {
     id: string;
-    storeName: string;
+    storeName?: string;
+    storeId?: string | number;
+    ownerEmail?: string;
     planId: string;
     status: string;
-    renewalDate: string | Date;
+    renewalDate?: string | Date;
   }) {
-    this.id = data.id;
-    this.storeName = data.storeName;
-    this.planId = data.planId;
+    this.id = String(data.id);
+    this.storeName = data.storeName ?? data.ownerEmail ?? `Store ${data.storeId ?? ''}`.trim();
+    this.planId = String(data.planId);
     this.status = data.status as SubscriptionStatus;
-    this.renewalDate = new Date(data.renewalDate);
+    this.renewalDate = data.renewalDate ? new Date(data.renewalDate) : new Date();
   }
 
   isActive(): boolean {

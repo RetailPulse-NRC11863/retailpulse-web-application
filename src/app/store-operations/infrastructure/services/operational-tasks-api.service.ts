@@ -18,14 +18,14 @@ export class OperationalTasksApiService extends BaseApiEndpoint<
   OperationalTaskAssembler
 > {
   constructor(http: HttpClient) {
-    super(http, `${environment.apiUrl}/operationalTasks`, new OperationalTaskAssembler());
+    super(http, `${environment.apiUrl}/operational-tasks`, new OperationalTaskAssembler());
   }
 
   /**
    * Updates the visual status of an operational task.
    */
   updateTaskStatus(taskId: string, status: string): Observable<OperationalTask> {
-    return this.http.patch<OperationalTaskResource>(`${this.endpointUrl}/${taskId}`, { status }).pipe(
+    return this.http.patch<OperationalTaskResource>(`${this.endpointUrl}/${taskId}/status`, { status }).pipe(
       map(updated => this.assembler.toEntityFromResource(updated)),
       catchError(this.handleError('Failed to update task status'))
     );

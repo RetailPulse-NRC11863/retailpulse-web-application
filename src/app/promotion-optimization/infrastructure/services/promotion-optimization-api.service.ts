@@ -14,24 +14,24 @@ export class PromotionOptimizationApiService {
   private http = inject(HttpClient);
 
   getConversionGaps(): Observable<ConversionGap[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/conversionMetrics`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/traffic/congestion`).pipe(
       map(data => data.map(item => new ConversionGap(item)))
     );
   }
 
   getProductPerformance(): Observable<ProductPerformance[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/productPerformance`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/product-performance`).pipe(
       map(data => data.map(item => new ProductPerformance(item)))
     );
   }
 
   getRecommendations(): Observable<PromotionRecommendation[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/recommendations`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/promotion-recommendations`).pipe(
       map(data => data.map(item => new PromotionRecommendation(item)))
     );
   }
 
   applyRecommendation(id: string): Observable<void> {
-    return this.http.patch<void>(`${environment.apiUrl}/recommendations/${id}`, { status: 'APPLIED' });
+    return this.http.post<void>(`${environment.apiUrl}/promotion-recommendations/${id}/apply`, {});
   }
 }

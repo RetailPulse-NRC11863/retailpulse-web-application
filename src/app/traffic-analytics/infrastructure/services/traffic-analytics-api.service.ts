@@ -14,19 +14,19 @@ export class TrafficAnalyticsApiService {
   private http = inject(HttpClient);
 
   getHeatmapMetrics(): Observable<HeatmapMetric[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/heatmapMetrics`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/heatmap-metrics`).pipe(
       map(data => data.map(item => new HeatmapMetric(item)))
     );
   }
 
   getZoneMetrics(): Observable<ZoneMetric[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/zoneMetrics`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/traffic/zones/metrics`).pipe(
       map(data => data.map(item => new ZoneMetric(item)))
     );
   }
 
   getTrafficZones(): Observable<TrafficZone[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/storeLayoutZones`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/zones`).pipe(
       map(data => data.map(item => new TrafficZone(item)))
     );
   }

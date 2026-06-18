@@ -13,27 +13,27 @@ export class SubscriptionPlan implements BaseEntity {
   recommended: boolean;
 
   constructor(data: {
-    id: string;
+    id: string | number;
     name: string;
     price: number;
-    currency: string;
+    currency?: string;
     description: string;
-    features: string[];
+    features?: string[];
     descriptionI18n?: Record<string, string>;
     featuresI18n?: Record<string, string[]>;
     capabilities?: Record<string, boolean>;
-    recommended: boolean;
+    recommended?: boolean;
   }) {
-    this.id = data.id;
+    this.id = String(data.id);
     this.name = data.name;
     this.price = data.price;
-    this.currency = data.currency;
+    this.currency = data.currency ?? 'USD';
     this.description = data.description;
-    this.features = data.features;
+    this.features = data.features ?? [data.description];
     this.descriptionI18n = data.descriptionI18n;
     this.featuresI18n = data.featuresI18n;
     this.capabilities = data.capabilities ?? {};
-    this.recommended = data.recommended;
+    this.recommended = data.recommended ?? data.name === 'GROWTH';
   }
 
   isFreeTier(): boolean {

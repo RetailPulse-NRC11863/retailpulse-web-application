@@ -11,7 +11,7 @@ import { environment } from '../../../../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class StoreZoneLayoutApiService extends BaseApiEndpoint<StoreZoneLayout, StoreZoneLayoutResource, StoreZoneLayoutResponse, ZoneAssembler> {
   constructor(http: HttpClient) {
-    super(http, `${environment.apiUrl}/storeLayoutZones`, new ZoneAssembler());
+    super(http, `${environment.apiUrl}/zones`, new ZoneAssembler());
   }
 }
 

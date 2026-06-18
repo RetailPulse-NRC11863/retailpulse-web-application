@@ -17,6 +17,6 @@ export class OperationalAlertsApiService extends BaseApiEndpoint<
   OperationalAlertAssembler
 > {
   constructor(http: HttpClient) {
-    super(http, `${environment.apiUrl}/alerts`, new OperationalAlertAssembler());
+    super(http, `${environment.apiUrl}/operational-alerts`, new OperationalAlertAssembler());
   }
 }

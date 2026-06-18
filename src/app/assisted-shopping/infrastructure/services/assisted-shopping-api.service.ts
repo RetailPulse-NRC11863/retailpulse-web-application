@@ -22,8 +22,8 @@ export class AssistedShoppingApiService extends BaseApiEndpoint<
   }
 
   searchProducts(query: string): Observable<AssistedProduct[]> {
-    const params = new HttpParams().set('q', query);
-    return this.http.get<ProductSearchResultResource[]>(this.endpointUrl, {params}).pipe(
+    const params = new HttpParams().set('query', query);
+    return this.http.get<ProductSearchResultResource[]>(`${this.endpointUrl}/search`, {params}).pipe(
       map(data => data.map(resource => this.assembler.toEntityFromResource(resource)))
     );
   }

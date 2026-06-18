@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://retailpulse-fake-api-production.up.railway.app/api/v1'
+  apiUrl: 'https://retailpulse-api-fabio-dgb7etencqega8g8.centralus-01.azurewebsites.net/api/v1'
 };

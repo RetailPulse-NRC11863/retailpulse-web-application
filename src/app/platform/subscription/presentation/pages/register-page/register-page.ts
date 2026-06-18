@@ -16,27 +16,26 @@ export class RegisterPageComponent {
   private http = inject(HttpClient);
   private router = inject(Router);
 
-  step: number = 1; // Ahora serán 4 pasos
+  step: number = 1;
 
-  // 1. Planes SaaS Definitivos
   availablePlans = [
     {
-      id: 'starter',
+      id: '1',
       name: 'Starter',
       price: 99,
-      features: ['Dashboard Básico', 'Alertas de Personal', 'Gestión de Quiosco'],
+      features: ['Dashboard Basico', 'Alertas de Personal', 'Gestion de Quiosco'],
     },
     {
-      id: 'growth',
+      id: '2',
       name: 'Growth',
       price: 199,
-      features: ['Todo lo de Starter', 'Reportes de Conversión', 'Soporte Prioritario'],
+      features: ['Todo lo de Starter', 'Reportes de Conversion', 'Soporte Prioritario'],
     },
     {
-      id: 'premium',
+      id: '3',
       name: 'Premium',
       price: 299,
-      features: ['Todo lo de Growth', 'Mapas de Calor (Heatmaps)', 'Analítica Predictiva'],
+      features: ['Todo lo de Growth', 'Mapas de Calor (Heatmaps)', 'Analitica Predictiva'],
     },
   ];
 
@@ -48,6 +47,7 @@ export class RegisterPageComponent {
   nextStep() {
     this.step++;
   }
+
   prevStep() {
     this.step--;
   }
@@ -55,19 +55,21 @@ export class RegisterPageComponent {
   selectPlan(plan: any) {
     this.selectedPlan = plan;
     this.userData.planId = plan.id;
-    this.nextStep(); // Pasa directo al pago
+    this.nextStep();
   }
 
   finishRegister() {
-    this.http.post('http://localhost:3000/users', this.userData).subscribe({
+    const newStore = { name: this.storeData.name, address: this.storeData.address };
+
+    this.http.post(`${environment.apiUrl}/stores`, newStore).subscribe({
       next: () => {
-        const newStore = { ...this.storeData, ownerEmail: this.userData.email };
-        this.http.post('http://localhost:3000/stores', newStore).subscribe(() => {
-          alert(`¡Suscripción ${this.selectedPlan.name} activada con éxito!`);
-          this.router.navigate(['/login']);
-        });
+        localStorage.setItem('userRole', this.userData.role);
+        localStorage.setItem('userName', this.userData.name);
+        localStorage.setItem('userPlan', this.userData.planId || '3');
+        alert(`Suscripcion ${this.selectedPlan.name} activada con exito.`);
+        this.router.navigate(['/app/admin/dashboard']);
       },
-      error: () => alert('Error: Asegúrate de que el JSON Server esté corriendo en el puerto 3000'),
+      error: () => alert('No se pudo crear la tienda en el backend.'),
     });
   }
 }

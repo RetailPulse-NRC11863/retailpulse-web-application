@@ -24,6 +24,8 @@ export interface StoreConfigurationState {
 }
 
 const API = `${environment.apiUrl}`;
+const ZONES_API = `${API}/zones`;
+const HEATMAP_METRICS_API = `${API}/heatmap-metrics`;
 
 @Injectable({ providedIn: 'root' })
 export class StoreConfigurationStore {
@@ -57,7 +59,7 @@ export class StoreConfigurationStore {
     this.state.update(s => ({ ...s, loading: true, error: null }));
 
     forkJoin({
-      zones:    this.http.get<any[]>(`${API}/storeLayoutZones`).pipe(catchError(() => of([]))),
+      zones:    this.http.get<any[]>(ZONES_API).pipe(catchError(() => of([]))),
       products: this.http.get<any[]>(`${API}/products`).pipe(catchError(() => of([])))
     }).subscribe({
       next: ({ zones, products }) => {
@@ -84,7 +86,7 @@ export class StoreConfigurationStore {
     const newId = 'Z' + Date.now();
     const newZone = new TrafficZone({ id: newId, ...zone } as any);
 
-    this.http.post<any>(`${API}/storeLayoutZones`, newZone).pipe(
+    this.http.post<any>(ZONES_API, newZone).pipe(
       switchMap(created => {
         const defaultMetric = {
           id: 'HM' + Date.now(),
@@ -95,7 +97,7 @@ export class StoreConfigurationStore {
           intensity: metricsData.intensity,
           attentionRequired: false
         };
-        return this.http.post(`${API}/heatmapMetrics`, defaultMetric).pipe(
+        return this.http.post(HEATMAP_METRICS_API, defaultMetric).pipe(
           catchError(() => of(null)),
           switchMap(() => of(new TrafficZone(created)))
         );
@@ -176,7 +178,7 @@ export class StoreConfigurationStore {
   saveZoneLayout(zones: TrafficZone[]) {
     this.state.update(s => ({ ...s, saving: true }));
     const patches$ = zones.map(z =>
-      this.http.patch(`${API}/storeLayoutZones/${z.id}`, { x: z.x, y: z.y, width: z.width, height: z.height }).pipe(catchError(() => of(null)))
+      this.http.put(`${ZONES_API}/${z.id}`, z).pipe(catchError(() => of(null)))
     );
     forkJoin(patches$).subscribe({
       next: () => this.state.update(s => ({ ...s, saving: false })),
@@ -190,13 +192,16 @@ export class StoreConfigurationStore {
     metricsData?: { traffic: number; averageDwellTimeSeconds: number; conversionRate: number; intensity: number }
   ) {
     this.state.update(s => ({ ...s, saving: true }));
-    this.http.patch<any>(`${API}/storeLayoutZones/${zoneId}`, zoneUpdates).pipe(
+    const existingZone = this.state().zones.find(z => z.id === zoneId);
+    const zonePayload = { ...existingZone, ...zoneUpdates, id: zoneId };
+
+    this.http.put<any>(`${ZONES_API}/${zoneId}`, zonePayload).pipe(
       switchMap(updated => {
         if (metricsData) {
-          return this.http.get<any[]>(`${API}/heatmapMetrics?zoneId=${zoneId}`).pipe(
+          return this.http.get<any[]>(`${HEATMAP_METRICS_API}/by-zone/${zoneId}`).pipe(
             switchMap(metrics => {
               if (metrics.length > 0) {
-                return this.http.patch(`${API}/heatmapMetrics/${metrics[0].id}`, metricsData).pipe(
+                return this.http.put(`${HEATMAP_METRICS_API}/${metrics[0].id}`, { ...metrics[0], ...metricsData }).pipe(
                   catchError(() => of(null)),
                   switchMap(() => of(updated))
                 );
@@ -251,12 +256,12 @@ export class StoreConfigurationStore {
 
   deleteZone(zoneId: string) {
     this.state.update(s => ({ ...s, saving: true }));
-    this.http.delete(`${API}/storeLayoutZones/${zoneId}`).pipe(
+    this.http.delete(`${ZONES_API}/${zoneId}`).pipe(
       switchMap(() =>
-        this.http.get<any[]>(`${API}/heatmapMetrics?zoneId=${zoneId}`).pipe(
+        this.http.get<any[]>(`${HEATMAP_METRICS_API}/by-zone/${zoneId}`).pipe(
           switchMap(metrics => {
             if (metrics.length > 0) {
-              return this.http.delete(`${API}/heatmapMetrics/${metrics[0].id}`).pipe(catchError(() => of(null)));
+              return this.http.delete(`${HEATMAP_METRICS_API}/${metrics[0].id}`).pipe(catchError(() => of(null)));
             }
             return of(null);
           }),

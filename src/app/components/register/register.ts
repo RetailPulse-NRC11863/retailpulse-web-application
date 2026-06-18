@@ -26,17 +26,17 @@ export class RegisterComponent {
   }
 
   finishRegister() {
-    // 1. Guardar usuario
-    this.http.post(`${environment.apiUrl}/users`, this.userData).subscribe({
+    const newStore = { name: this.storeData.name, address: this.storeData.address };
+
+    this.http.post(`${environment.apiUrl}/stores`, newStore).subscribe({
       next: () => {
-        // 2. Guardar tienda vinculada al correo del administrador
-        const newStore = { ...this.storeData, ownerEmail: this.userData.email };
-        this.http.post(`${environment.apiUrl}/stores`, newStore).subscribe(() => {
-          alert('¡Suscripción y tienda configuradas con éxito!');
-          this.router.navigate(['/login']);
-        });
+        localStorage.setItem('userRole', this.userData.role);
+        localStorage.setItem('userName', this.userData.name);
+        localStorage.setItem('userPlan', '3');
+        alert('Suscripcion y tienda configuradas con exito.');
+        this.router.navigate(['/app/admin/dashboard']);
       },
-      error: () => alert('Asegúrate de que el JSON Server esté corriendo en el puerto 3000')
+      error: () => alert('No se pudo crear la tienda en el backend.')
     });
   }
 }
