@@ -32,7 +32,7 @@ export class SubscriptionPlan implements BaseEntity {
     this.features = data.features ?? [data.description];
     this.descriptionI18n = data.descriptionI18n;
     this.featuresI18n = data.featuresI18n;
-    this.capabilities = data.capabilities ?? {};
+    this.capabilities = data.capabilities ?? this.defaultCapabilitiesFor(data.name);
     this.recommended = data.recommended ?? data.name === 'GROWTH';
   }
 
@@ -50,5 +50,17 @@ export class SubscriptionPlan implements BaseEntity {
 
   getFeatures(lang: string): string[] {
     return this.featuresI18n?.[lang] ?? this.features;
+  }
+
+  private defaultCapabilitiesFor(planName: string): Record<string, boolean> {
+    const normalizedName = planName.toUpperCase();
+
+    return {
+      dashboard: true,
+      alerts: true,
+      kiosk: true,
+      conversion: normalizedName === 'GROWTH' || normalizedName === 'PREMIUM',
+      heatmap: normalizedName === 'PREMIUM'
+    };
   }
 }
