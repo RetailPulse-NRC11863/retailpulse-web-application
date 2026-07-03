@@ -31,10 +31,13 @@ export class ZoneMetricTooltipComponent {
   getZoneIcon(type: string): any {
     const icons: Record<string, any> = {
       ACCESS:   DoorClosed,
+      ENTRANCE: DoorClosed,
       CHECKOUT: CreditCard,
       AISLE:    ShoppingCart,
       SECTION:  Package,
+      STORAGE:  Package,
       PROMO:    Star,
+      DISPLAY:  Star,
     };
     return icons[type] ?? MapPin;
   }
@@ -78,7 +81,7 @@ export class ZoneMetricTooltipComponent {
     if (detail.zone.type === 'CHECKOUT') {
       return 'Operational checkout zone. Optimize wait times and impulse products.';
     }
-    if (detail.zone.type === 'ACCESS') {
+    if (detail.zone.type === 'ACCESS' || detail.zone.type === 'ENTRANCE') {
       return 'Main entry point. Ensure visibility of promotions and customer welcome.';
     }
     return 'Performance within normal parameters. Continue regular monitoring.';

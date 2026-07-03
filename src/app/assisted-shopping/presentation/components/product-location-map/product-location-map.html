@@ -1,0 +1,43 @@
+<div class="location-map">
+  <svg [attr.viewBox]="viewBox" role="img" preserveAspectRatio="xMidYMid meet">
+    <rect [attr.x]="floorX" [attr.y]="floorY" [attr.width]="floorWidth" [attr.height]="floorHeight" rx="12" class="floor" />
+    <g class="grid">
+      <line *ngFor="let x of verticalGridLines()"
+            [attr.x1]="x" [attr.y1]="floorY" [attr.x2]="x" [attr.y2]="floorY + floorHeight" />
+      <line *ngFor="let y of horizontalGridLines()"
+            [attr.x1]="floorX" [attr.y1]="y" [attr.x2]="floorX + floorWidth" [attr.y2]="y" />
+    </g>
+    <g class="shelves">
+      <line *ngFor="let y of shelfLines()" [attr.x1]="floorX + 25" [attr.y1]="y" [attr.x2]="floorX + floorWidth - 25" [attr.y2]="y" />
+    </g>
+    <g *ngFor="let zone of displayZones()">
+      <rect
+        [attr.x]="zone.x"
+        [attr.y]="zone.y"
+        [attr.width]="zone.width"
+        [attr.height]="zone.height"
+        rx="10"
+        [class.layout-zone]="!isTargetZone(zone)"
+        [class.target-zone]="isTargetZone(zone)"
+        [class.entrance-zone]="isEntrance(zone) && !isTargetZone(zone)" />
+      <text
+        [attr.x]="zone.x + zone.width / 2"
+        [attr.y]="zone.y + zone.height / 2 + 5"
+        text-anchor="middle"
+        [class.layout-label]="!isTargetZone(zone)"
+        [class.target-label]="isTargetZone(zone)">
+        {{ zone.name }}
+      </text>
+      <text
+        *ngIf="isEntrance(zone)"
+        [attr.x]="zone.x + zone.width / 2"
+        [attr.y]="zone.y - 8"
+        text-anchor="middle"
+        class="start-label">
+        START
+      </text>
+    </g>
+    <circle [attr.cx]="markerX" [attr.cy]="markerY" r="18" class="marker-pulse" />
+    <circle [attr.cx]="markerX" [attr.cy]="markerY" r="8" class="marker-dot" />
+  </svg>
+</div>

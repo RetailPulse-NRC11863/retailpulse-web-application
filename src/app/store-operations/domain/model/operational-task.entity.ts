@@ -9,6 +9,10 @@ export class OperationalTask implements BaseEntity {
   zoneId: string;
   zoneName: string;
   alertId: string;
+  productId: string;
+  productName: string;
+  source: string;
+  triggerReason: string;
   createdAt: Date;
 
   constructor(data: {
@@ -20,6 +24,10 @@ export class OperationalTask implements BaseEntity {
     zoneId: string;
     zoneName: string;
     alertId: string;
+    productId?: string;
+    productName?: string;
+    source?: string;
+    triggerReason?: string;
     createdAt: Date | string;
   }) {
     this.id = data.id;
@@ -30,11 +38,15 @@ export class OperationalTask implements BaseEntity {
     this.zoneId = data.zoneId;
     this.zoneName = data.zoneName;
     this.alertId = data.alertId;
-    this.createdAt = new Date(data.createdAt);
+    this.productId = data.productId || '';
+    this.productName = data.productName || '';
+    this.source = data.source || 'SYSTEM';
+    this.triggerReason = data.triggerReason || data.description;
+    this.createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
   }
 
   markAsCompleted(): void {
-    this.status = 'RESOLVED';
+    this.status = 'COMPLETED';
   }
 
   isPending(): boolean {

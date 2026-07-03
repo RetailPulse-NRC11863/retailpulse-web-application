@@ -8,7 +8,7 @@
       S/ {{ product.price | number:'1.2-2' }}
     </div>
   </div>
-  
+
   <div class="product-body">
     <div class="location-info">
       <div class="info-row">
@@ -31,7 +31,36 @@
           {{ product.stock > 0 ? product.stock + ' ' + ('kiosk.inStock' | translate) : ('kiosk.outOfStock' | translate) }}
         </span>
       </div>
+      <div *ngIf="product.isLowStock()" class="stock-note">
+        {{ 'kiosk.limitedStock' | translate }}
+      </div>
       <app-promotion-card *ngIf="product.promotion" [promotion]="product.promotion"></app-promotion-card>
     </div>
+  </div>
+
+  <section *ngIf="showLocationMap" class="map-section" aria-label="Store layout with product zone highlighted">
+    <div class="map-section-header">
+      <lucide-icon [img]="MapPin" [size]="18" class="icon-primary"></lucide-icon>
+      <div>
+        <h4>{{ 'kiosk.storeLayout' | translate }}</h4>
+        <p>{{ 'kiosk.highlightedZone' | translate }}: {{ product.zoneName | dbTranslate }}</p>
+      </div>
+    </div>
+    <app-product-location-map [product]="product"></app-product-location-map>
+  </section>
+
+  <div class="product-actions">
+    <button type="button" class="action-button secondary" [disabled]="loadingAction" (click)="toggleLocationMap()">
+      <lucide-icon [img]="MapPin" [size]="18"></lucide-icon>
+      {{ showLocationMap ? ('kiosk.hideLocation' | translate) : ('kiosk.viewLocation' | translate) }}
+    </button>
+    <button type="button" class="action-button success" [disabled]="loadingAction || !product.isAvailable()" (click)="found.emit(product)">
+      <lucide-icon [img]="Check" [size]="18"></lucide-icon>
+      {{ 'kiosk.foundIt' | translate }}
+    </button>
+    <button type="button" class="action-button warning" [disabled]="loadingAction" (click)="helpRequested.emit(product)">
+      <lucide-icon [img]="HandHelping" [size]="18"></lucide-icon>
+      {{ 'kiosk.needHelp' | translate }}
+    </button>
   </div>
 </div>

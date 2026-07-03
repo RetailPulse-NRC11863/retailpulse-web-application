@@ -11,10 +11,14 @@ export class OperationalTaskAssembler implements BaseAssembler<OperationalTask, 
       description: resource.description,
       priority: resource.priority,
       status: resource.status,
-      zoneId: resource.zoneId,
-      zoneName: resource.zoneName,
-      alertId: resource.alertId,
-      createdAt: resource.createdAt
+      zoneId: resource.zoneId || '',
+      zoneName: resource.zoneName || (resource.zoneId ? `Zone ${resource.zoneId}` : 'Store floor'),
+      alertId: resource.alertId || '',
+      productId: resource.productId,
+      productName: resource.productName || (resource.productId ? `Product ${resource.productId}` : ''),
+      source: resource.source,
+      triggerReason: resource.triggerReason,
+      createdAt: resource.createdAt || new Date().toISOString()
     });
   }
 
@@ -28,6 +32,10 @@ export class OperationalTaskAssembler implements BaseAssembler<OperationalTask, 
       zoneId: entity.zoneId,
       zoneName: entity.zoneName,
       alertId: entity.alertId,
+      productId: entity.productId,
+      productName: entity.productName,
+      source: entity.source,
+      triggerReason: entity.triggerReason,
       createdAt: entity.createdAt.toISOString()
     };
   }

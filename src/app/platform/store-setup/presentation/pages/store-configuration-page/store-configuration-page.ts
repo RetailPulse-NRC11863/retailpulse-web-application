@@ -1,7 +1,7 @@
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { StoreConfigurationStore } from '../../../application/store-configuration-store.service';
+import { StoreConfigurationStore, type StoreInfo } from '../../../application/store-configuration-store.service';
 import { TrafficZone } from '../../../../../traffic-analytics/domain/model/traffic-zone.entity';
 import { InventoryItem } from '../../../../../inventory-intelligence/domain/model/inventory-item.entity';
 import { ProductCardComponent } from '../../components/product-card/product-card';
@@ -24,14 +24,14 @@ import {
 } from 'lucide-angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-type ZoneType = 'ACCESS' | 'CHECKOUT' | 'AISLE' | 'SECTION' | 'PROMO';
+type ZoneType = 'ENTRANCE' | 'CHECKOUT' | 'AISLE' | 'DISPLAY' | 'STORAGE';
 
 const ZONE_DEFAULTS: Record<ZoneType, { width: number; height: number }> = {
-  ACCESS:   { width: 180, height: 80 },
+  ENTRANCE: { width: 180, height: 80 },
   CHECKOUT: { width: 160, height: 80 },
   AISLE:    { width: 280, height: 100 },
-  SECTION:  { width: 280, height: 100 },
-  PROMO:    { width: 460, height: 80 }
+  DISPLAY:  { width: 460, height: 80 },
+  STORAGE:  { width: 220, height: 90 }
 };
 
 const CANVAS_WIDTH = 920;
@@ -65,20 +65,21 @@ export class StoreConfigurationPageComponent implements OnInit {
   readonly PencilIcon  = Pencil;
 
   readonly zoneIcons: Record<string, any> = {
-    ACCESS:   DoorClosed,
+    ENTRANCE: DoorClosed,
     CHECKOUT: CreditCard,
     AISLE:    ShoppingCart,
-    SECTION:  Package,
-    PROMO:    Star,
+    DISPLAY:  Star,
+    STORAGE:  Package,
   };
   readonly defaultZoneIcon = MapPin;
 
-  readonly zoneTypes: ZoneType[] = ['ACCESS', 'CHECKOUT', 'AISLE', 'SECTION', 'PROMO'];
+  readonly zoneTypes: ZoneType[] = ['ENTRANCE', 'CHECKOUT', 'AISLE', 'DISPLAY', 'STORAGE'];
 
   // --- UI state signals ---
   showAddForm        = signal(false);
   showAddProductForm = signal(false);
   editMode           = signal(false);
+  editingStoreInfo   = signal(false);
   confirmDelete      = signal<string | null>(null);
   confirmDeleteProduct = signal<string | null>(null);
 
@@ -87,6 +88,12 @@ export class StoreConfigurationPageComponent implements OnInit {
 
   // Edit product
   editingProductId = signal<string | null>(null);
+
+  // --- Add Zone form fields ---
+  editStoreName = '';
+  editStoreLocation = '';
+  editStoreManager = '';
+  editStoreStatus = 'ACTIVE';
 
   // --- Add Zone form fields ---
   newZoneName = '';
@@ -132,10 +139,40 @@ export class StoreConfigurationPageComponent implements OnInit {
 
   getZoneTypeLabel(type: string): string {
     const labels: Record<string, string> = {
-      ACCESS: 'Entrance/Exit', CHECKOUT: 'Checkout',
-      AISLE: 'Aisle', SECTION: 'Product Section', PROMO: 'Promotional'
+      ENTRANCE: 'Entrance/Exit', CHECKOUT: 'Checkout',
+      AISLE: 'Aisle', DISPLAY: 'Promotional Display', STORAGE: 'Storage'
     };
     return labels[type] ?? type;
+  }
+
+  startEditStoreInfo() {
+    const info = this.store.storeInfo();
+    if (!info) return;
+    this.editStoreName = info.name;
+    this.editStoreLocation = info.location;
+    this.editStoreManager = info.manager;
+    this.editStoreStatus = info.status || 'ACTIVE';
+    this.editingStoreInfo.set(true);
+  }
+
+  cancelEditStoreInfo() {
+    this.editingStoreInfo.set(false);
+  }
+
+  submitStoreInfo() {
+    const current = this.store.storeInfo();
+    if (!current || !this.editStoreName.trim() || !this.editStoreLocation.trim()) return;
+
+    const updated: StoreInfo = {
+      id: current.id,
+      name: this.editStoreName.trim(),
+      location: this.editStoreLocation.trim(),
+      manager: this.editStoreManager.trim() || 'Unassigned',
+      status: this.editStoreStatus || 'ACTIVE'
+    };
+
+    this.store.updateStoreInfo(updated);
+    this.editingStoreInfo.set(false);
   }
 
   // --- Auto-position logic ---

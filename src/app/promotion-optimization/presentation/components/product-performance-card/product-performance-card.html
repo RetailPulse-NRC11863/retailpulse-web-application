@@ -5,7 +5,8 @@
     </div>
     <div class="product-info">
       <h4 class="product-name">{{ product.productName }}</h4>
-      <span class="product-id">{{ product.productId }}</span>
+      <span class="product-id">{{ product.zoneName }} · {{ product.stockStatus }}</span>
+      <span class="reason">{{ product.reason }}</span>
     </div>
   </div>
 
@@ -18,6 +19,10 @@
       <div class="metric">
         <span class="label">Sales</span>
         <span class="value">{{ product.sales | number }}</span>
+      </div>
+      <div class="metric">
+        <span class="label">Stock</span>
+        <span class="value">{{ product.stock | number }}</span>
       </div>
     </div>
     

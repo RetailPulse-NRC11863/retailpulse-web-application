@@ -96,6 +96,11 @@
   border: 1px solid var(--rp-color-border);
 }
 
+.badge.status {
+  background-color: rgba(var(--rp-color-primary-rgb), 0.1);
+  color: var(--rp-color-primary);
+}
+
 .description {
   margin: 0;
   font-size: 0.875rem;
@@ -113,4 +118,15 @@
 .date {
   font-size: 0.75rem;
   color: var(--rp-color-text-secondary);
+}
+
+.apply-button {
+  align-self: flex-start;
+  border: none;
+  border-radius: var(--rp-border-radius-sm);
+  background: var(--rp-color-primary);
+  color: var(--rp-color-white);
+  padding: 0.55rem 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
 }

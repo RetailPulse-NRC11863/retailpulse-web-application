@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 import { environment } from '../../../../../../environments/environment';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-register-page',
@@ -61,10 +62,17 @@ export class RegisterPageComponent {
   finishRegister() {
     const newStore = { name: this.storeData.name, address: this.storeData.address };
 
-    this.http.post(`${environment.apiUrl}/stores`, newStore).subscribe({
+    this.http.post<any>(`${environment.apiUrl}/stores`, newStore).pipe(
+      switchMap(store => this.http.post(`${environment.apiUrl}/subscription/accounts`, {
+        storeId: store.id,
+        ownerEmail: this.userData.email,
+        planId: Number(this.userData.planId || '3')
+      }))
+    ).subscribe({
       next: () => {
         localStorage.setItem('userRole', this.userData.role);
         localStorage.setItem('userName', this.userData.name);
+        localStorage.setItem('userEmail', this.userData.email);
         localStorage.setItem('userPlan', this.userData.planId || '3');
         alert(`Suscripcion ${this.selectedPlan.name} activada con exito.`);
         this.router.navigate(['/app/admin/dashboard']);

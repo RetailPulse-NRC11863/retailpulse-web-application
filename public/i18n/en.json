@@ -16,7 +16,8 @@
     "promotion": "Promotion",
     "status": "Status",
     "priority": "Priority",
-    "actions": "Actions"
+    "actions": "Actions",
+    "product": "Product"
   },
   "access": {
     "eyebrow": "RetailPulse Web Application",
@@ -56,7 +57,14 @@
     "outOfStock": "Out of stock",
     "inStock": "In stock",
     "aisle": "Aisle",
-    "shelf": "Shelf"
+    "shelf": "Shelf",
+    "limitedStock": "Limited stock",
+    "storeLayout": "Store layout",
+    "highlightedZone": "Highlighted zone",
+    "viewLocation": "View location",
+    "hideLocation": "Hide location",
+    "foundIt": "Found it",
+    "needHelp": "Need help"
   },
   "staff": {
     "title": "Operational Panel",
@@ -65,7 +73,8 @@
     "pendingTasks": "Pending tasks",
     "noActiveAlerts": "No active alerts",
     "noPendingTasks": "No pending tasks",
-    "markAsCompleted": "Mark as completed"
+    "markAsCompleted": "Mark as completed",
+    "markAsAttended": "Mark as attended"
   },
   "admin": {
     "dashboardTitle": "Administrator Dashboard",
@@ -187,6 +196,46 @@
     "Shelf B1": "Shelf B1",
     "Shelf B3": "Shelf B3",
     "10% off": "10% off",
-    "3x2": "3x2"
+    "3x2": "3x2",
+    "Main Entrance": "Main Entrance",
+    "Cold Beverages": "Cold Beverages",
+    "Snacks and Cookies": "Snacks and Cookies",
+    "Dairy and Refrigerated": "Dairy and Refrigerated",
+    "Pantry Essentials": "Pantry Essentials",
+    "Personal Care": "Personal Care",
+    "Household Cleaning": "Household Cleaning",
+    "Promotional Display": "Promotional Display",
+    "Checkout Impulse Area": "Checkout Impulse Area",
+    "Back Storage": "Back Storage",
+    "Beverages": "Beverages",
+    "Snacks": "Snacks",
+    "Internal Stock": "Internal Stock",
+    "Mineral Water 625ml": "Mineral Water 625ml",
+    "Cola Soda 500ml": "Cola Soda 500ml",
+    "Orange Juice 1L": "Orange Juice 1L",
+    "Wavy Potato Chips": "Wavy Potato Chips",
+    "Chocolate Cookies": "Chocolate Cookies",
+    "Granola Bar": "Granola Bar",
+    "Evaporated Milk": "Evaporated Milk",
+    "Natural Yogurt": "Natural Yogurt",
+    "Sliced Cheese": "Sliced Cheese",
+    "Extra Rice 1kg": "Extra Rice 1kg",
+    "Vegetable Oil 1L": "Vegetable Oil 1L",
+    "Spaghetti Pasta 500g": "Spaghetti Pasta 500g",
+    "Family Shampoo": "Family Shampoo",
+    "Toothpaste Mint": "Toothpaste Mint",
+    "Antibacterial Soap": "Antibacterial Soap",
+    "Liquid Detergent": "Liquid Detergent",
+    "Bleach 1L": "Bleach 1L",
+    "Paper Towels": "Paper Towels",
+    "Promotional Snack Pack": "Promotional Snack Pack",
+    "Energy Drink Combo": "Energy Drink Combo",
+    "Breakfast Bundle": "Breakfast Bundle",
+    "Chocolate Bar": "Chocolate Bar",
+    "Reusable Shopping Bag": "Reusable Shopping Bag",
+    "Mint Candy": "Mint Candy",
+    "Water Bottle Stock Box": "Water Bottle Stock Box",
+    "Milk Restock Box": "Milk Restock Box",
+    "Cleaning Supplies Reserve": "Cleaning Supplies Reserve"
   }
 }

@@ -12,12 +12,14 @@ export class OperationalAlertAssembler
       type: resource.type,
       priority: resource.priority,
       status: resource.status,
-      message: resource.message,
-      zoneId: resource.zoneId,
-      zoneName: resource.zoneName,
-      productId: resource.productId,
-      productName: resource.productName,
-      createdAt: resource.createdAt
+      message: resource.message || resource.description || resource.title || resource.type,
+      zoneId: resource.zoneId || '',
+      zoneName: resource.zoneName || (resource.zoneId ? `Zone ${resource.zoneId}` : 'Store floor'),
+      productId: resource.productId || '',
+      productName: resource.productName || (resource.productId ? `Product ${resource.productId}` : ''),
+      source: resource.source,
+      triggerReason: resource.triggerReason,
+      createdAt: resource.createdAt || new Date().toISOString()
     });
   }
 
@@ -32,6 +34,8 @@ export class OperationalAlertAssembler
       zoneName: entity.zoneName,
       productId: entity.productId,
       productName: entity.productName,
+      source: entity.source,
+      triggerReason: entity.triggerReason,
       createdAt: entity.createdAt.toISOString()
     };
   }

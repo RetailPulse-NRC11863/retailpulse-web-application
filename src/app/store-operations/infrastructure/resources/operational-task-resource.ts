@@ -6,8 +6,12 @@ export interface OperationalTaskResource extends BaseResource {
   description: string;
   priority: string;
   status: string;
-  zoneId: string;
-  zoneName: string;
-  alertId: string;
-  createdAt: string;
+  zoneId?: string;
+  zoneName?: string;
+  alertId?: string;
+  productId?: string;
+  productName?: string;
+  source?: string;
+  triggerReason?: string;
+  createdAt?: string;
 }

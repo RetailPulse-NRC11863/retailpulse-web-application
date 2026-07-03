@@ -87,6 +87,15 @@
   gap: var(--rp-spacing-2);
 }
 
+.action-message {
+  background: #e8f7ee;
+  border: 1px solid rgba(25, 135, 84, 0.25);
+  color: var(--rp-color-success);
+  border-radius: var(--rp-radius);
+  padding: 12px 14px;
+  font-weight: 700;
+}
+
 .state-container {
   display: flex;
   flex-direction: column;

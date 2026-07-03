@@ -9,25 +9,30 @@
     <div class="status-badge" [ngClass]="'status-' + task.status.toLowerCase()">
       <lucide-icon *ngIf="task.status === 'PENDING'" [img]="Clock" size="14"></lucide-icon>
       <lucide-icon *ngIf="task.status === 'IN_PROGRESS'" [img]="Clock" size="14"></lucide-icon>
-      <lucide-icon *ngIf="task.status === 'RESOLVED'" [img]="CheckCircle2" size="14"></lucide-icon>
+      <lucide-icon *ngIf="task.status === 'COMPLETED'" [img]="CheckCircle2" size="14"></lucide-icon>
       {{ task.status.replace('_', ' ') }}
     </div>
   </div>
   
   <div class="task-body">
-    <h3 class="task-title">{{ task.title }}</h3>
-    <p class="task-description">{{ task.description }}</p>
+    <h3 class="task-title">{{ task.title | dbTranslate }}</h3>
+    <div class="operation-context" *ngIf="task.productName">
+      <span class="context-label">{{ 'common.product' | translate }}</span>
+      <strong>{{ task.productName | dbTranslate }}</strong>
+    </div>
+    <p class="task-description">{{ task.description | dbTranslate }}</p>
+    <p class="task-reason" *ngIf="task.triggerReason && task.triggerReason !== task.description">{{ task.triggerReason | dbTranslate }}</p>
     
     <div class="zone-badge">
       <lucide-icon [img]="MapPin" size="14"></lucide-icon>
-      {{ task.zoneName }}
+      {{ task.zoneName | dbTranslate }}
     </div>
   </div>
   
-  <div class="task-footer" *ngIf="task.status !== 'RESOLVED'">
+  <div class="task-footer" *ngIf="task.status !== 'COMPLETED'">
     <button class="btn-attend" (click)="onAttend()">
       <lucide-icon [img]="CheckCircle2" size="18"></lucide-icon>
-      Mark as Attended
+      {{ 'staff.markAsAttended' | translate }}
     </button>
   </div>
 </div>

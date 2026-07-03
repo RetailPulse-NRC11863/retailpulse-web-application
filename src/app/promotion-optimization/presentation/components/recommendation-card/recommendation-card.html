@@ -14,7 +14,15 @@
     <p class="description">{{ recommendation.description }}</p>
     <div class="meta-row">
       <span class="badge type">{{ recommendation.type }}</span>
+      <span class="badge status">{{ recommendation.status }}</span>
       <span class="date">{{ recommendation.createdAt | date:'mediumDate' }}</span>
     </div>
+    <button
+      type="button"
+      class="apply-button"
+      *ngIf="recommendation.status !== 'APPLIED'"
+      (click)="onApply()">
+      Apply recommendation
+    </button>
   </div>
 </div>

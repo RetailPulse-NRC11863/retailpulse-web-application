@@ -16,7 +16,8 @@
     "promotion": "Promoción",
     "status": "Estado",
     "priority": "Prioridad",
-    "actions": "Acciones"
+    "actions": "Acciones",
+    "product": "Producto"
   },
   "access": {
     "eyebrow": "RetailPulse Web Application",
@@ -56,7 +57,14 @@
     "outOfStock": "Sin stock",
     "inStock": "Disponible",
     "aisle": "Pasillo",
-    "shelf": "Estante"
+    "shelf": "Estante",
+    "limitedStock": "Stock limitado",
+    "storeLayout": "Layout de tienda",
+    "highlightedZone": "Zona resaltada",
+    "viewLocation": "Ver ubicacion",
+    "hideLocation": "Ocultar ubicacion",
+    "foundIt": "Lo encontre",
+    "needHelp": "Necesito ayuda"
   },
   "staff": {
     "title": "Panel operativo",
@@ -65,7 +73,8 @@
     "pendingTasks": "Tareas pendientes",
     "noActiveAlerts": "No hay alertas activas",
     "noPendingTasks": "No hay tareas pendientes",
-    "markAsCompleted": "Marcar como completada"
+    "markAsCompleted": "Marcar como completada",
+    "markAsAttended": "Marcar como atendida"
   },
   "admin": {
     "dashboardTitle": "Dashboard del administrador",
@@ -187,6 +196,46 @@
     "Shelf B1": "Estante B1",
     "Shelf B3": "Estante B3",
     "10% off": "10% de descuento",
-    "3x2": "3x2"
+    "3x2": "3x2",
+    "Main Entrance": "Entrada principal",
+    "Cold Beverages": "Bebidas frias",
+    "Snacks and Cookies": "Snacks y galletas",
+    "Dairy and Refrigerated": "Lacteos y refrigerados",
+    "Pantry Essentials": "Abarrotes esenciales",
+    "Personal Care": "Cuidado personal",
+    "Household Cleaning": "Limpieza del hogar",
+    "Promotional Display": "Exhibicion promocional",
+    "Checkout Impulse Area": "Zona de impulso en caja",
+    "Back Storage": "Almacen interno",
+    "Beverages": "Bebidas",
+    "Snacks": "Snacks",
+    "Internal Stock": "Stock interno",
+    "Mineral Water 625ml": "Agua mineral 625ml",
+    "Cola Soda 500ml": "Gaseosa cola 500ml",
+    "Orange Juice 1L": "Jugo de naranja 1L",
+    "Wavy Potato Chips": "Papas onduladas",
+    "Chocolate Cookies": "Galletas de chocolate",
+    "Granola Bar": "Barra de granola",
+    "Evaporated Milk": "Leche evaporada",
+    "Natural Yogurt": "Yogurt natural",
+    "Sliced Cheese": "Queso en tajadas",
+    "Extra Rice 1kg": "Arroz extra 1kg",
+    "Vegetable Oil 1L": "Aceite vegetal 1L",
+    "Spaghetti Pasta 500g": "Fideos spaghetti 500g",
+    "Family Shampoo": "Shampoo familiar",
+    "Toothpaste Mint": "Pasta dental menta",
+    "Antibacterial Soap": "Jabon antibacterial",
+    "Liquid Detergent": "Detergente liquido",
+    "Bleach 1L": "Lejia 1L",
+    "Paper Towels": "Papel toalla",
+    "Promotional Snack Pack": "Pack promocional de snacks",
+    "Energy Drink Combo": "Combo de bebidas energizantes",
+    "Breakfast Bundle": "Combo de desayuno",
+    "Chocolate Bar": "Barra de chocolate",
+    "Reusable Shopping Bag": "Bolsa reutilizable",
+    "Mint Candy": "Caramelos de menta",
+    "Water Bottle Stock Box": "Caja de reposicion de agua",
+    "Milk Restock Box": "Caja de reposicion de leche",
+    "Cleaning Supplies Reserve": "Reserva de limpieza"
   }
 }

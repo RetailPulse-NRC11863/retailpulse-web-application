@@ -10,6 +10,8 @@ export class OperationalAlert implements BaseEntity {
   zoneName: string;
   productId: string;
   productName: string;
+  source: string;
+  triggerReason: string;
   createdAt: Date;
   assignedStaffId: string | null = null;
 
@@ -23,6 +25,8 @@ export class OperationalAlert implements BaseEntity {
     zoneName: string;
     productId: string;
     productName: string;
+    source?: string;
+    triggerReason?: string;
     createdAt: Date | string;
   }) {
     this.id = data.id;
@@ -34,7 +38,9 @@ export class OperationalAlert implements BaseEntity {
     this.zoneName = data.zoneName;
     this.productId = data.productId;
     this.productName = data.productName;
-    this.createdAt = new Date(data.createdAt);
+    this.source = data.source || 'SYSTEM';
+    this.triggerReason = data.triggerReason || data.message;
+    this.createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
   }
 
   escalate(): void {

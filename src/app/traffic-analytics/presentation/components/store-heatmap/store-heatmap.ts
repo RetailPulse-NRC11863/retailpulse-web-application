@@ -84,10 +84,13 @@ export class StoreHeatmapComponent {
   getZoneIcon(type: string): any {
     const icons: Record<string, any> = {
       ACCESS:   DoorClosed,
+      ENTRANCE: DoorClosed,
       CHECKOUT: CreditCard,
       AISLE:    ShoppingCart,
       SECTION:  Package,
+      STORAGE:  Package,
       PROMO:    Star,
+      DISPLAY:  Star,
     };
     return icons[type] ?? MapPin;
   }

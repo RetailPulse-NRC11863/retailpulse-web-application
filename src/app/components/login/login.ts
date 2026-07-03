@@ -51,6 +51,7 @@ export class LoginComponent {
 
     localStorage.setItem('userRole', user.role);
     localStorage.setItem('userName', user.name);
+    localStorage.setItem('userEmail', user.email);
     localStorage.setItem('userPlan', user.planId);
 
     if (user.role === 'ADMIN') {

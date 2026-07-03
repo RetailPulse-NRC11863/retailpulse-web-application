@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { SubscriptionPlan } from '../../domain/model/subscription-plan.entity';
 import { SaaSAccount } from '../../domain/model/saas-account.entity';
 import { environment } from '../../../../../environments/environment';
@@ -19,7 +19,10 @@ export class SubscriptionApiService {
   }
 
   getActiveAccount(): Observable<SaaSAccount> {
-    return of(this.demoAccount());
+    return this.http.get<any>(`${environment.apiUrl}/subscription/accounts/current`).pipe(
+      map(data => new SaaSAccount(data)),
+      tap(account => localStorage.setItem('userPlan', account.planId))
+    );
   }
 
   changePlan(planId: string): Observable<SaaSAccount> {
@@ -27,18 +30,12 @@ export class SubscriptionApiService {
   }
 
   patchActiveAccount(patch: Partial<{ planId: string; storeName: string; renewalDate: string | Date; status: string }>): Observable<SaaSAccount> {
-    const account = this.demoAccount({ planId: patch.planId });
-    localStorage.setItem('userPlan', account.planId);
-    return of(account);
-  }
-
-  private demoAccount(patch?: Partial<{ planId: string }>): SaaSAccount {
-    return new SaaSAccount({
-      id: 'demo-current-account',
-      storeName: 'RetailPulse Demo Store',
-      planId: patch?.planId ?? localStorage.getItem('userPlan') ?? '3',
-      status: 'ACTIVE',
-      renewalDate: new Date(new Date().setMonth(new Date().getMonth() + 1))
-    });
+    return this.getActiveAccount().pipe(
+      switchMap(account => this.http.patch<any>(`${environment.apiUrl}/subscription/accounts/${account.id}/change-plan`, {
+        planId: Number(patch.planId ?? account.planId)
+      })),
+      map(data => new SaaSAccount(data)),
+      tap(account => localStorage.setItem('userPlan', account.planId))
+    );
   }
 }

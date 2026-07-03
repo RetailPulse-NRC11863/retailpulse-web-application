@@ -30,22 +30,27 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: center;
   margin-bottom: 2rem;
-  padding: 0 0.125rem;
+  min-height: 52px;
+  width: 100%;
+  overflow: hidden;
 }
 
 .brand img {
-  max-width: 100%;
-  height: auto;
-  max-height: 40px;
+  width: 44px;
+  height: 44px;
+  max-width: 44px;
+  max-height: 44px;
   object-fit: contain;
-  width: auto;
-  transition: max-height 0.3s ease, transform 0.3s ease;
+  object-position: left center;
+  transition: width 0.3s ease, max-width 0.3s ease, max-height 0.3s ease;
 }
 
 .sidebar:hover .brand img {
-  max-height: 55px; /* Hace el logo un poco más grande al expandir */
+  width: 220px;
+  max-width: 220px;
+  max-height: 52px;
 }
 
 .brand-mark {
@@ -176,6 +181,71 @@
 /* ─── Footer ─── */
 .sidebar-footer {
   margin-top: auto;
+}
+
+.language-switcher-shell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
+  margin-bottom: 12px;
+  transform: scale(0.72);
+  transform-origin: center;
+  transition: transform 0.2s ease;
+}
+
+.sidebar:hover .language-switcher-shell {
+  transform: scale(1);
+}
+
+.account-summary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0.625rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+  overflow: hidden;
+}
+
+.account-avatar {
+  display: grid;
+  place-items: center;
+  min-width: 28px;
+  color: #00D2FF;
+}
+
+.account-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  min-width: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease 0.05s;
+}
+
+.sidebar:hover .account-copy {
+  opacity: 1;
+}
+
+.account-copy strong,
+.account-copy span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.account-copy strong {
+  font-size: 0.8125rem;
+  font-weight: 700;
+}
+
+.account-copy span {
+  color: #9fb3c8;
+  font-size: 0.6875rem;
 }
 
 .sidebar-footer a {

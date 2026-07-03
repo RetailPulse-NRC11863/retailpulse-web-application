@@ -1,7 +1,7 @@
 import {Component, computed, effect, inject} from '@angular/core';
 import {Router, RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {NgOptimizedImage} from '@angular/common';
-import {LucideAngularModule, ChartColumnBig, Settings, ChartLine, CreditCard, Flame, Bell, RefreshCw} from 'lucide-angular';
+import {LucideAngularModule, ChartColumnBig, Settings, ChartLine, CreditCard, Flame, Bell, RefreshCw, CircleUserRound} from 'lucide-angular';
 import {LanguageSwitcher} from '../../components/language-switcher/language-switcher';
 import {TranslateModule} from '@ngx-translate/core';
 import { SubscriptionStore } from '../../../../platform/subscription/application/subscription-store.service';
@@ -32,6 +32,13 @@ export class MainLayout {
   protected readonly Flame = Flame;
   protected readonly Bell = Bell;
   protected readonly RefreshCw = RefreshCw;
+  protected readonly CircleUserRound = CircleUserRound;
+
+  readonly currentUser = {
+    name: localStorage.getItem('userName') || 'RetailPulse User',
+    email: localStorage.getItem('userEmail') || 'admin@retailpulse.com',
+    role: localStorage.getItem('userRole') || 'ADMIN'
+  };
 
   private readonly _featureRedirectEffect = effect(() => {
     const url = this.router.url;

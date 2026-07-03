@@ -146,10 +146,13 @@ export class ZoneLayoutEditorComponent {
   getZoneIcon(type: string): any {
     switch (type) {
       case 'ACCESS':   return DoorClosed;
+      case 'ENTRANCE': return DoorClosed;
       case 'CHECKOUT': return CreditCard;
       case 'AISLE':    return ShoppingCart;
       case 'SECTION':  return Package;
+      case 'STORAGE':  return Package;
       case 'PROMO':    return Star;
+      case 'DISPLAY':  return Star;
       default:         return MapPin;
     }
   }
@@ -157,10 +160,13 @@ export class ZoneLayoutEditorComponent {
   getZoneColor(type: string): string {
     switch (type) {
       case 'ACCESS':   return '#6366f1';
+      case 'ENTRANCE': return '#6366f1';
       case 'CHECKOUT': return '#0ea5e9';
       case 'AISLE':    return '#8b5cf6';
       case 'SECTION':  return '#10b981';
+      case 'STORAGE':  return '#10b981';
       case 'PROMO':    return '#f59e0b';
+      case 'DISPLAY':  return '#f59e0b';
       default:         return '#64748b';
     }
   }

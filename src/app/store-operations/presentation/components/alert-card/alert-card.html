@@ -14,6 +14,12 @@
   
   <div class="alert-body">
     <h3 class="alert-title">{{ alert.type.replace('_', ' ') }}</h3>
+    <div class="operation-context" *ngIf="alert.productName">
+      <span class="context-label">Product</span>
+      <strong>{{ alert.productName }}</strong>
+    </div>
     <p class="alert-message">{{ alert.message }}</p>
+    <p class="alert-reason">{{ alert.triggerReason }}</p>
+    <span class="source-badge">{{ alert.source }}</span>
   </div>
 </div>

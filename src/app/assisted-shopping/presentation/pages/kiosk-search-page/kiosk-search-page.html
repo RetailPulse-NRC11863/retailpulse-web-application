@@ -45,7 +45,17 @@
       </div>
 
       <div *ngIf="store.productResults().length > 0 && !store.loading()" class="results-grid">
-        <app-product-result-card *ngFor="let product of store.productResults()" [product]="product">
+        <div *ngIf="store.lastActionMessage()" class="action-message">
+          {{ store.lastActionMessage() }}
+        </div>
+        <app-product-result-card
+          *ngFor="let product of store.productResults(); trackBy: trackByProductId"
+          [product]="product"
+          [showLocationMap]="expandedLocationProductId === product.id"
+          [loadingAction]="store.actionLoadingProductId() === product.id"
+          (locationViewed)="onLocationViewed($event)"
+          (found)="onFound($event)"
+          (helpRequested)="onHelpRequested($event)">
         </app-product-result-card>
       </div>
     </div>

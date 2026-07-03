@@ -24,8 +24,8 @@ export class OperationalTasksApiService extends BaseApiEndpoint<
   /**
    * Updates the visual status of an operational task.
    */
-  updateTaskStatus(taskId: string, status: string): Observable<OperationalTask> {
-    return this.http.patch<OperationalTaskResource>(`${this.endpointUrl}/${taskId}/status`, { status }).pipe(
+  completeTask(taskId: string): Observable<OperationalTask> {
+    return this.http.patch<OperationalTaskResource>(`${this.endpointUrl}/${taskId}/complete`, {}).pipe(
       map(updated => this.assembler.toEntityFromResource(updated)),
       catchError(this.handleError('Failed to update task status'))
     );

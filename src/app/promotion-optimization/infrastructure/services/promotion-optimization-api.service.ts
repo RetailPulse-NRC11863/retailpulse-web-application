@@ -18,24 +18,29 @@ export class PromotionOptimizationApiService {
       map(data => data.map(item => new ConversionGap({
         id: String(item.zoneId),
         zoneId: String(item.zoneId),
-        totalInteractions: item.trafficCount ?? 0,
-        totalSales: this.estimateSalesFromCongestion(item.trafficCount ?? 0, item.congestionStatus),
-        conversionRate: this.estimateConversionRate(item.congestionStatus),
+        totalInteractions: item.interactionCount ?? item.trafficCount ?? 0,
+        totalSales: this.estimateSales(item.interactionCount ?? item.trafficCount ?? 0, item.conversionRate ?? 0),
+        conversionRate: item.conversionRate ?? 0,
         date: new Date().toISOString()
       })))
     );
   }
 
   getProductPerformance(): Observable<ProductPerformance[]> {
-    return this.http.get<any[]>(`${environment.apiUrl}/product-performance`).pipe(
+    return this.http.get<any[]>(`${environment.apiUrl}/promotion-recommendations/product-opportunities`).pipe(
       map(data => data.map(item => new ProductPerformance({
-        id: String(item.recommendationId ?? item.productId),
+        id: String(item.productId),
         productId: String(item.productId),
-        productName: item.recommendationTitle ?? `Product ${item.productId}`,
-        interactions: this.interactionsFromPriority(item.priority),
-        sales: this.salesFromPriority(item.priority),
-        performanceScore: item.priority === 'HIGH' ? 0.28 : 0.62,
-        status: item.priority === 'HIGH' ? 'NEEDS_ATTENTION' : 'GOOD'
+        productName: item.productName ?? item.recommendationTitle ?? `Product ${item.productId}`,
+        interactions: item.interactions ?? 0,
+        sales: item.conversions ?? 0,
+        performanceScore: (item.conversionRate ?? 0) / 100,
+        status: item.status,
+        zoneName: item.zoneName,
+        stock: item.availableStock,
+        stockStatus: item.stockStatus,
+        reason: item.reason,
+        recommendationId: item.recommendationId ? String(item.recommendationId) : null
       })))
     );
   }
@@ -57,28 +62,11 @@ export class PromotionOptimizationApiService {
   }
 
   applyRecommendation(id: string): Observable<void> {
-    return this.http.post<void>(`${environment.apiUrl}/promotion-recommendations/${id}/apply`, {});
+    return this.http.patch<void>(`${environment.apiUrl}/promotion-recommendations/${id}/apply`, {});
   }
 
-  private estimateConversionRate(congestionStatus: string): number {
-    if (congestionStatus === 'HIGH') return 0.12;
-    if (congestionStatus === 'MODERATE') return 0.24;
-    return 0.38;
+  private estimateSales(interactions: number, conversionRate: number): number {
+    return Math.round(interactions * conversionRate);
   }
 
-  private estimateSalesFromCongestion(trafficCount: number, congestionStatus: string): number {
-    return Math.round(trafficCount * this.estimateConversionRate(congestionStatus));
-  }
-
-  private interactionsFromPriority(priority: string): number {
-    if (priority === 'HIGH') return 320;
-    if (priority === 'MEDIUM') return 180;
-    return 90;
-  }
-
-  private salesFromPriority(priority: string): number {
-    if (priority === 'HIGH') return 42;
-    if (priority === 'MEDIUM') return 80;
-    return 45;
-  }
 }

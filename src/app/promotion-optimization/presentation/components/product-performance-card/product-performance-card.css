@@ -52,6 +52,13 @@
   color: var(--rp-color-text-secondary);
 }
 
+.reason {
+  max-width: 320px;
+  font-size: 0.72rem;
+  color: var(--rp-color-text-secondary);
+  line-height: 1.35;
+}
+
 .card-right {
   display: flex;
   align-items: center;

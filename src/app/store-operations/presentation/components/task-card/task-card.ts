@@ -2,11 +2,13 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OperationalTask } from '../../../domain/model/operational-task.entity';
 import { LucideAngularModule, CheckCircle2, Clock, MapPin, AlertCircle, AlertTriangle, Info } from 'lucide-angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { DbTranslatePipe } from '../../../../shared/presentation/pipes/db-translate.pipe';
 
 @Component({
   selector: 'app-task-card',
   standalone: true,
-  imports: [CommonModule, LucideAngularModule],
+  imports: [CommonModule, LucideAngularModule, TranslateModule, DbTranslatePipe],
   templateUrl: './task-card.html',
   styleUrls: ['./task-card.css']
 })

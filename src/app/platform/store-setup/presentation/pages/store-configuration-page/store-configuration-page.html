@@ -15,7 +15,7 @@
 
     <!-- Store Info Card -->
     <section class="overview-section">
-      <div class="overview-card">
+      <div class="overview-card" *ngIf="!editingStoreInfo()">
         <div class="icon-block">
           <lucide-icon [img]="StoreIcon" [size]="24"></lucide-icon>
         </div>
@@ -26,6 +26,44 @@
             <span class="tag">Manager: {{ store.storeInfo()?.manager }}</span>
             <span class="tag status">{{ store.storeInfo()?.status }}</span>
           </div>
+        </div>
+        <button class="btn-edit-store" (click)="startEditStoreInfo()" title="Edit store information">
+          <lucide-icon [img]="PencilIcon" [size]="16"></lucide-icon>
+          <span>Edit Store</span>
+        </button>
+      </div>
+
+      <div class="add-zone-form store-info-form" *ngIf="editingStoreInfo()">
+        <h4 class="form-section-title">Store Information</h4>
+        <div class="form-grid form-grid-2">
+          <div class="field-group">
+            <label class="field-label">Store Name</label>
+            <input class="form-input" type="text" placeholder="Store name" [(ngModel)]="editStoreName" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Manager</label>
+            <input class="form-input" type="text" placeholder="Store manager" [(ngModel)]="editStoreManager" />
+          </div>
+        </div>
+        <div class="form-grid form-grid-2">
+          <div class="field-group">
+            <label class="field-label">Address</label>
+            <input class="form-input" type="text" placeholder="Store address" [(ngModel)]="editStoreLocation" />
+          </div>
+          <div class="field-group">
+            <label class="field-label">Status</label>
+            <select class="form-select" [(ngModel)]="editStoreStatus">
+              <option value="ACTIVE">Active</option>
+              <option value="INACTIVE">Inactive</option>
+              <option value="SETUP_PENDING">Setup Pending</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="btn-submit-zone btn-update" (click)="submitStoreInfo()" [disabled]="!editStoreName.trim() || !editStoreLocation.trim() || store.saving()">
+            {{ store.saving() ? 'Saving...' : 'Update Store' }}
+          </button>
+          <button class="btn-form-cancel" (click)="cancelEditStoreInfo()">Cancel</button>
         </div>
       </div>
     </section>

@@ -80,3 +80,40 @@
   color: var(--rp-color-text);
   line-height: 1.4;
 }
+
+.operation-context {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  padding: 6px 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  color: #0A2540;
+  font-size: 0.85rem;
+}
+
+.context-label {
+  color: #64748b;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.alert-reason {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--rp-color-text-muted);
+  line-height: 1.4;
+}
+
+.source-badge {
+  align-self: flex-start;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--rp-color-primary);
+  background: rgba(0, 210, 255, 0.12);
+  border-radius: 4px;
+  padding: 3px 6px;
+}

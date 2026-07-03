@@ -28,6 +28,30 @@
   filter: brightness(1.08) drop-shadow(0 0 16px rgba(0, 210, 255, 0.35));
 }
 
+.zone-name-wrap {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  height: 100%;
+  padding: 0 8px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.zone-name-text {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 700;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+}
+
 .attention-pulse {
   animation: pulse-attention 2s ease-in-out infinite;
 }
